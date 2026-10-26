@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/portfolio/">
+<title>Sehrish — Web Designer · Karachi | Websites jo dil jeet lein</title>
+<meta name="description" content="Sehrish — Karachi ki web designer. Dark + Gold luxury websites, salon aur business sites, booking pages. Shuruaat Rs 12,000 se. Pehle demo dekho, phir faisla karo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a0b; --bg2:#101012; --panel:#141416; --panel2:#19191d;
+  --gold:#d4af37; --gold2:#f0d98c; --gold-dim:#9a7f2c;
+  --ink:#f3ecd9; --muted:#b8b0a0; --faint:#8a8474;
+  --line:rgba(212,175,55,.22); --line-soft:rgba(255,255,255,.07);
+  --serif:'Playfair Display',Georgia,serif; --sans:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --r:18px; --max:1120px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:16.5px;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--gold);color:#111}
+a{color:var(--gold2)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+section{padding:86px 0}
+.kicker{letter-spacing:.32em;text-transform:uppercase;font-size:.72rem;font-weight:600;color:var(--gold);text-align:center}
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(1.9rem,4.6vw,3rem);line-height:1.15;text-align:center;margin:14px auto 12px;max-width:22ch}
+h2 em{color:var(--gold);font-style:italic}
+.sub{color:var(--muted);text-align:center;max-width:56ch;margin:0 auto}
+.gold-rule{width:74px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:22px auto 0}
+/* NAV */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(10,10,11,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line-soft)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--serif);font-size:1.45rem;font-weight:900;color:var(--ink);text-decoration:none;letter-spacing:.02em}
+.logo span{color:var(--gold)}
+nav .links{display:flex;gap:28px;align-items:center}
+nav .links a{color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:500}
+nav .links a:hover{color:var(--gold2)}
+.btn{display:inline-block;background:linear-gradient(135deg,var(--gold2),var(--gold) 55%,var(--gold-dim));color:#171204;font-weight:700;text-decoration:none;padding:13px 30px;border-radius:999px;font-size:.98rem;box-shadow:0 8px 28px rgba(212,175,55,.28);transition:transform .25s ease,box-shadow .25s ease;border:0;cursor:pointer}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(212,175,55,.36)}
+.btn.ghost{background:transparent;color:var(--gold2);border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold)}
+nav .btn{padding:9px 22px;font-size:.88rem}
+@media(max-width:760px){nav .links a:not(.btn){display:none}}
+/* HERO */
+.hero{padding:168px 0 92px;text-align:center;position:relative;background:
+  radial-gradient(900px 480px at 50% -8%,rgba(212,175,55,.14),transparent 62%),
+  radial-gradient(620px 380px at 88% 22%,rgba(212,175,55,.06),transparent 60%),var(--bg)}
+.hero .kicker{font-size:.78rem}
+.hero h1{font-family:var(--serif);font-weight:900;font-size:clamp(2.6rem,7.2vw,4.7rem);line-height:1.08;margin:22px auto 20px;max-width:16ch}
+.hero h1 em{background:linear-gradient(120deg,var(--gold2),var(--gold) 60%,var(--gold-dim));-webkit-background-clip:text;background-clip:text;color:transparent;font-style:italic}
+.hero p.lead{color:var(--muted);font-size:clamp(1.02rem,2.2vw,1.2rem);max-width:58ch;margin:0 auto 34px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:38px}
+.chip{border:1px solid var(--line);color:var(--gold2);border-radius:999px;padding:7px 16px;font-size:.85rem;font-weight:500;background:rgba(212,175,55,.05)}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.flow{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;margin-top:58px;color:var(--faint);font-size:.9rem;letter-spacing:.04em}
+.flow b{color:var(--gold2);font-weight:600}
+.flow .arr{color:var(--gold-dim)}
+/* CARDS */
+.grid{display:grid;gap:24px;margin-top:52px}
+.grid.c3{grid-template-columns:repeat(3,1fr)}
+.grid.c2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:900px){.grid.c3{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.grid.c3,.grid.c2{grid-template-columns:1fr}}
+.card{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line-soft);border-radius:var(--r);padding:30px 28px;transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;display:flex;flex-direction:column}
+.card:hover{transform:translateY(-5px);border-color:var(--line);box-shadow:0 22px 44px rgba(0,0,0,.45)}
+.card .art{border-radius:12px;height:118px;margin-bottom:22px;border:1px solid var(--line-soft);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:2rem;color:var(--gold);position:relative;overflow:hidden;text-align:center;padding:0 10px}
+.art.a1{background:radial-gradient(420px 200px at 20% 0%,rgba(212,175,55,.28),transparent 60%),linear-gradient(140deg,#1b1710,#0d0d0f)}
+.art.a2{background:radial-gradient(420px 200px at 80% 0%,rgba(140,200,255,.22),transparent 60%),linear-gradient(140deg,#101820,#0b0e12)}
+.art.a3{background:radial-gradient(420px 200px at 50% 0%,rgba(212,175,55,.16),transparent 62%),linear-gradient(140deg,#17171c,#0c0c0e)}
+.art.a4{background:radial-gradient(420px 200px at 30% 0%,rgba(190,140,255,.18),transparent 60%),linear-gradient(140deg,#16121e,#0c0b10)}
+.card h3{font-family:var(--serif);font-size:1.42rem;font-weight:700;margin-bottom:8px}
+.card p{color:var(--muted);font-size:.97rem;flex:1}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:16px 0 18px}
+.tag{font-size:.74rem;letter-spacing:.06em;border:1px solid var(--line-soft);color:var(--faint);padding:4px 10px;border-radius:999px;text-transform:uppercase}
+.card .go{color:var(--gold2);font-weight:600;text-decoration:none;font-size:.95rem}
+.card .go:hover{color:var(--gold);text-decoration:underline}
+.card .go+.go{margin-left:16px}
+/* TOOLS */
+.tool-ic{font-size:1.7rem;margin-bottom:14px}
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:52px}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+.step{background:var(--panel);border:1px solid var(--line-soft);border-radius:var(--r);padding:28px 24px}
+.step .num{font-family:var(--serif);font-size:2rem;color:var(--gold);font-weight:900;line-height:1}
+.step h3{font-family:var(--serif);font-size:1.2rem;margin:14px 0 7px}
+.step p{color:var(--muted);font-size:.94rem}
+/* PRICING */
+.price{background:linear-gradient(180deg,var(--panel2),var(--panel));border:1px solid var(--line-soft);border-radius:var(--r);padding:32px 28px;text-align:center;display:flex;flex-direction:column}
+.price.hot{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 24px 50px rgba(212,175,55,.12)}
+.price .tier{letter-spacing:.24em;font-size:.72rem;text-transform:uppercase;color:var(--gold);font-weight:700}
+.price .amt{font-family:var(--serif);font-size:2rem;font-weight:900;margin:12px 0 4px}
+.price .amt small{font-size:.95rem;color:var(--muted);font-family:var(--sans);font-weight:500}
+.price p{color:var(--muted);font-size:.93rem;flex:1}
+.badge{display:inline-block;background:var(--gold);color:#171204;font-size:.7rem;font-weight:700;letter-spacing:.1em;padding:4px 12px;border-radius:999px;text-transform:uppercase;margin-bottom:14px}
+/* FAQ */
+.faq{max-width:760px;margin:48px auto 0}
+details{border:1px solid var(--line-soft);border-radius:14px;background:var(--panel);margin-bottom:12px;overflow:hidden}
+summary{cursor:pointer;padding:20px 24px;font-weight:600;font-size:1.02rem;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--gold);font-size:1.4rem;font-weight:400;line-height:1}
+details[open ] summary::after{content:"–"}
+details .ans{padding:0 24px 22px;color:var(--muted);font-size:.96rem}
+/* CREATOR / CTA */
+.creator{background:radial-gradient(760px 380px at 50% 0%,rgba(212,175,55,.1),transparent 62%),var(--bg2);border-block:1px solid var(--line-soft)}
+.creator .inner{max-width:720px;margin:0 auto;text-align:center}
+.creator p{color:var(--muted);margin-top:16px}
+.creator .sig{font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--gold2);margin-top:26px}
+.final{text-align:center}
+footer{border-top:1px solid var(--line-soft);padding:34px 0 44px;text-align:center;color:var(--faint);font-size:.88rem}
+footer a{color:var(--muted)}
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top">Sehrish<span>.</span></a>
+    <div class="links">
+      <a href="#kaam">Kaam</a>
+      <a href="#tools">Tools</a>
+      <a href="#qeemat">Qeemat</a>
+      <a href="#sawal">Sawal Jawab</a>
+      <a class="btn" href="https://sehrish64.github.io/linkhub/" target="_blank" rel="noopener">Baat Karo</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <p class="kicker rv">For Salons &amp; Small Businesses · Built for Customers</p>
+    <h1 class="rv">Websites jo pehli nazar mein <em>dil jeet lein.</em></h1>
+    <p class="lead rv">Apne salon ya business ko ek aisi website dein jo dekhne wale ko customer bana de — khoobsurat design, mobile par tez, aur seedha WhatsApp order tak. Pehle mera kaam khud dekho, phir faisla karo.</p>
+    <div class="chips rv">
+      <span class="chip">Dark + Gold Luxury Style</span>
+      <span class="chip">Mobile-First Design</span>
+      <span class="chip">Hosting Bilkul Free</span>
+    </div>
+    <div class="cta-row rv">
+      <a class="btn" href="https://sehrish64.github.io/linkhub/" target="_blank" rel="noopener">Apni Website Banwao</a>
+      <a class="btn ghost" href="#kaam">Pehle Kaam Dekho ↓</a>
+    </div>
+    <p class="flow rv"><span><b>Baat</b></span><span class="arr">→</span><span><b>Design</b></span><span class="arr">→</span><span><b>Demo</b></span><span class="arr">→</span><span><b>Live Website</b></span></p>
+  </div>
+</header>
+
+<section id="kaam">
+  <div class="wrap">
+    <p class="kicker rv">The Screening Room</p>
+    <h2 class="rv">Daawa baad mein, <em>kaam pehle dekho.</em></h2>
+    <p class="sub rv">Ye teenon websites live hain — khol kar khud dekho. Jo style pasand aaye, tumhari website usi andaaz mein ban sakti hai.</p>
+    <div class="gold-rule rv"></div>
+    <div class="grid c3">
+      <article class="card rv">
+        <div class="art a1">Luxe</div>
+        <h3>Luxe Salon</h3>
+        <p>Dark + Gold luxury salon website — gehra kala background, sunahre accents, services, prices aur gallery ke saath mukammal demo.</p>
+        <div class="tags"><span class="tag">Dark + Gold</span><span class="tag">Salon</span><span class="tag">Live</span></div>
+        <div><a class="go" href="https://sehrish64.github.io/luxe-salon/" target="_blank" rel="noopener">Live Dekho ↗</a></div>
+      </article>
+      <article class="card rv">
+        <div class="art a2">Glass</div>
+        <h3>Liquid Glass Agency</h3>
+        <p>Modern agency website sheeshe (glass) wale effects ke saath — halki, tez aur bilkul naye zamane ki look.</p>
+        <div class="tags"><span class="tag">Liquid Glass</span><span class="tag">Agency</span><span class="tag">Live</span></div>
+        <div><a class="go" href="https://sehrish64.github.io/liquid-glass-agency/" target="_blank" rel="noopener">Live Dekho ↗</a></div>
+      </article>
+      <article class="card rv">
+        <div class="art a3">Links</div>
+        <h3>LinkHub</h3>
+        <p>Ek hi page par saare links — Instagram bio ke liye perfect. Saaf, tez aur mobile ke liye bana hua.</p>
+        <div class="tags"><span class="tag">Link Page</span><span class="tag">Clean</span><span class="tag">Live</span></div>
+        <div><a class="go" href="https://sehrish64.github.io/linkhub/" target="_blank" rel="noopener">Live Dekho ↗</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="tools" style="background:var(--bg2);border-block:1px solid var(--line-soft)">
+  <div class="wrap">
+    <p class="kicker rv">Sirf Websites Nahi</p>
+    <h2 class="rv">Mere banaye hue <em>tools bhi dekho.</em></h2>
+    <p class="sub rv">Mein sirf design nahi karti — kaam ke tools bhi banati hun. Ye sab asal projects hain, GitHub par khule hue: khol kar khud jaanch lo.</p>
+    <div class="gold-rule rv"></div>
+    <div class="grid c3">
+      <article class="card rv">
+        <div class="tool-ic" aria-hidden="true">🎙️</div>
+        <h3>DubKaro</h3>
+        <p>Urdu-first AI dubbing pipeline — kisi bhi video ki awaz Urdu mein, accent ka khayal rakh kar. Mera sab se bara technical project.</p>
+        <div class="tags"><span class="tag">AI</span><span class="tag">Urdu</span><span class="tag">Dubbing</span></div>
+      </article>
+      <article class="card rv">
+        <div class="tool-ic" aria-hidden="true">🔤</div>
+        <h3>Roman Urdu Translate</h3>
+        <p>Chrome extension: koi bhi text select karo, foran Roman Urdu tarjuma — teen styles mein. Oracle server par 24/7 chalta backend.</p>
+        <div class="tags"><span class="tag">Extension</span><span class="tag">Open Source</span></div>
+        <div><a class="go" href="https://github.com/Sehrish64/roman-urdu-translate" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
+      <article class="card rv">
+        <div class="tool-ic" aria-hidden="true">👻</div>
+        <h3>Ghost Mode</h3>
+        <p>Chrome extension jo browsing ko private aur saaf rakhta hai — chhota tool, roz ka kaam.</p>
+        <div class="tags"><span class="tag">Extension</span><span class="tag">Privacy</span></div>
+        <div><a class="go" href="https://github.com/Sehrish64/ghost-mode" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
+      <article class="card rv">
+        <div class="tool-ic" aria-hidden="true">🦆</div>
+        <h3>Gotta Go Duo</h3>
+        <p>Discord par khelne wala duck-vs-mango racing game — aur is ka browser version bhi, abhi khel kar dekho.</p>
+        <div class="tags"><span class="tag">Game</span><span class="tag">Discord</span></div>
+        <div><a class="go" href="https://sehrish64.github.io/gotta-go-duo-browser/" target="_blank" rel="noopener">Khelo ↗</a><a class="go" href="https://github.com/Sehrish64/gotta-go-duo" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
+      <article class="card rv">
+        <div class="tool-ic" aria-hidden="true">🌙</div>
+        <h3>Mafia Night</h3>
+        <p>Discord ka Mafia game bot — Roman Urdu pack ke saath, doston ke server ke liye mukammal game.</p>
+        <div class="tags"><span class="tag">Bot</span><span class="tag">Discord</span></div>
+        <div><a class="go" href="https://github.com/Sehrish64/mafia-night" target="_blank" rel="noopener">GitHub ↗</a></div>
+      </article>
+      <article class="card rv">
+        <div class="tool-ic" aria-hidden="true">✨</div>
+        <h3>Aur bohat kuch…</h3>
+        <p>YouTube channels ke liye animated videos, games aur roz naye experiments — mera poora kaam GitHub par hai.</p>
+        <div class="tags"><span class="tag">Videos</span><span class="tag">Games</span></div>
+        <div><a class="go" href="https://github.com/Sehrish64" target="_blank" rel="noopener">GitHub Profile ↗</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="styles">
+  <div class="wrap">
+    <p class="kicker rv">Design Styles</p>
+    <h2 class="rv">Teen andaaz, <em>ek tumhare liye.</em></h2>
+    <p class="sub rv">Har business ki apni pehchan hoti hai. Ye teen styles mein se jo tumhare kaam se mile, wahi chun lo.</p>
+    <div class="gold-rule rv"></div>
+    <div class="grid c3">
+      <article class="card rv">
+        <div class="art a1">Aa</div>
+        <h3>Dark + Gold Luxury</h3>
+        <p>Gehra kala aur sunahra — salon, boutique aur premium brands ke liye. Meri sab se pasandeeda aur sab se zyada sarahi gayi style.</p>
+        <div class="tags"><span class="tag">Salon</span><span class="tag">Premium</span></div>
+      </article>
+      <article class="card rv">
+        <div class="art a2">Gg</div>
+        <h3>Liquid Glass</h3>
+        <p>Sheeshe jaisi chamak, halke rang aur smooth effects — agencies aur modern services ke liye bilkul nayi look.</p>
+        <div class="tags"><span class="tag">Agency</span><span class="tag">Modern</span></div>
+      </article>
+      <article class="card rv">
+        <div class="art a4">Cc</div>
+        <h3>Clean &amp; Bright</h3>
+        <p>Saaf suthra, roshan aur seedha — shops, clinics aur har us business ke liye jahan bharosa sab se pehle hai.</p>
+        <div class="tags"><span class="tag">Shops</span><span class="tag">Trust</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="banwao" style="background:var(--bg2);border-block:1px solid var(--line-soft)">
+  <div class="wrap">
+    <p class="kicker rv">Kya Banwa Sakte Hain?</p>
+    <h2 class="rv">Tum laao idea, <em>website meri zimmedari.</em></h2>
+    <div class="gold-rule rv"></div>
+    <div class="grid c2">
+      <article class="card rv"><h3>💇 Salon &amp; Beauty</h3><p>Services, price list, gallery aur WhatsApp booking — salon ke liye mukammal website, bilkul Luxe Salon wali style mein.</p></article>
+      <article class="card rv"><h3>🏪 Business / Shop</h3><p>Tumhari dukaan ya business ki pehchan online — products, rates, location aur rabta, sab ek jagah.</p></article>
+      <article class="card rv"><h3>📅 Booking Pages</h3><p>Appointment aur order ke liye khaas page — customer seedha WhatsApp par pohanchay, koi jhanjhat nahi.</p></article>
+      <article class="card rv"><h3>🔗 Link Pages</h3><p>Instagram ya TikTok bio ke liye ek saaf sa page — tumhare saare links, videos aur offers ek hi jagah.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <p class="kicker rv">Tareeqa-e-Kaar</p>
+    <h2 class="rv">Chaand steps mein <em>website tayyar.</em></h2>
+    <p class="sub rv">Koi mushkil process nahi — seedha, saaf aur har step par tumhein khabar.</p>
+    <div class="gold-rule rv"></div>
+    <div class="steps">
+      <div class="step rv"><div class="num">01</div><h3>Baat Karo</h3><p>WhatsApp par apne business ki details bhejo — kya chahiye, kis style mein. Koi form, koi daftar nahi.</p></div>
+      <div class="step rv"><div class="num">02</div><h3>50% Advance</h3><p>Kaam shuru karne ke liye sirf aadhi raqam advance — Easypaisa ya JazzCash se, asaan aur mehfooz.</p></div>
+      <div class="step rv"><div class="num">03</div><h3>Demo Dekho</h3><p>Tumhari website ka demo link milega — khol kar dekho, jo tabdeeli chahiye batao, design tumhari pasand par final hoga.</p></div>
+      <div class="step rv"><div class="num">04</div><h3>Live Karo</h3><p>Pasand aane par baqi payment — aur tumhari website live. Link tumhara, khushi tumhari.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="qeemat" style="background:var(--bg2);border-block:1px solid var(--line-soft)">
+  <div class="wrap">
+    <p class="kicker rv">Seedhi Saadi Qeemat</p>
+    <h2 class="rv">Chhota budget, <em>bara asar.</em></h2>
+    <p class="sub rv">Koi chhupa kharcha nahi, koi jhoota waada nahi. Hosting bilkul free hai — mehengi monthly fees se hamesha ki chhutti.</p>
+    <div class="gold-rule rv"></div>
+    <div class="grid c3" style="grid-template-columns:repeat(4,1fr)" id="priceGrid">
+      <article class="price rv">
+        <span class="badge">Shuruaat</span>
+        <p class="tier">Pehle Clients Ke Liye</p>
+        <p class="amt">Rs 12,000<small> se</small></p>
+        <p>Meri shuruaati offer — pehle chand clients ke liye khaas riayati rate. Ek khoobsurat one-page website ke liye best.</p>
+      </article>
+      <article class="price rv">
+        <p class="tier">Basic</p>
+        <p class="amt">Rs 15–20k</p>
+        <p>Chhote business ke liye mukammal website — home, services, gallery aur rabta.</p>
+      </article>
+      <article class="price hot rv">
+        <p class="tier">Standard</p>
+        <p class="amt">Rs 25–35k</p>
+        <p>Salon aur growing business ke liye — booking page, zyada sections aur apni pasand ki style.</p>
+      </article>
+      <article class="price rv">
+        <p class="tier">Premium</p>
+        <p class="amt">Rs 40–60k</p>
+        <p>Luxury brands ke liye — Dark + Gold ya Liquid Glass, khaas effects aur mukammal custom design.</p>
+      </article>
+    </div>
+    <style>@media(max-width:980px){#priceGrid{grid-template-columns:1fr 1fr!important}}@media(max-width:560px){#priceGrid{grid-template-columns:1fr!important}}</style>
+    <p class="sub rv" style="margin-top:30px">Hosting: <b style="color:var(--gold2)">Rs 0</b> (GitHub Pages) · Apna domain (jaise yoursalon.pk) chaaho to taqreeban <b style="color:var(--gold2)">Rs 3,000 / saal</b> — ikhtiyari hai, lazmi nahi.</p>
+  </div>
+</section>
+
+<section id="sawal">
+  <div class="wrap">
+    <p class="kicker rv">Sawal Jawab</p>
+    <h2 class="rv">Seedhe jawab, <em>bina ghumaye.</em></h2>
+    <div class="gold-rule rv"></div>
+    <div class="faq">
+      <details class="rv"><summary>Website banne mein kitne din lagte hain?</summary><div class="ans">Aam tor par 3 se 7 din — size aur details par munhasir hai. Demo pehle milta hai, taake tum beech mein hi design dekh sako aur tabdeeli bata sako.</div></details>
+      <details class="rv"><summary>Payment kaise hoti hai?</summary><div class="ans">Sirf 50% advance se kaam shuru hota hai (Easypaisa / JazzCash). Baqi raqam tab, jab demo dekh kar tumhein design pasand aa jaye. Pasand na aaye to final payment ka koi dabao nahi.</div></details>
+      <details class="rv"><summary>Kitni tabdeeliyan (changes) milti hain?</summary><div class="ans">Demo stage par tumhari pasand ke hisab se reasonable changes shamil hain — rang, text, tasaveer, sections ki tartib. Maqsad yehi hai ke final website tumhein dil se pasand aaye.</div></details>
+      <details class="rv"><summary>Hosting aur domain ka kharcha kitna hai?</summary><div class="ans">Hosting bilkul free hai (GitHub Pages) — koi monthly fee nahi. Apna domain (jaise .pk ya .com) lena chaaho to taqreeban Rs 3,000 saalana hai; ye ikhtiyari hai, free wale address par bhi website bilkul theek chalti hai.</div></details>
+      <details class="rv"><summary>Kya tum nayi ho? Bharosa kaise karun?</summary><div class="ans">Saaf jawab: haan, mera ye business naya hai — isi liye shuruaati rate bhi kam rakha hai. Bharose ke liye jhooti baatein nahi, mera live kaam upar diya hai: har website khol kar khud dekho, phir faisla karo.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="creator">
+  <div class="wrap">
+    <div class="inner">
+      <p class="kicker rv">Meet the Creator</p>
+      <h2 class="rv">Mein ne ye sab <em>khud banaya hai.</em></h2>
+      <p class="rv">Bohat si websites ek jaisi lagti hain — copy-paste templates, wahi purani shaklein. Mein Karachi se kaam karti hun aur har website ko us business ki apni pehchan deti hun: salon ke liye luxury wali chamak, shop ke liye saaf bharosa, aur har design mobile par utna hi khoobsurat jitna computer par.</p>
+      <p class="rv">Websites ke saath saath mein tools bhi banati hun — Urdu dubbing ka AI system, Chrome extensions, Discord games — kyun ke mujhe sirf sajana nahi, banana aata hai. Tumhara kaam bhi usi mehnat aur usi khayal se hoga.</p>
+      <p class="sig rv">— Sehrish, Web Designer · Karachi</p>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <p class="kicker rv">Start Here</p>
+    <h2 class="rv">Tumhari website ka pehla step <em>ek click hai.</em></h2>
+    <p class="sub rv" style="margin-bottom:34px">Mere saare links aur rabte ke tareeqe ek hi jagah — LinkHub par. Wahan se baat shuru karo, baqi mein sambhal lungi.</p>
+    <a class="btn rv" href="https://sehrish64.github.io/linkhub/" target="_blank" rel="noopener">LinkHub Kholain — Baat Shuru Karo</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Sehrish · Web Designer, Karachi, Pakistan — Dark + Gold, dil se banaya hua.</p>
+    <p style="margin-top:8px"><a href="#kaam">Kaam</a> · <a href="#tools">Tools</a> · <a href="#qeemat">Qeemat</a> · <a href="https://github.com/Sehrish64" target="_blank" rel="noopener">GitHub</a> · <a href="https://sehrish64.github.io/linkhub/" target="_blank" rel="noopener">LinkHub</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:.12});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
