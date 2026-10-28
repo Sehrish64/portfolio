@@ -574,6 +574,31 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
   #scratchCanvas{transition:none}
   .scratch-burst i{display:none}
 }
+
+/* ============ DESIGN PICKER ============ */
+.design-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.design-grid > .design-tile:last-child:nth-child(odd){grid-column:1 / -1}
+.design-tile{position:relative;display:block;width:100%;padding:10px 10px 12px;cursor:pointer;appearance:none;-webkit-appearance:none;
+  background:linear-gradient(180deg,var(--surface2),var(--surface));border:1px solid var(--line-soft);
+  border-radius:16px;box-shadow:var(--shadow);transition:border-color .3s,transform .3s; font:inherit;color:var(--text)}
+.design-tile:hover{transform:translateY(-2px)}
+.design-tile[aria-pressed="true"]{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold),var(--shadow)}
+.dt-preview{display:block;height:84px;border-radius:10px;position:relative;overflow:hidden;
+  background:linear-gradient(165deg,var(--p-surface),var(--p-bg) 78%);border:1px solid rgba(128,110,60,.25)}
+.dt-dots{position:absolute;top:8px;left:0;right:0;display:flex;justify-content:center;gap:5px}
+.dt-dots i{width:11px;height:11px;border-radius:50%;border:1px solid rgba(128,110,60,.35)}
+.dt-arch{position:absolute;left:50%;bottom:12px;width:52px;height:54px;transform:translateX(-50%);
+  border:1.5px solid var(--p-gold);border-bottom:none;border-radius:60px 60px 0 0;opacity:.9}
+.dt-arch::after{content:"";position:absolute;left:50%;top:8px;width:7px;height:7px;transform:translateX(-50%) rotate(45deg);background:var(--p-bright)}
+.dt-glow{position:absolute;left:50%;bottom:6px;width:64px;height:10px;transform:translateX(-50%);
+  border-radius:50%;background:var(--p-gold);opacity:.35;filter:blur(3px)}
+.dt-name{display:block;margin-top:10px;font-family:var(--sans);font-size:.72rem;letter-spacing:.22em;
+  text-indent:.22em;text-transform:uppercase;color:var(--text)}
+.dt-check{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;z-index:2;
+  background:var(--btn-bg);display:none;align-items:center;justify-content:center}
+.dt-check svg{display:block}
+.design-tile[aria-pressed="true"] .dt-check{display:flex}
+@media(max-width:340px){.design-grid{gap:9px}.dt-preview{height:72px}}
 </style>
 </head>
 <body>
@@ -735,6 +760,17 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       </div>
     </div>
     <p class="scratch-hint" id="scratchHint" data-i18n="scratchHint">Rub the foil with your finger or cursor</p>
+  </div>
+</section>
+
+<!-- ================= DESIGN PICKER ================= -->
+<section>
+  <div class="wrap rv">
+    <div class="divider"><svg width="9" height="9" viewBox="0 0 10 10"><rect x="2" y="2" width="6" height="6" transform="rotate(45 5 5)" fill="var(--gold)"/></svg></div>
+    <p class="kicker" data-i18n="designKicker">Make It Yours</p>
+    <h2 class="sec-title" data-i18n="designTitle">Choose Your Design</h2>
+    <p class="sec-sub" data-i18n="designSub">Seven looks, one celebration — tap any design to dress the whole invitation in it.</p>
+    <div class="design-grid" id="designGrid"></div>
   </div>
 </section>
 
@@ -909,16 +945,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
   <p class="demo">Demo Invitation · Sample Names, Venue &amp; Number</p>
 </footer>
 
-<!-- ================= THEME SWITCHER ================= -->
-<nav class="switcher" aria-label="Invitation colour theme">
-  <button type="button" data-set="midnight" aria-pressed="true"><span class="dot" style="background:linear-gradient(135deg,#0a0805 55%,#c9a24b 55%)"></span>Midnight</button>
-  <button type="button" data-set="ivory" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#faf3e3 55%,#6e1423 55%)"></span>Ivory</button>
-  <button type="button" data-set="emerald" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#06231a 55%,#d4af5f 55%)"></span>Emerald</button>
-  <button type="button" data-set="blush" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#fbe7df 55%,#b76e79 55%)"></span>Blush</button>
-  <button type="button" data-set="royal" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#05333b 55%,#d4af5f 55%)"></span>Peacock</button>
-  <button type="button" data-set="rose" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#57102a 55%,#f78fb0 55%)"></span>Rose</button>
-  <button type="button" data-set="khwab" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#f7f1e0 55%,#71835f 55%)"></span>Khwab</button>
-</nav>
+<!-- Theme switching lives in the "Choose Your Design" picker section -->
 
 <script>
 (function(){
@@ -1017,7 +1044,9 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       scratchKicker:'A Little Surprise', scratchTitle:'Scratch & Reveal',
       scratchSave:'Save the Date', scratchDay:'Sunday', scratchDate:'20 December 2026',
       scratchNote:'We cannot wait to see you there',
-      scratchHint:'Rub the foil with your finger or cursor'},
+      scratchHint:'Rub the foil with your finger or cursor',
+      designKicker:'Make It Yours', designTitle:'Choose Your Design',
+      designSub:'Seven looks, one celebration — tap any design to dress the whole invitation in it.'},
     ur: {open:'دعوت نامہ کھولیں', hint:'کھولنے کے لیے مہر پر دبائیں', scroll:'نیچے اسکرول کریں',
       days:'دن', hours:'گھنٹے', minutes:'منٹ', seconds:'سیکنڈ',
       viewLoc:'مقام دیکھیں', addCal:'کیلنڈر میں شامل کریں',
@@ -1029,7 +1058,9 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       scratchKicker:'ایک چھوٹا سا سرپرائز', scratchTitle:'کھرچیں اور دیکھیں',
       scratchSave:'تاریخ یاد رکھیں', scratchDay:'اتوار', scratchDate:'20 دسمبر 2026',
       scratchNote:'ہم آپ کو دیکھنے کے لیے بے تابی سے منتظر ہیں',
-      scratchHint:'فوائل کو انگلی یا کرسر سے رگڑیں'}
+      scratchHint:'فوائل کو انگلی یا کرسر سے رگڑیں',
+      designKicker:'اپنی پسند بنائیں', designTitle:'اپنا ڈیزائن چنیں',
+      designSub:'سات انداز، ایک جشن — کسی بھی ڈیزائن پر دبائیں، پورا دعوت نامہ اسی رنگ میں سج جائے گا۔'}
   };
   var langEn = document.getElementById('langEn'), langUr = document.getElementById('langUr');
   function applyLang(l){
@@ -1101,19 +1132,53 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
     updProg();
   }
 
-  /* ---- Theme switcher ---- */
-  var btns = Array.prototype.slice.call(document.querySelectorAll('.switcher button'));
+  /* ---- Design picker (theme switcher) ----
+     Data-driven: to add a design, add ONE entry here (plus its html[data-theme] CSS vars).
+     Palettes mirror each theme's CSS variables (--bg / --surface2 / --gold / accent). */
+  var DESIGNS = [
+    {id:'midnight', name:'Midnight', bg:'#080604', surface:'#171208', gold:'#c9a24b', bright:'#eed9a0'},
+    {id:'ivory',    name:'Ivory',    bg:'#f7efdd', surface:'#fdf3df', gold:'#b07c2c', bright:'#6e1423'},
+    {id:'emerald',  name:'Emerald',  bg:'#03130c', surface:'#0a2e20', gold:'#d4af5f', bright:'#f2dda6'},
+    {id:'blush',    name:'Blush',    bg:'#fceeea', surface:'#fdeeea', gold:'#b76e79', bright:'#e3a3ad'},
+    {id:'royal',    name:'Peacock',  bg:'#032024', surface:'#0d4a4c', gold:'#d4af5f', bright:'#40beaf'},
+    {id:'rose',     name:'Rose',     bg:'#2e0714', surface:'#671431', gold:'#dfa94f', bright:'#f78fb0'},
+    {id:'khwab',    name:'Khwab',    bg:'#f7f1e0', surface:'#f8f2df', gold:'#ab8a44', bright:'#71835f'}
+  ];
+  var designGrid = document.getElementById('designGrid'), tileBtns = [];
+  if(designGrid){
+    DESIGNS.forEach(function(d){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'design-tile';
+      b.setAttribute('data-set', d.id);
+      b.setAttribute('aria-pressed', 'false');
+      b.setAttribute('aria-label', d.name + ' design');
+      b.innerHTML =
+        '<span class="dt-preview" style="--p-bg:' + d.bg + ';--p-surface:' + d.surface + ';--p-gold:' + d.gold + ';--p-bright:' + d.bright + '">' +
+          '<span class="dt-dots"><i style="background:' + d.bg + '"></i><i style="background:' + d.gold + '"></i><i style="background:' + d.bright + '"></i></span>' +
+          '<span class="dt-arch"></span><span class="dt-glow"></span>' +
+        '</span>' +
+        '<span class="dt-name">' + d.name + '</span>' +
+        '<span class="dt-check"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="var(--btn-text)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5 4.8 9 10 3"/></svg></span>';
+      b.addEventListener('click', function(){ applyTheme(d.id); });
+      designGrid.appendChild(b);
+      tileBtns.push(b);
+    });
+  }
   function applyTheme(name){
     root.setAttribute('data-theme', name);
-    btns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-set') === name ? 'true' : 'false'); });
+    tileBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-set') === name ? 'true' : 'false'); });
     try{ localStorage.setItem('wi-theme', name); }catch(e){}
   }
-  btns.forEach(function(b){ b.addEventListener('click', function(){ applyTheme(b.getAttribute('data-set')); }); });
   var start = null;
   try{
     start = new URLSearchParams(location.search).get('theme') || localStorage.getItem('wi-theme');
   }catch(e){}
-  if(start && ['midnight','ivory','emerald','blush','royal','rose','khwab'].indexOf(start) > -1) applyTheme(start);
+  if(start && DESIGNS.some(function(d){ return d.id === start; })) applyTheme(start);
+  else {
+    var cur = root.getAttribute('data-theme') || 'midnight';
+    tileBtns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-set') === cur ? 'true' : 'false'); });
+  }
 
   /* ---- Countdown to Baraat: Sun 20 Dec 2026, 7:00 PM PKT ---- */
   var target = new Date('2026-12-20T19:00:00+05:00').getTime();
