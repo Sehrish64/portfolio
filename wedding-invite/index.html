@@ -104,6 +104,36 @@ html[data-theme="khwab"] .hero::after{
   background-position:top left,bottom left,left top,right top;
 }
 html[data-theme="khwab"] .hero .wrap{position:relative;z-index:1}
+/* Khwab v4: falling petals + gentle entrance motion (this theme only, soft always) */
+.petals{display:none}
+html[data-theme="khwab"] .petals{display:block;position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2}
+html[data-theme="khwab"] .petals i{position:absolute;top:-4%;display:block;border-radius:80% 6px 80% 6px;background:linear-gradient(135deg,rgba(217,167,171,.85),rgba(192,138,141,.85));opacity:0;animation:petalFall linear infinite}
+html[data-theme="khwab"] .petals i:nth-child(1){left:6%;width:11px;height:14px;animation-duration:13s;animation-delay:-2s}
+html[data-theme="khwab"] .petals i:nth-child(2){left:14%;width:8px;height:10px;animation-duration:10s;animation-delay:-7s}
+html[data-theme="khwab"] .petals i:nth-child(3){left:22%;width:12px;height:15px;animation-duration:15s;animation-delay:-4s}
+html[data-theme="khwab"] .petals i:nth-child(4){left:33%;width:7px;height:9px;animation-duration:9s;animation-delay:-1s}
+html[data-theme="khwab"] .petals i:nth-child(5){left:41%;width:10px;height:13px;animation-duration:12s;animation-delay:-9s}
+html[data-theme="khwab"] .petals i:nth-child(6){left:52%;width:8px;height:11px;animation-duration:11s;animation-delay:-5s}
+html[data-theme="khwab"] .petals i:nth-child(7){left:60%;width:12px;height:14px;animation-duration:16s;animation-delay:-3s}
+html[data-theme="khwab"] .petals i:nth-child(8){left:68%;width:7px;height:10px;animation-duration:10s;animation-delay:-8s}
+html[data-theme="khwab"] .petals i:nth-child(9){left:76%;width:10px;height:12px;animation-duration:13s;animation-delay:-6s}
+html[data-theme="khwab"] .petals i:nth-child(10){left:84%;width:8px;height:10px;animation-duration:11s;animation-delay:-2.5s}
+html[data-theme="khwab"] .petals i:nth-child(11){left:90%;width:11px;height:14px;animation-duration:14s;animation-delay:-10s}
+html[data-theme="khwab"] .petals i:nth-child(12){left:96%;width:7px;height:9px;animation-duration:9.5s;animation-delay:-4.5s}
+@keyframes petalFall{0%{transform:translate3d(0,-40px,0) rotate(0deg);opacity:0}7%{opacity:.5}25%{transform:translate3d(14px,27vh,0) rotate(95deg)}50%{transform:translate3d(-12px,53vh,0) rotate(180deg)}75%{transform:translate3d(12px,79vh,0) rotate(265deg)}88%{opacity:.45}100%{transform:translate3d(-6px,106vh,0) rotate(350deg);opacity:0}}
+html[data-theme="khwab"] body.opened .hero::before{animation:khwabFade 1.6s ease both}
+html[data-theme="khwab"] body.opened .hero::after{animation:khwabFade 2.1s ease .2s both}
+html[data-theme="khwab"] body.opened .hero .bismillah{animation:khwabUp 1s ease .3s both}
+html[data-theme="khwab"] body.opened .hero .names{animation:khwabUp 1.1s ease .5s both}
+html[data-theme="khwab"] body.opened .hero .dateline{animation:khwabUp 1s ease .75s both}
+html[data-theme="khwab"] body.opened .hero .count{animation:khwabUp 1s ease .95s both}
+@keyframes khwabFade{from{opacity:0}}
+@keyframes khwabUp{from{opacity:0;transform:translateY(14px)}}
+html[data-theme="khwab"] .divider svg rect{fill:#b98a8d}
+@media (prefers-reduced-motion: reduce){
+  html[data-theme="khwab"] .petals{display:none}
+  html[data-theme="khwab"] body.opened .hero::before,html[data-theme="khwab"] body.opened .hero::after,html[data-theme="khwab"] body.opened .hero .bismillah,html[data-theme="khwab"] body.opened .hero .names,html[data-theme="khwab"] body.opened .hero .dateline,html[data-theme="khwab"] body.opened .hero .count{animation:none}
+}
 
 /* ============ BASE ============ */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -586,6 +616,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
 
 <!-- ================= HERO ================= -->
 <header class="hero">
+    <div class="petals" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
   <div class="wrap">
     <div class="arch rv in">
       <svg class="archdraw" viewBox="0 0 600 760" preserveAspectRatio="none" aria-hidden="true" focusable="false">
