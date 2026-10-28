@@ -77,41 +77,26 @@ html[data-theme="rose"]{
   --pill:rgba(46,7,20,.88); --tile1:#671431; --tile2:#42091d;
 }
 html[data-theme="khwab"]{
-  --bg:#160f2e; --bg2:#241447; --glow:rgba(216,170,220,.15);
-  --surface:#221440; --surface2:#2c1a54;
-  --text:#efe9fb; --muted:#c6b4e2; --faint:#9686ba;
-  --gold:#e8cf8f; --gold-bright:#f4e3b2; --gold-deep:#b08d4f;
-  --heading:#f4e3b2; --line:rgba(232,207,143,.46); --line-soft:rgba(232,207,143,.20);
-  --btn-bg:linear-gradient(135deg,#f4e3b2,#d9b877); --btn-text:#2a1850;
-  --chip:rgba(232,207,143,.10); --shadow:0 18px 50px rgba(5,2,16,.6);
-  --pill:rgba(22,14,46,.88); --tile1:#2c1a54; --tile2:#1a1036;
+  --bg:#f7f1e0; --bg2:#f1e7cf; --glow:rgba(176,141,62,.12);
+  --surface:#fdfaf0; --surface2:#f8f2df;
+  --text:#4c4234; --muted:#857453; --faint:#ab9873;
+  --gold:#ab8a44; --gold-bright:#c4a355; --gold-deep:#8a6d2f;
+  --heading:#a5853f; --line:rgba(113,131,95,.5); --line-soft:rgba(113,131,95,.24);
+  --btn-bg:linear-gradient(135deg,#c9a959,#a5853f); --btn-text:#fffaf0;
+  --chip:rgba(113,131,95,.10); --shadow:0 18px 44px rgba(120,100,50,.18);
+  --pill:rgba(253,250,240,.92); --tile1:#f8f2df; --tile2:#f1e7cf;
 }
-/* Khwab: moonlit star layer in the hero (this theme only) */
+/* Khwab: Mughal-garden frame + corner florals in the hero (this theme only) */
 html[data-theme="khwab"] .hero::before{
-  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background-image:
-    radial-gradient(circle 30px at 84% 9%, rgba(244,227,178,.85), rgba(244,227,178,.22) 55%, transparent 72%),
-    radial-gradient(1.6px 1.6px at 8% 14%, #fff6da 50%, transparent 51%),
-    radial-gradient(1.2px 1.2px at 18% 30%, #f4e3b2 50%, transparent 51%),
-    radial-gradient(1.8px 1.8px at 27% 8%, #ffffff 50%, transparent 51%),
-    radial-gradient(1.2px 1.2px at 36% 22%, #ffe9ec 50%, transparent 51%),
-    radial-gradient(1.5px 1.5px at 45% 12%, #fff6da 50%, transparent 51%),
-    radial-gradient(1.1px 1.1px at 54% 28%, #e8cf8f 50%, transparent 51%),
-    radial-gradient(1.7px 1.7px at 63% 6%, #ffffff 50%, transparent 51%),
-    radial-gradient(1.2px 1.2px at 71% 20%, #f4e3b2 50%, transparent 51%),
-    radial-gradient(1.4px 1.4px at 93% 26%, #fff6da 50%, transparent 51%),
-    radial-gradient(1.1px 1.1px at 13% 44%, #e8a0b4 50%, transparent 51%),
-    radial-gradient(1.3px 1.3px at 88% 42%, #f4e3b2 50%, transparent 51%),
-    radial-gradient(1px 1px at 33% 48%, #ffffff 50%, transparent 51%),
-    radial-gradient(1px 1px at 58% 44%, #fff6da 50%, transparent 51%),
-    radial-gradient(1.2px 1.2px at 76% 52%, #e8cf8f 50%, transparent 51%),
-    radial-gradient(1px 1px at 5% 58%, #f4e3b2 50%, transparent 51%),
-    radial-gradient(1px 1px at 96% 60%, #ffffff 50%, transparent 51%);
-  animation:twinkle 3.8s ease-in-out infinite;
+  content:"";position:absolute;inset:12px;z-index:0;pointer-events:none;
+  border:1.5px solid rgba(113,131,95,.55);border-radius:180px 180px 16px 16px;
+  outline:1px solid rgba(171,138,68,.55);outline-offset:5px;
+}
+html[data-theme="khwab"] .hero::after{
+  content:"";position:absolute;top:4px;left:4px;right:4px;height:120px;z-index:0;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20120%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2371835f%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M26%20118%20C22%2084%2024%2048%2034%2016%22%2F%3E%3Cpath%20d%3D%22M26%2082%20C38%2074%2046%2064%2048%2050%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%238a9a76%22%3E%3Cellipse%20cx%3D%2220%22%20cy%3D%2266%22%20rx%3D%227%22%20ry%3D%223.4%22%20transform%3D%22rotate%28-38%2020%2066%29%22%2F%3E%3Cellipse%20cx%3D%2238%22%20cy%3D%2292%22%20rx%3D%227%22%20ry%3D%223.4%22%20transform%3D%22rotate%2830%2038%2092%29%22%2F%3E%3Cellipse%20cx%3D%2252%22%20cy%3D%2266%22%20rx%3D%226%22%20ry%3D%223%22%20transform%3D%22rotate%28-24%2052%2066%29%22%2F%3E%3C%2Fg%3E%3Cg%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2214%22%20r%3D%228%22%20fill%3D%22%23c08a8d%22%2F%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2214%22%20r%3D%223.4%22%20fill%3D%22%23a96a6e%22%2F%3E%3Ccircle%20cx%3D%2251%22%20cy%3D%2242%22%20r%3D%226%22%20fill%3D%22%23cfa0a3%22%2F%3E%3Ccircle%20cx%3D%2251%22%20cy%3D%2242%22%20r%3D%222.4%22%20fill%3D%22%23a96a6e%22%2F%3E%3Ccircle%20cx%3D%2217%22%20cy%3D%2250%22%20r%3D%225.4%22%20fill%3D%22%23c08a8d%22%2F%3E%3Ccircle%20cx%3D%2217%22%20cy%3D%2250%22%20r%3D%222.2%22%20fill%3D%22%23a96a6e%22%2F%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%2225%22%20r%3D%222%22%20fill%3D%22%23ab8a44%22%2F%3E%3Ccircle%20cx%3D%2223%22%20cy%3D%2230%22%20r%3D%222%22%20fill%3D%22%23ab8a44%22%2F%3E%3Ccircle%20cx%3D%2257%22%20cy%3D%2262%22%20r%3D%222%22%20fill%3D%22%23ab8a44%22%2F%3E%3C%2Fg%3E%3Cg%20transform%3D%22translate%28400%200%29%20scale%28-1%201%29%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%2371835f%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M26%20118%20C22%2084%2024%2048%2034%2016%22%2F%3E%3Cpath%20d%3D%22M26%2082%20C38%2074%2046%2064%2048%2050%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%238a9a76%22%3E%3Cellipse%20cx%3D%2220%22%20cy%3D%2266%22%20rx%3D%227%22%20ry%3D%223.4%22%20transform%3D%22rotate%28-38%2020%2066%29%22%2F%3E%3Cellipse%20cx%3D%2238%22%20cy%3D%2292%22%20rx%3D%227%22%20ry%3D%223.4%22%20transform%3D%22rotate%2830%2038%2092%29%22%2F%3E%3Cellipse%20cx%3D%2252%22%20cy%3D%2266%22%20rx%3D%226%22%20ry%3D%223%22%20transform%3D%22rotate%28-24%2052%2066%29%22%2F%3E%3C%2Fg%3E%3Cg%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2214%22%20r%3D%228%22%20fill%3D%22%23c08a8d%22%2F%3E%3Ccircle%20cx%3D%2234%22%20cy%3D%2214%22%20r%3D%223.4%22%20fill%3D%22%23a96a6e%22%2F%3E%3Ccircle%20cx%3D%2251%22%20cy%3D%2242%22%20r%3D%226%22%20fill%3D%22%23cfa0a3%22%2F%3E%3Ccircle%20cx%3D%2251%22%20cy%3D%2242%22%20r%3D%222.4%22%20fill%3D%22%23a96a6e%22%2F%3E%3Ccircle%20cx%3D%2217%22%20cy%3D%2250%22%20r%3D%225.4%22%20fill%3D%22%23c08a8d%22%2F%3E%3Ccircle%20cx%3D%2217%22%20cy%3D%2250%22%20r%3D%222.2%22%20fill%3D%22%23a96a6e%22%2F%3E%3Ccircle%20cx%3D%2244%22%20cy%3D%2225%22%20r%3D%222%22%20fill%3D%22%23ab8a44%22%2F%3E%3Ccircle%20cx%3D%2223%22%20cy%3D%2230%22%20r%3D%222%22%20fill%3D%22%23ab8a44%22%2F%3E%3Ccircle%20cx%3D%2257%22%20cy%3D%2262%22%20r%3D%222%22%20fill%3D%22%23ab8a44%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E") center top/100% 120px no-repeat;opacity:.9;
 }
 html[data-theme="khwab"] .hero .wrap{position:relative;z-index:1}
-@keyframes twinkle{0%,100%{opacity:.6}50%{opacity:1}}
-@media (prefers-reduced-motion: reduce){html[data-theme="khwab"] .hero::before{animation:none}}
 
 /* ============ BASE ============ */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -834,7 +819,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
   <button type="button" data-set="blush" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#fbe7df 55%,#b76e79 55%)"></span>Blush</button>
   <button type="button" data-set="royal" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#05333b 55%,#d4af5f 55%)"></span>Peacock</button>
   <button type="button" data-set="rose" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#57102a 55%,#f78fb0 55%)"></span>Rose</button>
-  <button type="button" data-set="khwab" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#241447 55%,#e8cf8f 55%)"></span>Khwab</button>
+  <button type="button" data-set="khwab" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#f7f1e0 55%,#71835f 55%)"></span>Khwab</button>
 </nav>
 
 <script>
