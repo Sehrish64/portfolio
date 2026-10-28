@@ -546,6 +546,34 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
   .gate.opening .env-card{transform:none}
   .gate{transition:none}
 }
+
+/* ============ SCRATCH & REVEAL ============ */
+.scratch-box{position:relative;max-width:440px;margin:26px auto 0;border:1px solid var(--line);
+  border-radius:22px;overflow:hidden;background:linear-gradient(180deg,var(--surface2),var(--surface));
+  box-shadow:var(--shadow);-webkit-user-select:none;user-select:none}
+.scratch-under{padding:42px 22px 38px;text-align:center}
+.su-save{font-family:var(--sans);font-size:.66rem;letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;color:var(--gold)}
+.su-day{font-family:var(--serif);font-style:italic;font-size:clamp(1.3rem,5.4vw,1.6rem);color:var(--muted);margin-top:16px}
+.su-date{font-family:var(--serif);font-weight:700;font-size:clamp(1.9rem,8.6vw,2.6rem);line-height:1.15;margin-top:4px;
+  background:linear-gradient(160deg,var(--gold-bright) 15%,var(--gold) 48%,var(--gold-deep) 90%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--gold)}
+.su-note{margin-top:14px;font-style:italic;color:var(--muted);font-size:clamp(1rem,4.4vw,1.15rem)}
+.su-hash{font-family:var(--serif);font-size:1.15rem;color:var(--heading);margin-top:12px}
+#scratchCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:pointer;
+  transition:opacity .9s ease}
+#scratchCanvas.done{opacity:0;pointer-events:none}
+.scratch-hint{margin-top:16px;font-family:var(--sans);font-size:.66rem;letter-spacing:.3em;text-indent:.3em;
+  text-transform:uppercase;color:var(--faint);transition:opacity .6s ease}
+.scratch-hint.done{opacity:0}
+.scratch-burst{position:absolute;left:50%;top:50%;z-index:3;pointer-events:none}
+.scratch-burst i{position:absolute;left:-5px;top:-7px;width:9px;height:13px;border-radius:80% 6px 80% 6px;
+  background:var(--gold);opacity:0}
+.scratch-burst i.b2{background:var(--gold-bright)}
+.scratch-box.celebrated .scratch-burst i{animation:burstFly 1.2s cubic-bezier(.15,.6,.4,1) forwards}
+@media (prefers-reduced-motion: reduce){
+  #scratchCanvas{transition:none}
+  .scratch-burst i{display:none}
+}
 </style>
 </head>
 <body>
@@ -677,6 +705,38 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
     <g class="lotus l3" transform="translate(560 160) scale(.7)"><ellipse cx="0" cy="3" rx="21" ry="3.5" fill="#4f7a5a"/><path d="M0 1c-4-8-12-10-16-9 1 7 6 11 16 9zM0 1c4-8 12-10 16-9-1 7-6 11-16 9zM0 1c-2-9 0-14 0-14s2 5 0 14z" fill="#e88ca0"/></g>
   </svg>
 </header>
+
+<!-- ================= SCRATCH & REVEAL ================= -->
+<section>
+  <div class="wrap rv">
+    <div class="divider"><svg width="9" height="9" viewBox="0 0 10 10"><rect x="2" y="2" width="6" height="6" transform="rotate(45 5 5)" fill="var(--gold)"/></svg></div>
+    <p class="kicker" data-i18n="scratchKicker">A Little Surprise</p>
+    <h2 class="sec-title" data-i18n="scratchTitle">Scratch &amp; Reveal</h2>
+    <div class="scratch-box" id="scratchBox">
+      <div class="scratch-under">
+        <p class="su-save" data-i18n="scratchSave">Save the Date</p>
+        <p class="su-day" data-i18n="scratchDay">Sunday</p>
+        <p class="su-date" data-i18n="scratchDate">20 December 2026</p>
+        <p class="su-note" data-i18n="scratchNote">We cannot wait to see you there</p>
+        <p class="su-hash">#AyeshaWedsAhmed</p>
+      </div>
+      <canvas id="scratchCanvas" role="img" aria-label="Scratch the foil to reveal the wedding date"></canvas>
+      <div class="scratch-burst" aria-hidden="true">
+        <i style="--tx:-95px;--ty:-75px;--rot:210deg"></i>
+        <i class="b2" style="--tx:-45px;--ty:-115px;--rot:-160deg"></i>
+        <i style="--tx:25px;--ty:-125px;--rot:260deg"></i>
+        <i class="b2" style="--tx:95px;--ty:-80px;--rot:-230deg"></i>
+        <i style="--tx:125px;--ty:-15px;--rot:140deg"></i>
+        <i class="b2" style="--tx:-128px;--ty:-10px;--rot:-120deg"></i>
+        <i style="--tx:-75px;--ty:20px;--rot:300deg"></i>
+        <i class="b2" style="--tx:70px;--ty:25px;--rot:-280deg"></i>
+        <i style="--tx:0px;--ty:-140px;--rot:180deg"></i>
+        <i class="b2" style="--tx:-18px;--ty:-65px;--rot:-320deg"></i>
+      </div>
+    </div>
+    <p class="scratch-hint" id="scratchHint" data-i18n="scratchHint">Rub the foil with your finger or cursor</p>
+  </div>
+</section>
 
 <!-- ================= BLESSING ================= -->
 <section>
@@ -953,7 +1013,11 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       occLine:'The same beautiful invitation website — lovingly made for any of your special days.',
       storyTitle:'Written in the Stars', galTitle:'Along the Way',
       rsvpTitle:'Will You Join Us?', rsvpSub:'Your presence is the greatest gift of all.',
-      rsvpBtn:'RSVP on WhatsApp', rsvpNote:'Please respond by 10 December 2026'},
+      rsvpBtn:'RSVP on WhatsApp', rsvpNote:'Please respond by 10 December 2026',
+      scratchKicker:'A Little Surprise', scratchTitle:'Scratch & Reveal',
+      scratchSave:'Save the Date', scratchDay:'Sunday', scratchDate:'20 December 2026',
+      scratchNote:'We cannot wait to see you there',
+      scratchHint:'Rub the foil with your finger or cursor'},
     ur: {open:'دعوت نامہ کھولیں', hint:'کھولنے کے لیے مہر پر دبائیں', scroll:'نیچے اسکرول کریں',
       days:'دن', hours:'گھنٹے', minutes:'منٹ', seconds:'سیکنڈ',
       viewLoc:'مقام دیکھیں', addCal:'کیلنڈر میں شامل کریں',
@@ -961,7 +1025,11 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       occLine:'وہی خوبصورت دعوتی ویب سائٹ — آپ کے ہر خاص دن کے لیے محبت سے بنائی گئی۔',
       storyTitle:'ستاروں میں لکھا ہوا', galTitle:'سفر کی جھلکیاں',
       rsvpTitle:'کیا آپ شامل ہوں گے؟', rsvpSub:'آپ کی موجودگی ہی سب سے بڑا تحفہ ہے۔',
-      rsvpBtn:'واٹس ایپ پر جواب دیں', rsvpNote:'براہ کرم 10 دسمبر 2026 تک جواب دیں۔'}
+      rsvpBtn:'واٹس ایپ پر جواب دیں', rsvpNote:'براہ کرم 10 دسمبر 2026 تک جواب دیں۔',
+      scratchKicker:'ایک چھوٹا سا سرپرائز', scratchTitle:'کھرچیں اور دیکھیں',
+      scratchSave:'تاریخ یاد رکھیں', scratchDay:'اتوار', scratchDate:'20 دسمبر 2026',
+      scratchNote:'ہم آپ کو دیکھنے کے لیے بے تابی سے منتظر ہیں',
+      scratchHint:'فوائل کو انگلی یا کرسر سے رگڑیں'}
   };
   var langEn = document.getElementById('langEn'), langUr = document.getElementById('langUr');
   function applyLang(l){
@@ -1079,6 +1147,153 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
     setVal(mEl, pad(m)); setVal(sEl, pad(s));
   }
   tick(); setInterval(tick, 1000);
+
+  /* ---- Scratch & Reveal (gold foil over the Baraat date) ---- */
+  (function(){
+    var box = document.getElementById('scratchBox'),
+        cv = document.getElementById('scratchCanvas'),
+        hint = document.getElementById('scratchHint');
+    if(!box || !cv || !cv.getContext) return;
+    var ctx = cv.getContext('2d'),
+        ready = false, started = false, done = false,
+        drawing = false, last = null, moveCount = 0, checking = false;
+
+    function themeColor(name, fallback){
+      var v = '';
+      try{ v = getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }catch(e){}
+      return v || fallback;
+    }
+    function paintFoil(){
+      var W = cv.width, H = cv.height;
+      if(!W || !H) return;
+      var k = box.clientWidth ? W / box.clientWidth : 1,
+          gold = themeColor('--gold', '#c9a24b'),
+          bright = themeColor('--gold-bright', '#eed9a0'),
+          deep = themeColor('--gold-deep', '#8a6a24');
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = 1;
+      var g = ctx.createLinearGradient(0, 0, W, H);
+      g.addColorStop(0, deep); g.addColorStop(.32, gold); g.addColorStop(.52, bright);
+      g.addColorStop(.72, gold); g.addColorStop(1, deep);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      /* brushed sheen bands */
+      ctx.globalAlpha = .05; ctx.fillStyle = '#ffffff';
+      for(var b = -2; b < 6; b++){
+        ctx.save(); ctx.translate(W / 2, H / 2); ctx.rotate(-.5); ctx.translate(-W / 2, -H / 2);
+        ctx.fillRect(b * W / 4, -H * .2, W / 9, H * 1.4); ctx.restore();
+      }
+      /* speckle */
+      var n = Math.floor(W * H / 420), i;
+      for(i = 0; i < n; i++){
+        ctx.globalAlpha = .04 + (i % 5) * .018;
+        ctx.fillStyle = i % 3 ? deep : bright;
+        ctx.fillRect((i * 67.31) % W, (i * 41.73) % H, 2, 2);
+      }
+      /* diamond lattice */
+      ctx.globalAlpha = .10; ctx.strokeStyle = deep; ctx.lineWidth = 1;
+      var step = 34 * k, x, y;
+      for(x = step / 2; x < W; x += step){
+        for(y = step / 2; y < H; y += step){
+          ctx.beginPath();
+          ctx.moveTo(x, y - 4 * k); ctx.lineTo(x + 4 * k, y); ctx.lineTo(x, y + 4 * k); ctx.lineTo(x - 4 * k, y);
+          ctx.closePath(); ctx.stroke();
+        }
+      }
+      /* centre seal emblem, echoing the card's A·A seal */
+      ctx.globalAlpha = .55; ctx.strokeStyle = deep; ctx.lineWidth = 1.6 * k;
+      ctx.beginPath(); ctx.arc(W / 2, H / 2, 34 * k, 0, Math.PI * 2); ctx.stroke();
+      ctx.globalAlpha = .4; ctx.lineWidth = 1 * k;
+      ctx.beginPath(); ctx.arc(W / 2, H / 2, 29 * k, 0, Math.PI * 2); ctx.stroke();
+      ctx.globalAlpha = .6; ctx.fillStyle = deep;
+      ctx.font = '600 ' + Math.round(21 * k) + 'px Georgia, "Times New Roman", serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('A·A', W / 2, H / 2 + 1);
+      ctx.globalAlpha = 1;
+    }
+    function sizeCanvas(){
+      var r = box.getBoundingClientRect();
+      if(r.width < 40 || r.height < 40) return false;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(r.width * dpr);
+      cv.height = Math.round(r.height * dpr);
+      paintFoil();
+      ready = true;
+      return true;
+    }
+    function scratchedPct(){
+      var img;
+      try{ img = ctx.getImageData(0, 0, cv.width, cv.height).data; }catch(e){ return 0; }
+      var total = 0, clear = 0;
+      for(var i = 3; i < img.length; i += 32){
+        total++;
+        if(img[i] < 128) clear++;
+      }
+      return total ? clear / total : 0;
+    }
+    function checkPct(){
+      if(done || checking || !ready) return;
+      checking = true;
+      setTimeout(function(){
+        checking = false;
+        if(!done && scratchedPct() >= .45) finish();
+      }, 50);
+    }
+    function finish(){
+      done = true; drawing = false;
+      cv.classList.add('done');
+      box.classList.add('celebrated');
+      if(hint) hint.classList.add('done');
+      setTimeout(function(){ cv.style.display = 'none'; }, 1100);
+    }
+    function pos(e){
+      var r = cv.getBoundingClientRect(),
+          s = r.width ? cv.width / r.width : 1;
+      return { x: (e.clientX - r.left) * s, y: (e.clientY - r.top) * s, s: s };
+    }
+    function erase(p){
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.lineWidth = 46 * p.s; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+      ctx.beginPath();
+      if(last){ ctx.moveTo(last.x, last.y); } else { ctx.moveTo(p.x, p.y); }
+      ctx.lineTo(p.x + .01, p.y + .01);
+      ctx.stroke();
+      last = p; started = true;
+    }
+    cv.addEventListener('pointerdown', function(e){
+      if(done) return;
+      if(!ready && !sizeCanvas()) return;
+      drawing = true;
+      try{ cv.setPointerCapture(e.pointerId); }catch(err){}
+      last = null;
+      erase(pos(e));
+      e.preventDefault();
+    });
+    cv.addEventListener('pointermove', function(e){
+      if(!drawing || done) return;
+      erase(pos(e));
+      if(++moveCount % 6 === 0) checkPct();
+    });
+    function endStroke(){ if(!drawing) return; drawing = false; last = null; checkPct(); }
+    cv.addEventListener('pointerup', endStroke);
+    cv.addEventListener('pointercancel', endStroke);
+
+    if(!sizeCanvas()){
+      var tries = 0,
+          iv = setInterval(function(){ if(sizeCanvas() || ++tries > 40) clearInterval(iv); }, 250);
+    }
+    var rsz = null;
+    window.addEventListener('resize', function(){
+      if(started || done) return;
+      clearTimeout(rsz);
+      rsz = setTimeout(sizeCanvas, 200);
+    });
+    /* repaint the untouched foil when the theme changes */
+    if('MutationObserver' in window){
+      new MutationObserver(function(){
+        if(!started && !done && ready) paintFoil();
+      }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    }
+  })();
 
   /* ---- Reveal on scroll ---- */
   if('IntersectionObserver' in window){
