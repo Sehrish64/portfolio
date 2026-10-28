@@ -76,6 +76,42 @@ html[data-theme="rose"]{
   --chip:rgba(255,143,171,.14); --shadow:0 18px 50px rgba(0,0,0,.55);
   --pill:rgba(46,7,20,.88); --tile1:#671431; --tile2:#42091d;
 }
+html[data-theme="khwab"]{
+  --bg:#160f2e; --bg2:#241447; --glow:rgba(216,170,220,.15);
+  --surface:#221440; --surface2:#2c1a54;
+  --text:#efe9fb; --muted:#c6b4e2; --faint:#9686ba;
+  --gold:#e8cf8f; --gold-bright:#f4e3b2; --gold-deep:#b08d4f;
+  --heading:#f4e3b2; --line:rgba(232,207,143,.46); --line-soft:rgba(232,207,143,.20);
+  --btn-bg:linear-gradient(135deg,#f4e3b2,#d9b877); --btn-text:#2a1850;
+  --chip:rgba(232,207,143,.10); --shadow:0 18px 50px rgba(5,2,16,.6);
+  --pill:rgba(22,14,46,.88); --tile1:#2c1a54; --tile2:#1a1036;
+}
+/* Khwab: moonlit star layer in the hero (this theme only) */
+html[data-theme="khwab"] .hero::before{
+  content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    radial-gradient(circle 30px at 84% 9%, rgba(244,227,178,.85), rgba(244,227,178,.22) 55%, transparent 72%),
+    radial-gradient(1.6px 1.6px at 8% 14%, #fff6da 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 18% 30%, #f4e3b2 50%, transparent 51%),
+    radial-gradient(1.8px 1.8px at 27% 8%, #ffffff 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 36% 22%, #ffe9ec 50%, transparent 51%),
+    radial-gradient(1.5px 1.5px at 45% 12%, #fff6da 50%, transparent 51%),
+    radial-gradient(1.1px 1.1px at 54% 28%, #e8cf8f 50%, transparent 51%),
+    radial-gradient(1.7px 1.7px at 63% 6%, #ffffff 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 71% 20%, #f4e3b2 50%, transparent 51%),
+    radial-gradient(1.4px 1.4px at 93% 26%, #fff6da 50%, transparent 51%),
+    radial-gradient(1.1px 1.1px at 13% 44%, #e8a0b4 50%, transparent 51%),
+    radial-gradient(1.3px 1.3px at 88% 42%, #f4e3b2 50%, transparent 51%),
+    radial-gradient(1px 1px at 33% 48%, #ffffff 50%, transparent 51%),
+    radial-gradient(1px 1px at 58% 44%, #fff6da 50%, transparent 51%),
+    radial-gradient(1.2px 1.2px at 76% 52%, #e8cf8f 50%, transparent 51%),
+    radial-gradient(1px 1px at 5% 58%, #f4e3b2 50%, transparent 51%),
+    radial-gradient(1px 1px at 96% 60%, #ffffff 50%, transparent 51%);
+  animation:twinkle 3.8s ease-in-out infinite;
+}
+html[data-theme="khwab"] .hero .wrap{position:relative;z-index:1}
+@keyframes twinkle{0%,100%{opacity:.6}50%{opacity:1}}
+@media (prefers-reduced-motion: reduce){html[data-theme="khwab"] .hero::before{animation:none}}
 
 /* ============ BASE ============ */
 *{margin:0;padding:0;box-sizing:border-box}
@@ -206,7 +242,7 @@ footer .demo{margin-top:14px;font-family:var(--sans);font-size:.58rem;letter-spa
 }
 .switcher button .dot{width:15px;height:15px;border-radius:50%;flex:none;border:1px solid rgba(128,110,60,.45)}
 .switcher button[aria-pressed="true"]{border-color:var(--gold);color:var(--text);background:var(--chip)}
-@media(max-width:430px){.switcher{gap:2px;padding:5px}.switcher button{padding:6px 4px;font-size:.47rem;gap:2px;letter-spacing:.02em}.switcher button .dot{width:10px;height:10px}}
+@media(max-width:430px){.switcher{gap:1px;padding:5px 4px}.switcher button{padding:6px 3px;font-size:.47rem;gap:2px;letter-spacing:.02em}.switcher button .dot{width:10px;height:10px}}
 
 /* ============ ANIMATION LAYER ============ */
 /* scroll progress */
@@ -798,6 +834,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
   <button type="button" data-set="blush" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#fbe7df 55%,#b76e79 55%)"></span>Blush</button>
   <button type="button" data-set="royal" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#05333b 55%,#d4af5f 55%)"></span>Peacock</button>
   <button type="button" data-set="rose" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#57102a 55%,#f78fb0 55%)"></span>Rose</button>
+  <button type="button" data-set="khwab" aria-pressed="false"><span class="dot" style="background:linear-gradient(135deg,#241447 55%,#e8cf8f 55%)"></span>Khwab</button>
 </nav>
 
 <script>
@@ -985,7 +1022,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
   try{
     start = new URLSearchParams(location.search).get('theme') || localStorage.getItem('wi-theme');
   }catch(e){}
-  if(start && ['midnight','ivory','emerald','blush','royal','rose'].indexOf(start) > -1) applyTheme(start);
+  if(start && ['midnight','ivory','emerald','blush','royal','rose','khwab'].indexOf(start) > -1) applyTheme(start);
 
   /* ---- Countdown to Baraat: Sun 20 Dec 2026, 7:00 PM PKT ---- */
   var target = new Date('2026-12-20T19:00:00+05:00').getTime();
