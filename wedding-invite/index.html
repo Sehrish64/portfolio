@@ -1172,7 +1172,15 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
   }
   var start = null;
   try{
-    start = new URLSearchParams(location.search).get('theme') || localStorage.getItem('wi-theme');
+    var params = new URLSearchParams(location.search),
+        wanted = params.get('design') || params.get('theme');
+    if(wanted){
+      wanted = String(wanted).toLowerCase();
+      DESIGNS.forEach(function(d){
+        if(d.id === wanted || d.name.toLowerCase() === wanted) start = d.id;
+      });
+    }
+    if(!start) start = localStorage.getItem('wi-theme');
   }catch(e){}
   if(start && DESIGNS.some(function(d){ return d.id === start; })) applyTheme(start);
   else {
