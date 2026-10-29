@@ -7,7 +7,7 @@
 <meta name="description" content="Wedding invitation of Ayesha & Ahmed — 20 December 2026, Karachi.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&family=Cinzel:wght@500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 /* ============ THEME VARIABLES ============ */
 :root{
@@ -97,6 +97,29 @@ html[data-theme="gulnaar"]{
   --chip:rgba(194,69,106,.09); --shadow:0 18px 44px rgba(74,21,48,.20);
   --pill:rgba(255,247,240,.94); --tile1:#fbe3e9; --tile2:#f6cfdb;
   --foil-lo:#7e2247; --foil-mid:#e88aa8; --foil-hi:#fadbe4;
+}
+
+html[data-theme="mukhmal"]{
+  --bg:#3d0a12; --bg2:#5a0e18; --glow:rgba(232,185,90,.16);
+  --surface:#57101c; --surface2:#6d1624;
+  --text:#f5ead0; --muted:#dcbd93; --faint:#b08d64;
+  --gold:#c9a86a; --gold-bright:#e8b95a; --gold-deep:#8a6a24;
+  --heading:#f5ead0; --line:rgba(201,168,106,.5); --line-soft:rgba(201,168,106,.24);
+  --btn-bg:linear-gradient(135deg,#e8b95a,#a87f2e); --btn-text:#2a0a04;
+  --chip:rgba(201,168,106,.10); --shadow:0 18px 50px rgba(0,0,0,.6);
+  --pill:rgba(42,6,13,.88); --tile1:#6d1624; --tile2:#450a14;
+  --foil-lo:#3d0a12; --foil-mid:#a6192e; --foil-hi:#e8b95a;
+}
+html[data-theme="celestial"]{
+  --bg:#dceef5; --bg2:#eaf4f8; --glow:rgba(127,176,214,.22);
+  --surface:#ffffff; --surface2:#eef6fa;
+  --text:#1e3a52; --muted:#4a6a86; --faint:#7fa0ba;
+  --gold:#7fb0d6; --gold-bright:#a8c8e8; --gold-deep:#4a7ba6;
+  --heading:#1e3a52; --line:rgba(127,176,214,.5); --line-soft:rgba(127,176,214,.26);
+  --btn-bg:linear-gradient(135deg,#7fb0d6,#4a7ba6); --btn-text:#ffffff;
+  --chip:rgba(127,176,214,.12); --shadow:0 18px 44px rgba(30,58,82,.16);
+  --pill:rgba(255,255,255,.9); --tile1:#cfe6f3; --tile2:#eaf4f8;
+  --foil-lo:#7fb0d6; --foil-mid:#cfe4f2; --foil-hi:#ffffff;
 }
 /* Khwab v3: soft Mughal-garden treatment — paper grain, jaali bands, lush corner florals (this theme only) */
 html[data-theme="khwab"] body::after{
@@ -237,6 +260,98 @@ html:not([data-theme="gulnaar"]) .stage-sec{display:none}
   .stage .couple{opacity:1;transform:translateX(-50%) translateY(-12%) scale(1.06)}
   .stage .stage-names{opacity:1}
   .stage-burst i{display:none}
+}
+
+/* Mukhmal: velvet maroon royal — draped curtains framing a stage, a
+   chandelier over the arch, candelabras & roses at the corners, a faint
+   diamond lattice, crescent-and-star dividers, script names (this theme only) */
+html[data-theme="mukhmal"] body{
+  background-image:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2026%2026%27%3E%3Cpath%20d%3D%27M13%201%20L25%2013%20L13%2025%20L1%2013%20Z%27%20fill%3D%27none%27%20stroke%3D%27%23c9a86a%27%20stroke-opacity%3D%27.09%27%2F%3E%3C%2Fsvg%3E"),
+    radial-gradient(ellipse 90% 45% at 50% -5%, var(--glow), transparent 70%),
+    linear-gradient(180deg, var(--bg2), var(--bg) 40%);
+  background-size:26px 26px,auto,auto;
+}
+html[data-theme="mukhmal"] .divider svg rect{fill:#a6192e}
+html[data-theme="mukhmal"] .gate::before{content:"";position:absolute;left:50%;top:50%;z-index:0;
+  width:min(450px,97vw);height:min(86vh,710px);transform:translate(-50%,-52%);
+  background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20400%20520%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M24%20506%20L24%20218%20C24%20130%2098%2098%20200%2016%20C302%2098%20376%20130%20376%20218%20L376%20506%27%20fill%3D%27none%27%20stroke%3D%27%23c9a86a%27%20stroke-width%3D%273%27%2F%3E%3Cpath%20d%3D%27M46%20490%20L46%20224%20C46%20144%20112%20110%20200%2042%20C288%20110%20354%20144%20354%20224%20L354%20490%27%20fill%3D%27none%27%20stroke%3D%27%23a6192e%27%20stroke-width%3D%271.4%27%20opacity%3D%27.55%27%2F%3E%3C%2Fsvg%3E") center/contain no-repeat;opacity:.95;pointer-events:none}
+html[data-theme="mukhmal"] .gate>*{position:relative;z-index:1}
+html[data-theme="mukhmal"] .hero::before{content:"";position:absolute;left:0;top:0;bottom:0;
+  width:118px;z-index:0;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20120%20200%27%3E%3Cg%20stroke%3D%27%23c9a86a%27%20stroke-width%3D%272.4%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M60%20196%20V54%27%2F%3E%3Cpath%20d%3D%27M60%20110%20C44%20102%2034%2088%2030%2068%27%2F%3E%3Cpath%20d%3D%27M60%20110%20C76%20102%2086%2088%2090%2068%27%2F%3E%3Cpath%20d%3D%27M42%20196%20H78%27%2F%3E%3Cpath%20d%3D%27M60%20196%20L44%20182%20M60%20196%20L76%20182%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%23f5ead0%27%3E%3Crect%20x%3D%2727%27%20y%3D%2746%27%20width%3D%276%27%20height%3D%2720%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%2757%27%20y%3D%2734%27%20width%3D%276%27%20height%3D%2720%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%2787%27%20y%3D%2746%27%20width%3D%276%27%20height%3D%2720%27%20rx%3D%272%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%23e8b95a%27%3E%3Cpath%20d%3D%27M30%2032%20C34%2040%2034%2044%2030%2048%20C26%2044%2026%2040%2030%2032Z%27%2F%3E%3Cpath%20d%3D%27M60%2018%20C64.5%2026%2064.5%2030%2060%2034%20C55.5%2030%2055.5%2026%2060%2018Z%27%2F%3E%3Cpath%20d%3D%27M90%2032%20C94%2040%2094%2044%2090%2048%20C86%2044%2086%2040%2090%2032Z%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%23e8b95a%27%20opacity%3D%27.26%27%3E%3Ccircle%20cx%3D%2730%27%20cy%3D%2740%27%20r%3D%2711%27%2F%3E%3Ccircle%20cx%3D%2760%27%20cy%3D%2726%27%20r%3D%2712%27%2F%3E%3Ccircle%20cx%3D%2790%27%20cy%3D%2740%27%20r%3D%2711%27%2F%3E%3C%2Fg%3E%3Cg%3E%3Ccircle%20cx%3D%2718%27%20cy%3D%27182%27%20r%3D%2710%27%20fill%3D%27%23a6192e%27%2F%3E%3Ccircle%20cx%3D%2718%27%20cy%3D%27182%27%20r%3D%275.5%27%20fill%3D%27%23c9405a%27%2F%3E%3Ccircle%20cx%3D%2718%27%20cy%3D%27182%27%20r%3D%272.2%27%20fill%3D%27%23e8b95a%27%2F%3E%3Ccircle%20cx%3D%2738%27%20cy%3D%27191%27%20r%3D%278%27%20fill%3D%27%237d1220%27%2F%3E%3Ccircle%20cx%3D%2738%27%20cy%3D%27191%27%20r%3D%274%27%20fill%3D%27%23a6192e%27%2F%3E%3Ccircle%20cx%3D%27101%27%20cy%3D%27184%27%20r%3D%279%27%20fill%3D%27%23a6192e%27%2F%3E%3Ccircle%20cx%3D%27101%27%20cy%3D%27184%27%20r%3D%274.5%27%20fill%3D%27%23c9405a%27%2F%3E%3Ccircle%20cx%3D%27101%27%20cy%3D%27184%27%20r%3D%272%27%20fill%3D%27%23e8b95a%27%2F%3E%3Ccircle%20cx%3D%2782%27%20cy%3D%27192%27%20r%3D%277%27%20fill%3D%27%237d1220%27%2F%3E%3Ccircle%20cx%3D%2782%27%20cy%3D%27192%27%20r%3D%273.2%27%20fill%3D%27%23a6192e%27%2F%3E%3Cellipse%20cx%3D%2728%27%20cy%3D%27197%27%20rx%3D%279%27%20ry%3D%273%27%20fill%3D%27%232f060d%27%2F%3E%3Cellipse%20cx%3D%2792%27%20cy%3D%27197%27%20rx%3D%279%27%20ry%3D%273%27%20fill%3D%27%232f060d%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") 50% 100%/96px auto no-repeat,url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20140%20900%27%20preserveAspectRatio%3D%27none%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27cg%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%270%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%232f060d%27%2F%3E%3Cstop%20offset%3D%27.3%27%20stop-color%3D%27%237d1a2a%27%2F%3E%3Cstop%20offset%3D%27.55%27%20stop-color%3D%27%234a0b15%27%2F%3E%3Cstop%20offset%3D%27.78%27%20stop-color%3D%27%238e2436%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233d0a12%27%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%27M0%200%20H140%20C110%20170%20124%20360%20102%20540%20C90%20650%20102%20780%2090%20900%20L0%20900%20Z%27%20fill%3D%27url%28%23cg%29%27%2F%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%23000000%27%20stroke-opacity%3D%27.22%27%20stroke-width%3D%276%27%3E%3Cpath%20d%3D%27M28%200%20C20%20300%2032%20620%2024%20900%27%2F%3E%3Cpath%20d%3D%27M58%200%20C50%20280%2062%20640%2054%20900%27%2F%3E%3Cpath%20d%3D%27M88%200%20C82%20260%2092%20600%2084%20900%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%23e8b95a%27%20stroke-opacity%3D%27.13%27%20stroke-width%3D%272%27%3E%3Cpath%20d%3D%27M42%200%20C36%20290%2046%20630%2040%20900%27%2F%3E%3Cpath%20d%3D%27M72%200%20C66%20270%2076%20620%2070%20900%27%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%27M140%200%20C110%20170%20124%20360%20102%20540%20C90%20650%20102%20780%2090%20900%27%20fill%3D%27none%27%20stroke%3D%27%23c9a86a%27%20stroke-opacity%3D%27.5%27%20stroke-width%3D%272%27%2F%3E%3Cellipse%20cx%3D%2798%27%20cy%3D%27596%27%20rx%3D%2713%27%20ry%3D%2722%27%20fill%3D%27%23c9a86a%27%2F%3E%3Cellipse%20cx%3D%2798%27%20cy%3D%27596%27%20rx%3D%276%27%20ry%3D%2712%27%20fill%3D%27%23e8b95a%27%2F%3E%3C%2Fsvg%3E") 0 0/100% 100% no-repeat}
+html[data-theme="mukhmal"] .hero::after{content:"";position:absolute;right:0;top:0;bottom:0;
+  width:118px;z-index:0;pointer-events:none;transform:scaleX(-1);
+  background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20120%20200%27%3E%3Cg%20stroke%3D%27%23c9a86a%27%20stroke-width%3D%272.4%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M60%20196%20V54%27%2F%3E%3Cpath%20d%3D%27M60%20110%20C44%20102%2034%2088%2030%2068%27%2F%3E%3Cpath%20d%3D%27M60%20110%20C76%20102%2086%2088%2090%2068%27%2F%3E%3Cpath%20d%3D%27M42%20196%20H78%27%2F%3E%3Cpath%20d%3D%27M60%20196%20L44%20182%20M60%20196%20L76%20182%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%23f5ead0%27%3E%3Crect%20x%3D%2727%27%20y%3D%2746%27%20width%3D%276%27%20height%3D%2720%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%2757%27%20y%3D%2734%27%20width%3D%276%27%20height%3D%2720%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%2787%27%20y%3D%2746%27%20width%3D%276%27%20height%3D%2720%27%20rx%3D%272%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%23e8b95a%27%3E%3Cpath%20d%3D%27M30%2032%20C34%2040%2034%2044%2030%2048%20C26%2044%2026%2040%2030%2032Z%27%2F%3E%3Cpath%20d%3D%27M60%2018%20C64.5%2026%2064.5%2030%2060%2034%20C55.5%2030%2055.5%2026%2060%2018Z%27%2F%3E%3Cpath%20d%3D%27M90%2032%20C94%2040%2094%2044%2090%2048%20C86%2044%2086%2040%2090%2032Z%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%23e8b95a%27%20opacity%3D%27.26%27%3E%3Ccircle%20cx%3D%2730%27%20cy%3D%2740%27%20r%3D%2711%27%2F%3E%3Ccircle%20cx%3D%2760%27%20cy%3D%2726%27%20r%3D%2712%27%2F%3E%3Ccircle%20cx%3D%2790%27%20cy%3D%2740%27%20r%3D%2711%27%2F%3E%3C%2Fg%3E%3Cg%3E%3Ccircle%20cx%3D%2718%27%20cy%3D%27182%27%20r%3D%2710%27%20fill%3D%27%23a6192e%27%2F%3E%3Ccircle%20cx%3D%2718%27%20cy%3D%27182%27%20r%3D%275.5%27%20fill%3D%27%23c9405a%27%2F%3E%3Ccircle%20cx%3D%2718%27%20cy%3D%27182%27%20r%3D%272.2%27%20fill%3D%27%23e8b95a%27%2F%3E%3Ccircle%20cx%3D%2738%27%20cy%3D%27191%27%20r%3D%278%27%20fill%3D%27%237d1220%27%2F%3E%3Ccircle%20cx%3D%2738%27%20cy%3D%27191%27%20r%3D%274%27%20fill%3D%27%23a6192e%27%2F%3E%3Ccircle%20cx%3D%27101%27%20cy%3D%27184%27%20r%3D%279%27%20fill%3D%27%23a6192e%27%2F%3E%3Ccircle%20cx%3D%27101%27%20cy%3D%27184%27%20r%3D%274.5%27%20fill%3D%27%23c9405a%27%2F%3E%3Ccircle%20cx%3D%27101%27%20cy%3D%27184%27%20r%3D%272%27%20fill%3D%27%23e8b95a%27%2F%3E%3Ccircle%20cx%3D%2782%27%20cy%3D%27192%27%20r%3D%277%27%20fill%3D%27%237d1220%27%2F%3E%3Ccircle%20cx%3D%2782%27%20cy%3D%27192%27%20r%3D%273.2%27%20fill%3D%27%23a6192e%27%2F%3E%3Cellipse%20cx%3D%2728%27%20cy%3D%27197%27%20rx%3D%279%27%20ry%3D%273%27%20fill%3D%27%232f060d%27%2F%3E%3Cellipse%20cx%3D%2792%27%20cy%3D%27197%27%20rx%3D%279%27%20ry%3D%273%27%20fill%3D%27%232f060d%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") 50% 100%/96px auto no-repeat,url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20140%20900%27%20preserveAspectRatio%3D%27none%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27cg%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%270%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%232f060d%27%2F%3E%3Cstop%20offset%3D%27.3%27%20stop-color%3D%27%237d1a2a%27%2F%3E%3Cstop%20offset%3D%27.55%27%20stop-color%3D%27%234a0b15%27%2F%3E%3Cstop%20offset%3D%27.78%27%20stop-color%3D%27%238e2436%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233d0a12%27%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%27M0%200%20H140%20C110%20170%20124%20360%20102%20540%20C90%20650%20102%20780%2090%20900%20L0%20900%20Z%27%20fill%3D%27url%28%23cg%29%27%2F%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%23000000%27%20stroke-opacity%3D%27.22%27%20stroke-width%3D%276%27%3E%3Cpath%20d%3D%27M28%200%20C20%20300%2032%20620%2024%20900%27%2F%3E%3Cpath%20d%3D%27M58%200%20C50%20280%2062%20640%2054%20900%27%2F%3E%3Cpath%20d%3D%27M88%200%20C82%20260%2092%20600%2084%20900%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27none%27%20stroke%3D%27%23e8b95a%27%20stroke-opacity%3D%27.13%27%20stroke-width%3D%272%27%3E%3Cpath%20d%3D%27M42%200%20C36%20290%2046%20630%2040%20900%27%2F%3E%3Cpath%20d%3D%27M72%200%20C66%20270%2076%20620%2070%20900%27%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%27M140%200%20C110%20170%20124%20360%20102%20540%20C90%20650%20102%20780%2090%20900%27%20fill%3D%27none%27%20stroke%3D%27%23c9a86a%27%20stroke-opacity%3D%27.5%27%20stroke-width%3D%272%27%2F%3E%3Cellipse%20cx%3D%2798%27%20cy%3D%27596%27%20rx%3D%2713%27%20ry%3D%2722%27%20fill%3D%27%23c9a86a%27%2F%3E%3Cellipse%20cx%3D%2798%27%20cy%3D%27596%27%20rx%3D%276%27%20ry%3D%2712%27%20fill%3D%27%23e8b95a%27%2F%3E%3C%2Fsvg%3E") 0 0/100% 100% no-repeat}
+html[data-theme="mukhmal"] .hero .wrap{position:relative;z-index:1}
+html[data-theme="mukhmal"] .arch{padding-top:118px}
+html[data-theme="mukhmal"] .arch::before{content:"";position:absolute;left:50%;top:2px;
+  transform:translateX(-50%);z-index:2;width:min(300px,72%);height:106px;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20300%20112%27%3E%3Cdefs%3E%3CradialGradient%20id%3D%27hg%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23e8b95a%27%20stop-opacity%3D%27.5%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23e8b95a%27%20stop-opacity%3D%270%27%2F%3E%3C%2FradialGradient%3E%3C%2Fdefs%3E%3Cellipse%20cx%3D%27150%27%20cy%3D%2758%27%20rx%3D%27142%27%20ry%3D%2752%27%20fill%3D%27url%28%23hg%29%27%2F%3E%3Cg%20stroke%3D%27%23c9a86a%27%20stroke-width%3D%272.4%27%20fill%3D%27none%27%3E%3Cpath%20d%3D%27M150%200%20V22%27%2F%3E%3Cpath%20d%3D%27M150%2022%20V78%27%2F%3E%3Cpath%20d%3D%27M150%2040%20C118%2040%2096%2050%2082%2066%27%2F%3E%3Cpath%20d%3D%27M150%2040%20C182%2040%20204%2050%20218%2066%27%2F%3E%3Cpath%20d%3D%27M150%2058%20C128%2058%20114%2064%20104%2076%27%2F%3E%3Cpath%20d%3D%27M150%2058%20C172%2058%20186%2064%20196%2076%27%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%27M138%2022%20H162%20L156%2034%20H144%20Z%27%20fill%3D%27%23c9a86a%27%2F%3E%3Cg%20fill%3D%27%23f5ead0%27%3E%3Crect%20x%3D%2779%27%20y%3D%2752%27%20width%3D%276%27%20height%3D%2714%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27215%27%20y%3D%2752%27%20width%3D%276%27%20height%3D%2714%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27101%27%20y%3D%2762%27%20width%3D%276%27%20height%3D%2714%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27193%27%20y%3D%2762%27%20width%3D%276%27%20height%3D%2714%27%20rx%3D%272%27%2F%3E%3Crect%20x%3D%27147%27%20y%3D%2764%27%20width%3D%276%27%20height%3D%2714%27%20rx%3D%272%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%23e8b95a%27%3E%3Cpath%20d%3D%27M82%2040%20C85.5%2046%2085.5%2049%2082%2052%20C78.5%2049%2078.5%2046%2082%2040Z%27%2F%3E%3Cpath%20d%3D%27M218%2040%20C221.5%2046%20221.5%2049%20218%2052%20C214.5%2049%20214.5%2046%20218%2040Z%27%2F%3E%3Cpath%20d%3D%27M104%2050%20C107.5%2056%20107.5%2059%20104%2062%20C100.5%2059%20100.5%2056%20104%2050Z%27%2F%3E%3Cpath%20d%3D%27M196%2050%20C199.5%2056%20199.5%2059%20196%2062%20C192.5%2059%20192.5%2056%20196%2050Z%27%2F%3E%3Cpath%20d%3D%27M150%2052%20C153.5%2058%20153.5%2061%20150%2064%20C146.5%2061%20146.5%2058%20150%2052Z%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%23e8b95a%27%20opacity%3D%27.85%27%3E%3Ccircle%20cx%3D%27110%27%20cy%3D%2786%27%20r%3D%272%27%2F%3E%3Ccircle%20cx%3D%27128%27%20cy%3D%2782%27%20r%3D%271.6%27%2F%3E%3Ccircle%20cx%3D%27172%27%20cy%3D%2782%27%20r%3D%271.6%27%2F%3E%3Ccircle%20cx%3D%27190%27%20cy%3D%2786%27%20r%3D%272%27%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%27150%27%20cy%3D%2786%27%20r%3D%274%27%20fill%3D%27%23c9a86a%27%2F%3E%3C%2Fsvg%3E") center top/contain no-repeat}
+html[data-theme="mukhmal"] .names{font-family:'Great Vibes',cursive;font-weight:400;
+  font-size:clamp(3.8rem,17.5vw,7rem);letter-spacing:.01em}
+html[data-theme="mukhmal"] .sec-title::before{content:"";display:block;width:48px;height:27px;
+  margin:0 auto 5px;background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2060%2034%27%3E%3Cpath%20fill-rule%3D%27evenodd%27%20fill%3D%27%23c9a86a%27%20d%3D%27M11%2017%20a13%2013%200%201%200%2026%200%20a13%2013%200%201%200%20-26%200%20M20.5%2017%20a10.5%2010.5%200%201%200%2021%200%20a10.5%2010.5%200%201%200%20-21%200%27%2F%3E%3Cpath%20d%3D%27M45%205%20L47%2011%20L53%2013%20L47%2015%20L45%2021%20L43%2015%20L37%2013%20L43%2011%20Z%27%20fill%3D%27%23e8b95a%27%2F%3E%3C%2Fsvg%3E") center/contain no-repeat}
+html[data-theme="mukhmal"] .count{background:linear-gradient(165deg,#5a0e18,#3d0a12);
+  border:1px solid rgba(201,168,106,.55);border-radius:20px;padding:14px 12px 12px;
+  box-shadow:0 14px 30px rgba(0,0,0,.5)}
+html[data-theme="mukhmal"] .count .box{background:rgba(245,234,208,.08);
+  border-color:rgba(232,185,90,.5)}
+html[data-theme="mukhmal"] .count b{color:#e8b95a}
+html[data-theme="mukhmal"] .count .box small{color:#dcbd93}
+html[data-theme="mukhmal"] .count-note{color:#f5ead0}
+html[data-theme="mukhmal"] .card{border:1px solid transparent;
+  background:linear-gradient(var(--surface),var(--surface)) padding-box,
+             linear-gradient(120deg,#c9a86a,#a6192e,#c9a86a) border-box}
+
+/* Celestial Clouds: airy sky — a deeper band at the top with crescent moon
+   & twinkling stars, soft clouds drifting over the hero, tall cap names
+   with a script accent, white cards with watercolor edges (this theme only) */
+html[data-theme="celestial"] .divider svg rect{fill:#7fb0d6}
+html[data-theme="celestial"] .gate::before{content:"";position:absolute;left:50%;top:50%;z-index:0;
+  width:min(450px,97vw);height:min(86vh,710px);transform:translate(-50%,-52%);
+  background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20400%20520%27%20preserveAspectRatio%3D%27none%27%3E%3Cpath%20d%3D%27M24%20506%20L24%20210%20A176%20176%200%200%201%20376%20210%20L376%20506%27%20fill%3D%27none%27%20stroke%3D%27%237fb0d6%27%20stroke-width%3D%273%27%2F%3E%3Cpath%20d%3D%27M46%20490%20L46%20216%20A154%20154%200%200%201%20354%20216%20L354%20490%27%20fill%3D%27none%27%20stroke%3D%27%23a8c8e8%27%20stroke-width%3D%271.4%27%2F%3E%3C%2Fsvg%3E") center/contain no-repeat;opacity:.9;pointer-events:none}
+html[data-theme="celestial"] .gate>*{position:relative;z-index:1}
+html[data-theme="celestial"] .hero{background:linear-gradient(180deg,rgba(127,176,214,.55),
+  rgba(168,200,232,.18) 190px,rgba(168,200,232,0) 330px)}
+html[data-theme="celestial"] .hero::before{content:"";position:absolute;left:-15%;top:4%;
+  width:130%;height:150px;z-index:0;pointer-events:none;opacity:.85;
+  background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20600%20160%27%3E%3Cdefs%3E%3Cfilter%20id%3D%27cb%27%20x%3D%27-20%25%27%20y%3D%27-40%25%27%20width%3D%27140%25%27%20height%3D%27180%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%278%27%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Cg%20filter%3D%27url%28%23cb%29%27%20fill%3D%27%23ffffff%27%3E%3Cellipse%20cx%3D%2790%27%20cy%3D%27104%27%20rx%3D%2786%27%20ry%3D%2734%27%2F%3E%3Cellipse%20cx%3D%27150%27%20cy%3D%2786%27%20rx%3D%2766%27%20ry%3D%2730%27%2F%3E%3Cellipse%20cx%3D%27330%27%20cy%3D%27112%27%20rx%3D%2796%27%20ry%3D%2736%27%2F%3E%3Cellipse%20cx%3D%27392%27%20cy%3D%2792%27%20rx%3D%2760%27%20ry%3D%2727%27%2F%3E%3Cellipse%20cx%3D%27540%27%20cy%3D%27106%27%20rx%3D%2782%27%20ry%3D%2732%27%2F%3E%3Cellipse%20cx%3D%27586%27%20cy%3D%2788%27%20rx%3D%2752%27%20ry%3D%2724%27%2F%3E%3Cellipse%20cx%3D%2716%27%20cy%3D%2792%27%20rx%3D%2748%27%20ry%3D%2724%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") 0 0/auto 100% repeat-x;animation:cloudDrift 56s ease-in-out infinite alternate}
+html[data-theme="celestial"] .hero::after{content:"";position:absolute;left:-15%;top:36%;
+  width:130%;height:115px;z-index:0;pointer-events:none;opacity:.55;
+  background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20600%20160%27%3E%3Cdefs%3E%3Cfilter%20id%3D%27cb%27%20x%3D%27-20%25%27%20y%3D%27-40%25%27%20width%3D%27140%25%27%20height%3D%27180%25%27%3E%3CfeGaussianBlur%20stdDeviation%3D%278%27%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3Cg%20filter%3D%27url%28%23cb%29%27%20fill%3D%27%23ffffff%27%3E%3Cellipse%20cx%3D%2790%27%20cy%3D%27104%27%20rx%3D%2786%27%20ry%3D%2734%27%2F%3E%3Cellipse%20cx%3D%27150%27%20cy%3D%2786%27%20rx%3D%2766%27%20ry%3D%2730%27%2F%3E%3Cellipse%20cx%3D%27330%27%20cy%3D%27112%27%20rx%3D%2796%27%20ry%3D%2736%27%2F%3E%3Cellipse%20cx%3D%27392%27%20cy%3D%2792%27%20rx%3D%2760%27%20ry%3D%2727%27%2F%3E%3Cellipse%20cx%3D%27540%27%20cy%3D%27106%27%20rx%3D%2782%27%20ry%3D%2732%27%2F%3E%3Cellipse%20cx%3D%27586%27%20cy%3D%2788%27%20rx%3D%2752%27%20ry%3D%2724%27%2F%3E%3Cellipse%20cx%3D%2716%27%20cy%3D%2792%27%20rx%3D%2748%27%20ry%3D%2724%27%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") 40% 0/auto 100% repeat-x;animation:cloudDrift 78s ease-in-out infinite alternate-reverse}
+@keyframes cloudDrift{from{transform:translateX(-2.6%)}to{transform:translateX(2.6%)}}
+html[data-theme="celestial"] .hero .wrap{position:relative;z-index:1}
+html[data-theme="celestial"] .arch{padding-top:104px}
+html[data-theme="celestial"] .arch::before{content:"";position:absolute;left:50%;top:6px;
+  transform:translateX(-50%);z-index:2;width:min(340px,84%);height:88px;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%20340%20104%27%3E%3Cg%20fill%3D%27%23ffffff%27%3E%3Ccircle%20cx%3D%2730%27%20cy%3D%2726%27%20r%3D%271.8%27%20opacity%3D%27.8%27%2F%3E%3Ccircle%20cx%3D%2766%27%20cy%3D%2758%27%20r%3D%271.3%27%20opacity%3D%27.55%27%2F%3E%3Ccircle%20cx%3D%27104%27%20cy%3D%2720%27%20r%3D%271.5%27%20opacity%3D%27.7%27%2F%3E%3Ccircle%20cx%3D%27132%27%20cy%3D%2766%27%20r%3D%271.2%27%20opacity%3D%27.5%27%2F%3E%3Ccircle%20cx%3D%27212%27%20cy%3D%2760%27%20r%3D%271.4%27%20opacity%3D%27.6%27%2F%3E%3Ccircle%20cx%3D%27244%27%20cy%3D%2722%27%20r%3D%271.7%27%20opacity%3D%27.85%27%2F%3E%3Ccircle%20cx%3D%27282%27%20cy%3D%2752%27%20r%3D%271.3%27%20opacity%3D%27.55%27%2F%3E%3Ccircle%20cx%3D%27312%27%20cy%3D%2728%27%20r%3D%271.8%27%20opacity%3D%27.8%27%2F%3E%3Ccircle%20cx%3D%2788%27%20cy%3D%2784%27%20r%3D%271.1%27%20opacity%3D%27.45%27%2F%3E%3Ccircle%20cx%3D%27262%27%20cy%3D%2784%27%20r%3D%271.1%27%20opacity%3D%27.45%27%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%27%237fb0d6%27%3E%3Cpath%20d%3D%27M52%2034%20L53.6%2039.4%20L59%2041%20L53.6%2042.6%20L52%2048%20L50.4%2042.6%20L45%2041%20L50.4%2039.4%20Z%27%2F%3E%3Cpath%20d%3D%27M292%2062%20L293.6%2067.4%20L299%2069%20L293.6%2070.6%20L292%2076%20L290.4%2070.6%20L285%2069%20L290.4%2067.4%20Z%27%20opacity%3D%27.8%27%2F%3E%3Cpath%20d%3D%27M170%208%20L171.2%2012%20L175.2%2013.2%20L171.2%2014.4%20L170%2018.4%20L168.8%2014.4%20L164.8%2013.2%20L168.8%2012%20Z%27%20opacity%3D%27.7%27%2F%3E%3C%2Fg%3E%3Cpath%20fill-rule%3D%27evenodd%27%20fill%3D%27%23ffffff%27%20opacity%3D%27.97%27%20d%3D%27M136%2050%20a24%2024%200%201%200%2048%200%20a24%2024%200%201%200%20-48%200%20M150%2050%20a19%2019%200%201%200%2038%200%20a19%2019%200%201%200%20-38%200%27%2F%3E%3C%2Fsvg%3E") center top/contain no-repeat;animation:twinkle 3.6s ease-in-out infinite}
+@keyframes twinkle{0%,100%{opacity:.72}50%{opacity:1}}
+html[data-theme="celestial"] .names{font-family:'Cinzel',serif;font-weight:700;letter-spacing:.05em}
+html[data-theme="celestial"] .names .amp{font-family:'Great Vibes',cursive;font-weight:400;
+  font-size:.72em;letter-spacing:0}
+html[data-theme="celestial"] .bismillah{color:var(--gold-deep)}
+html[data-theme="celestial"] .kicker{color:var(--gold-deep)}
+html[data-theme="celestial"] .sec-title::before{content:"";display:block;width:56px;height:26px;
+  margin:0 auto 5px;background:url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2030%27%3E%3Cg%20fill%3D%27%237fb0d6%27%3E%3Cellipse%20cx%3D%2720%27%20cy%3D%2721%27%20rx%3D%2715%27%20ry%3D%277%27%2F%3E%3Cellipse%20cx%3D%2733%27%20cy%3D%2715%27%20rx%3D%2712%27%20ry%3D%278%27%2F%3E%3Cellipse%20cx%3D%2746%27%20cy%3D%2721%27%20rx%3D%2714%27%20ry%3D%277%27%2F%3E%3C%2Fg%3E%3Cpath%20d%3D%27M52%201%20L53.2%205.8%20L58%207%20L53.2%208.2%20L52%2013%20L50.8%208.2%20L46%207%20L50.8%205.8%20Z%27%20fill%3D%27%234a7ba6%27%20opacity%3D%27.8%27%2F%3E%3C%2Fsvg%3E") center/contain no-repeat}
+html[data-theme="celestial"] .count{background:linear-gradient(165deg,#ffffff,#eaf4f8);
+  border:1px solid rgba(127,176,214,.5);border-radius:20px;padding:14px 12px 12px;
+  box-shadow:0 14px 30px rgba(30,58,82,.14)}
+html[data-theme="celestial"] .count .box{background:rgba(168,200,232,.16);
+  border-color:rgba(127,176,214,.45)}
+html[data-theme="celestial"] .count b{color:#1e3a52}
+html[data-theme="celestial"] .count .box small{color:#4a7ba6}
+html[data-theme="celestial"] .count-note{color:#4a6a86}
+html[data-theme="celestial"] .card{border:1px solid transparent;
+  background:linear-gradient(#ffffff,#ffffff) padding-box,
+             linear-gradient(120deg,#a8c8e8,#7fb0d6,#dceef5) border-box}
+html[data-theme="celestial"] .card .when{color:var(--gold-deep)}
+html[data-theme="celestial"] .loc{color:var(--gold-deep)}
+html[data-theme="celestial"] .story .sig{color:var(--gold-deep)}
+html[data-theme="celestial"] .scene-line{color:var(--gold-deep)}
+@media (prefers-reduced-motion: reduce){
+  html[data-theme="celestial"] .hero::before,
+  html[data-theme="celestial"] .hero::after{animation:none}
+  html[data-theme="celestial"] .arch::before{animation:none}
 }
 
 /* ============ BASE ============ */
@@ -923,7 +1038,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
     <div class="divider"><svg width="9" height="9" viewBox="0 0 10 10"><rect x="2" y="2" width="6" height="6" transform="rotate(45 5 5)" fill="var(--gold)"/></svg></div>
     <p class="kicker" data-i18n="designKicker">Make It Yours</p>
     <h2 class="sec-title" data-i18n="designTitle">Choose Your Design</h2>
-    <p class="sec-sub" data-i18n="designSub">Eight looks, one celebration — tap any design to dress the whole invitation in it.</p>
+    <p class="sec-sub" data-i18n="designSub">Ten looks, one celebration — tap any design to dress the whole invitation in it.</p>
     <div class="design-grid" id="designGrid"></div>
   </div>
 </section>
@@ -1200,7 +1315,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       scratchNote:'We cannot wait to see you there',
       scratchHint:'Rub the foil with your finger or cursor',
       designKicker:'Make It Yours', designTitle:'Choose Your Design',
-      designSub:'Eight looks, one celebration — tap any design to dress the whole invitation in it.',
+      designSub:'Ten looks, one celebration — tap any design to dress the whole invitation in it.',
       stageKick:'A Moment to Remember', stageTitle:'The Grand Entrance',
       stageLine:'Two hearts, one journey — hand in hand, all the way to the stage.', stageReplay:'Replay'},
     ur: {open:'دعوت نامہ کھولیں', hint:'کھولنے کے لیے مہر پر دبائیں', scroll:'نیچے اسکرول کریں',
@@ -1216,7 +1331,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       scratchNote:'ہم آپ کو دیکھنے کے لیے بے تابی سے منتظر ہیں',
       scratchHint:'فوائل کو انگلی یا کرسر سے رگڑیں',
       designKicker:'اپنی پسند بنائیں', designTitle:'اپنا ڈیزائن چنیں',
-      designSub:'آٹھ انداز، ایک جشن — کسی بھی ڈیزائن پر دبائیں، پورا دعوت نامہ اسی رنگ میں سج جائے گا۔',
+      designSub:'دس انداز، ایک جشن — کسی بھی ڈیزائن پر دبائیں، پورا دعوت نامہ اسی رنگ میں سج جائے گا۔',
       stageKick:'ایک یادگار لمحہ', stageTitle:'شاندار آمد',
       stageLine:'دو دل، ایک سفر — ہاتھ میں ہاتھ، اسٹیج تک۔', stageReplay:'دوبارہ دیکھیں'}
   };
@@ -1301,7 +1416,9 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
     {id:'royal',    name:'Peacock',  bg:'#032024', surface:'#0d4a4c', gold:'#d4af5f', bright:'#40beaf'},
     {id:'rose',     name:'Rose',     bg:'#2e0714', surface:'#671431', gold:'#dfa94f', bright:'#f78fb0'},
     {id:'khwab',    name:'Khwab',    bg:'#f7f1e0', surface:'#f8f2df', gold:'#ab8a44', bright:'#71835f'},
-    {id:'gulnaar',  name:'Gulnaar',  bg:'#fdf3ec', surface:'#fdecef', gold:'#c89b3c', bright:'#c2456a'}
+    {id:'gulnaar',  name:'Gulnaar',  bg:'#fdf3ec', surface:'#fdecef', gold:'#c89b3c', bright:'#c2456a'},
+    {id:'mukhmal',  name:'Mukhmal',  bg:'#3d0a12', surface:'#5a0e18', gold:'#c9a86a', bright:'#e8b95a'},
+    {id:'celestial',name:'Celestial',bg:'#dceef5', surface:'#ffffff', gold:'#7fb0d6', bright:'#1e3a52'}
   ];
   var designGrid = document.getElementById('designGrid'), tileBtns = [];
   if(designGrid){
