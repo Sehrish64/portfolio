@@ -121,6 +121,118 @@ html[data-theme="celestial"]{
   --pill:rgba(255,255,255,.9); --tile1:#cfe6f3; --tile2:#eaf4f8;
   --foil-lo:#7fb0d6; --foil-mid:#cfe4f2; --foil-hi:#ffffff;
 }
+
+html[data-theme="shahkar"]{
+  --bg:#160a26; --bg2:#22103a; --glow:rgba(212,175,95,.16);
+  --surface:#2a1544; --surface2:#331b50;
+  --text:#f7eedd; --muted:#d9c4a6; --faint:#a68d70;
+  --gold:#d4af5f; --gold-bright:#f2dda6; --gold-deep:#96742f;
+  --heading:#f2dda6; --line:rgba(212,175,95,.5); --line-soft:rgba(212,175,95,.24);
+  --btn-bg:linear-gradient(135deg,#e3c26c,#a87f2e); --btn-text:#22103a;
+  --chip:rgba(212,175,95,.12); --shadow:0 18px 50px rgba(0,0,0,.55);
+  --pill:rgba(22,10,38,.88); --tile1:#331b50; --tile2:#22103a;
+  --foil-lo:#2a1a08; --foil-mid:#c9a24b; --foil-hi:#f2dda6;
+}
+/* Shahkar (Design #11, flagship): cinematic film + love-story journey +
+   guest greeting (this theme only). Each .cine-slot holds a code animation
+   today; drop an Omni <video> inside a slot (width/height 100%,
+   object-fit cover) to replace it — no restructuring needed. */
+html:not([data-theme="shahkar"]) .cine-sec,
+html:not([data-theme="shahkar"]) .journey-sec,
+html:not([data-theme="shahkar"]) .guest-greet{display:none}
+.guest-greet{max-width:430px;margin:16px auto 0;padding:11px 16px;border:1px solid var(--line);
+  border-radius:16px;background:var(--chip);font-family:var(--serif);font-size:1.02rem;
+  line-height:1.5;color:var(--text);text-align:center}
+.guest-greet b{color:var(--gold-bright)}
+.cine{position:relative;max-width:460px;margin:16px auto 0;aspect-ratio:16/10;border-radius:22px;
+  overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);
+  background:linear-gradient(180deg,#0d0518,#241040 55%,#12081f)}
+.cine-slot{position:absolute;inset:0;overflow:hidden;opacity:0}
+.cine-slot.s1{opacity:1}
+.cine-slot video{width:100%;height:100%;object-fit:cover;display:block}
+.cine-slot .cine-anim{position:absolute;inset:0}
+.cine-slot .scene-tag{position:absolute;left:10px;bottom:8px;z-index:6;font-family:var(--sans);
+  font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(242,221,166,.9);
+  background:rgba(13,5,24,.55);padding:4px 9px;border-radius:999px}
+.cine-sky{position:absolute;inset:0;background:
+  radial-gradient(circle 2px at 12% 18%,#f2dda6 96%,transparent),
+  radial-gradient(circle 1.6px at 28% 10%,#f2dda6 96%,transparent),
+  radial-gradient(circle 2px at 47% 22%,#f2dda6 96%,transparent),
+  radial-gradient(circle 1.5px at 63% 9%,#f2dda6 96%,transparent),
+  radial-gradient(circle 2px at 78% 20%,#f2dda6 96%,transparent),
+  radial-gradient(circle 1.6px at 90% 12%,#f2dda6 96%,transparent),
+  radial-gradient(circle 1.5px at 36% 30%,#f2dda6 96%,transparent),
+  linear-gradient(180deg,#0d0518,#1c0c33 60%,#2a1544)}
+.cine-gate{position:absolute;top:0;bottom:0;width:50.5%;z-index:4}
+.cine-gate svg{width:100%;height:100%;display:block}
+.cine-gate.gl{left:0}
+.cine-gate.gr{right:0}
+.cine-dove{position:absolute;z-index:3;width:58px;opacity:0}
+.cine-dove svg{width:100%;height:auto;display:block;filter:drop-shadow(0 3px 6px rgba(0,0,0,.45))}
+.cine-dove.d1{left:0;top:22%}
+.cine-dove.d2{left:0;top:46%;width:44px}
+.petal-fall{position:absolute;inset:0;z-index:2;pointer-events:none}
+.petal-fall i{position:absolute;top:-6%;width:11px;height:14px;border-radius:80% 6px 80% 6px;
+  background:linear-gradient(135deg,#f3b7cb,#c2456a);opacity:0}
+.fw{position:absolute;z-index:3;pointer-events:none}
+.fw i{position:absolute;left:-4px;top:-6px;width:8px;height:11px;border-radius:80% 6px 80% 6px;
+  background:linear-gradient(135deg,#f2dda6,#d4af5f);opacity:0}
+.fw i.r{background:linear-gradient(135deg,#f3b7cb,#c2456a)}
+.fw i.w{background:linear-gradient(135deg,#ffffff,#e8d3a0)}
+.cine-names{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:5;
+  text-align:center;padding:0 14px}
+.cine-names .cn0{font-family:var(--sans);font-size:.58rem;letter-spacing:.34em;text-indent:.34em;
+  color:#e8d3a0;margin:0 0 6px}
+.cine-names .cn1{font-family:'Great Vibes',cursive;font-size:clamp(2.5rem,12vw,3.5rem);
+  color:#f2dda6;line-height:1.1;text-shadow:0 2px 22px rgba(0,0,0,.6);margin:0}
+.cine-names .cn2{font-family:var(--sans);font-size:.6rem;letter-spacing:.3em;text-indent:.3em;
+  color:#e8d3a0;margin:10px 0 0}
+.cine-replay{display:flex;width:fit-content;margin:12px auto 0}
+.cine-note{font-family:var(--sans);font-size:.66rem;letter-spacing:.02em;color:var(--muted);
+  text-align:center;margin:10px auto 0;max-width:420px;line-height:1.55}
+.journey{margin-top:18px;display:grid;gap:14px}
+.beat{display:flex;gap:14px;align-items:flex-start;text-align:left;background:var(--surface);
+  border:1px solid var(--line-soft);border-radius:18px;padding:14px 16px;
+  opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease}
+.journey-sec .rv.in .beat{opacity:1;transform:none}
+.journey-sec .rv.in .beat:nth-child(2){transition-delay:.15s}
+.journey-sec .rv.in .beat:nth-child(3){transition-delay:.3s}
+.beat .bicon{flex:0 0 auto;width:56px;height:56px}
+.beat .bicon svg{width:100%;height:100%;display:block}
+.beat .bt{font-family:var(--serif);font-size:1.14rem;color:var(--heading);margin:1px 0 3px}
+.beat .bl{font-size:.98rem;line-height:1.45;color:var(--muted);margin:0}
+@media (prefers-reduced-motion: no-preference){
+  .cine.play .s1{animation:cineSlot 3.4s ease 0s forwards}
+  .cine.play .s2{animation:cineSlot 3.4s ease 2.8s forwards}
+  .cine.play .s3{animation:cineSlot 3.4s ease 5.6s forwards}
+  .cine.play .s4{animation:cineFinale 1.2s ease 8.4s forwards}
+  @keyframes cineSlot{0%{opacity:0}8%{opacity:1}82%{opacity:1}100%{opacity:0}}
+  @keyframes cineFinale{from{opacity:0;transform:scale(.97)}to{opacity:1;transform:scale(1)}}
+  .cine.play .gl{animation:gateSwingL 1.7s ease .4s forwards}
+  .cine.play .gr{animation:gateSwingR 1.7s ease .4s forwards}
+  @keyframes gateSwingL{from{transform:translateX(0)}to{transform:translateX(-102%)}}
+  @keyframes gateSwingR{from{transform:translateX(0)}to{transform:translateX(102%)}}
+  .cine.play .d1{animation:doveFly 3.1s ease .2s forwards}
+  .cine.play .d2{animation:doveFly 3.1s ease .8s forwards}
+  @keyframes doveFly{0%{transform:translate(-70px,46px) rotate(8deg);opacity:0}14%{opacity:1}
+    100%{transform:translate(480px,-42px) rotate(-4deg);opacity:1}}
+  .cine.play .petal-fall i{animation:petalDrop 3s linear infinite}
+  @keyframes petalDrop{0%{transform:translateY(0) rotate(0deg);opacity:0}12%{opacity:.9}
+    100%{transform:translateY(320%) rotate(240deg);opacity:0}}
+  .cine.play .fw i{animation:fwBurst 1.15s cubic-bezier(.15,.6,.4,1) forwards}
+  .cine.play .fw.f2 i{animation-delay:.55s}
+  .cine.play .fw.f3 i{animation-delay:1.05s}
+  @keyframes fwBurst{0%{transform:translate(0,0) scale(.4);opacity:0}25%{opacity:1}
+    100%{transform:translate(var(--tx),var(--ty)) scale(1);opacity:0}}
+  .beat .bicon{animation:beatFloat 3.4s ease-in-out infinite}
+  @keyframes beatFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+}
+@media (prefers-reduced-motion: reduce){
+  .cine .s1,.cine .s2,.cine .s3{opacity:0}
+  .cine .s4{opacity:1}
+  .cine .gl{transform:translateX(-102%)}
+  .cine .gr{transform:translateX(102%)}
+}
 /* Khwab v3: soft Mughal-garden treatment — paper grain, jaali bands, lush corner florals (this theme only) */
 html[data-theme="khwab"] body::after{
   content:"";position:fixed;inset:0;z-index:3;pointer-events:none;mix-blend-mode:multiply;
@@ -900,6 +1012,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       <p class="kicker of">The Wedding Of</p>
       <h1 class="names"><span class="nm">Ayesha</span><span class="amp">&amp;</span><span class="nm">Ahmed</span></h1>
       <p class="dateline">Sunday · 20 December 2026 · Karachi</p>
+      <p class="guest-greet" id="guestGreet" hidden></p>
       <p class="scroll-hint" data-i18n="scroll">Scroll to explore</p>
       <div class="seal"><span>A·A</span></div>
       <div class="count" id="count" aria-label="Countdown to the Baraat">
@@ -949,6 +1062,99 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
     <g class="lotus l3" transform="translate(560 160) scale(.7)"><ellipse cx="0" cy="3" rx="21" ry="3.5" fill="#4f7a5a"/><path d="M0 1c-4-8-12-10-16-9 1 7 6 11 16 9zM0 1c4-8 12-10 16-9-1 7-6 11-16 9zM0 1c-2-9 0-14 0-14s2 5 0 14z" fill="#e88ca0"/></g>
   </svg>
 </header>
+
+
+<!-- ================= SHAHKAR CINEMATIC OPENING (Design #11 only) ================= -->
+<section class="cine-sec">
+  <div class="wrap rv">
+    <p class="kicker">A Film Begins</p>
+    <h2 class="sec-title">The Cinematic Opening</h2>
+    <div class="cine" id="cineFilm" aria-label="Cinematic opening: palace gates, doves, fireworks, and the names">
+      <!-- OMNI SLOT 1 (gates): replace the .cine-anim inside with
+           <video src="omni-scene-1-gates.mp4" autoplay muted loop playsinline> -->
+      <div class="cine-slot s1" data-omni-scene="1-gates">
+        <div class="cine-anim">
+          <div class="cine-sky"></div>
+          <svg viewBox="0 0 460 288" preserveAspectRatio="xMidYMax slice" style="position:absolute;inset:0;width:100%;height:100%" aria-hidden="true">
+            <g stroke="#d4af5f" stroke-width="1.4" fill="#2a1544">
+              <rect x="96" y="150" width="16" height="100"/><path d="M92 150a12 12 0 0 1 24 0z" fill="#331b50"/>
+              <rect x="348" y="150" width="16" height="100"/><path d="M344 150a12 12 0 0 1 24 0z" fill="#331b50"/>
+              <rect x="150" y="168" width="160" height="82"/>
+              <path d="M150 168a80 62 0 0 1 160 0z" fill="#331b50"/>
+              <rect x="222" y="96" width="16" height="40" fill="#331b50"/><path d="M214 96a16 16 0 0 1 32 0z" fill="#331b50"/>
+              <rect x="176" y="130" width="10" height="30" fill="#331b50"/><path d="M171 130a10 10 0 0 1 20 0z" fill="#331b50"/>
+              <rect x="274" y="130" width="10" height="30" fill="#331b50"/><path d="M269 130a10 10 0 0 1 20 0z" fill="#331b50"/>
+            </g>
+            <g fill="#f2dda6"><rect x="222" y="206" width="16" height="44" rx="8"/><rect x="188" y="214" width="10" height="36" rx="5"/><rect x="262" y="214" width="10" height="36" rx="5"/></g>
+            <rect x="0" y="250" width="460" height="38" fill="#12081f"/>
+          </svg>
+          <div class="cine-gate gl"><svg viewBox="0 0 100 288" preserveAspectRatio="none" aria-hidden="true"><g fill="rgba(22,10,38,.92)" stroke="#d4af5f" stroke-width="2"><path d="M0 0h100v288H0z"/><g stroke-width="1.2"><line x1="18" y1="0" x2="18" y2="288"/><line x1="38" y1="0" x2="38" y2="288"/><line x1="58" y1="0" x2="58" y2="288"/><line x1="78" y1="0" x2="78" y2="288"/></g><circle cx="50" cy="120" r="10" fill="none"/><circle cx="50" cy="60" r="5" fill="none"/></g></svg></div>
+          <div class="cine-gate gr"><svg viewBox="0 0 100 288" preserveAspectRatio="none" aria-hidden="true"><g fill="rgba(22,10,38,.92)" stroke="#d4af5f" stroke-width="2"><path d="M0 0h100v288H0z"/><g stroke-width="1.2"><line x1="22" y1="0" x2="22" y2="288"/><line x1="42" y1="0" x2="42" y2="288"/><line x1="62" y1="0" x2="62" y2="288"/><line x1="82" y1="0" x2="82" y2="288"/></g><circle cx="50" cy="120" r="10" fill="none"/><circle cx="50" cy="60" r="5" fill="none"/></g></svg></div>
+          <span class="scene-tag">Scene 1 · Palace Gates</span>
+        </div>
+      </div>
+      <!-- OMNI SLOT 2 (doves): replace the .cine-anim inside with
+           <video src="omni-scene-2-doves.mp4" autoplay muted loop playsinline> -->
+      <div class="cine-slot s2" data-omni-scene="2-doves">
+        <div class="cine-anim">
+          <div class="cine-sky"></div>
+          <div class="petal-fall" aria-hidden="true"><i style="left:8%;animation-delay:0s"></i><i style="left:20%;animation-delay:.7s"></i><i style="left:34%;animation-delay:1.3s"></i><i style="left:48%;animation-delay:.4s"></i><i style="left:62%;animation-delay:1s"></i><i style="left:76%;animation-delay:1.6s"></i><i style="left:88%;animation-delay:.2s"></i></div>
+          <div class="cine-dove d1"><svg viewBox="0 0 64 40" aria-hidden="true"><path d="M6 22Q20 6 34 14L52 4Q55 8 48 12L40 18Q44 26 34 28Q22 32 12 26Q4 26 6 22Z" fill="#f7eedd"/><circle cx="50" cy="8" r="3.4" fill="#f7eedd"/><circle cx="51" cy="7.4" r="1" fill="#160a26"/></svg></div>
+          <div class="cine-dove d2"><svg viewBox="0 0 64 40" aria-hidden="true"><path d="M6 22Q20 6 34 14L52 4Q55 8 48 12L40 18Q44 26 34 28Q22 32 12 26Q4 26 6 22Z" fill="#e8d3a0"/><circle cx="50" cy="8" r="3.4" fill="#e8d3a0"/><circle cx="51" cy="7.4" r="1" fill="#160a26"/></svg></div>
+          <span class="scene-tag">Scene 2 · Doves &amp; Petals</span>
+        </div>
+      </div>
+      <!-- OMNI SLOT 3 (fireworks): replace the .cine-anim inside with
+           <video src="omni-scene-3-fireworks.mp4" autoplay muted loop playsinline> -->
+      <div class="cine-slot s3" data-omni-scene="3-fireworks">
+        <div class="cine-anim">
+          <div class="cine-sky"></div>
+          <div class="fw f1" style="left:30%;top:34%"><i style="--tx:-52px;--ty:-48px"></i><i class="r" style="--tx:48px;--ty:-52px"></i><i class="w" style="--tx:58px;--ty:10px"></i><i style="--tx:-58px;--ty:8px"></i><i class="r" style="--tx:0px;--ty:-70px"></i><i class="w" style="--tx:-14px;--ty:52px"></i></div>
+          <div class="fw f2" style="left:68%;top:28%"><i style="--tx:-46px;--ty:-44px"></i><i class="r" style="--tx:44px;--ty:-48px"></i><i class="w" style="--tx:54px;--ty:12px"></i><i style="--tx:-54px;--ty:6px"></i><i class="r" style="--tx:0px;--ty:-64px"></i><i class="w" style="--tx:-12px;--ty:48px"></i></div>
+          <div class="fw f3" style="left:50%;top:48%"><i style="--tx:-40px;--ty:-40px"></i><i class="r" style="--tx:40px;--ty:-42px"></i><i class="w" style="--tx:48px;--ty:10px"></i><i style="--tx:-48px;--ty:8px"></i><i class="r" style="--tx:0px;--ty:-58px"></i><i class="w" style="--tx:-10px;--ty:44px"></i></div>
+          <span class="scene-tag">Scene 3 · Fireworks</span>
+        </div>
+      </div>
+      <!-- OMNI SLOT 4 (names): replace the .cine-anim inside with
+           <video src="omni-scene-4-names.mp4" autoplay muted loop playsinline> -->
+      <div class="cine-slot s4" data-omni-scene="4-names">
+        <div class="cine-anim">
+          <div class="cine-sky"></div>
+          <div class="cine-names">
+            <p class="cn0">THE WEDDING OF</p>
+            <p class="cn1">Ayesha &amp; Ahmed</p>
+            <p class="cn2">20 DECEMBER 2026 · KARACHI</p>
+          </div>
+          <span class="scene-tag">Scene 4 · The Names</span>
+        </div>
+      </div>
+    </div>
+    <button class="loc cine-replay" type="button" id="cineReplay"><svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><path d="M12 5V1.8L6.8 6 12 10.2V7a5.5 5.5 0 1 1-5.5 5.5H4A8 8 0 1 0 12 5z" fill="currentColor"/></svg><span>Replay the Film</span></button>
+    <p class="cine-note">Four film scenes — palace gates, doves &amp; petals, fireworks, the names. Each scene is its own slot: Omni video clips can replace the code animation in any slot without restructuring (prompts: omni-prompts-shahkar.md).</p>
+  </div>
+</section>
+
+<!-- ================= SHAHKAR LOVE-STORY JOURNEY (Design #11 only) ================= -->
+<section class="journey-sec">
+  <div class="wrap rv">
+    <p class="kicker">Hamari Kahani</p>
+    <h2 class="sec-title">The Love-Story Journey</h2>
+    <div class="journey">
+      <div class="beat">
+        <span class="bicon"><svg viewBox="0 0 56 56" aria-hidden="true"><g fill="none" stroke="#d4af5f" stroke-width="2" stroke-linecap="round"><path d="M10 24h24v10a9 9 0 0 1-9 9h-6a9 9 0 0 1-9-9z"/><path d="M34 27h4a4 4 0 0 1 0 8h-4"/><path d="M16 18c0-3 2-3 2-6M24 18c0-3 2-3 2-6"/></g><path d="M40 12l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#f2dda6"/></svg></span>
+        <div><p class="bt">Pehli Mulaqat</p><p class="bl">Ek chai ki pyali, ek muskurahat — aur kahani shuru hui.</p></div>
+      </div>
+      <div class="beat">
+        <span class="bicon"><svg viewBox="0 0 56 56" aria-hidden="true"><g fill="none" stroke="#d4af5f" stroke-width="2"><circle cx="24" cy="32" r="12"/><circle cx="34" cy="28" r="9" opacity=".7"/></g><path d="M29 14l2 4 4 2-4 2-2 4-2-4-4-2 4-2z" fill="#f2dda6"/></svg></span>
+        <div><p class="bt">Rishta Pakka</p><p class="bl">Dono khandanon ne haan kaha, aur rishta pakka ho gaya.</p></div>
+      </div>
+      <div class="beat">
+        <span class="bicon"><svg viewBox="0 0 56 56" aria-hidden="true"><g fill="none" stroke="#d4af5f" stroke-width="2" stroke-linejoin="round"><path d="M10 46V28a18 16 0 0 1 36 0v18"/><path d="M20 46V30a8 7 0 0 1 16 0v16"/><circle cx="28" cy="16" r="3" fill="#f2dda6" stroke="none"/></g></svg></span>
+        <div><p class="bt">Shaadi ka Din</p><p class="bl">Aur phir woh din aa gaya — jab do dil ek ho gaye.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- Gulnaar stage scene (visible only in the Gulnaar design) -->
   <section class="stage-sec">
@@ -1038,7 +1244,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
     <div class="divider"><svg width="9" height="9" viewBox="0 0 10 10"><rect x="2" y="2" width="6" height="6" transform="rotate(45 5 5)" fill="var(--gold)"/></svg></div>
     <p class="kicker" data-i18n="designKicker">Make It Yours</p>
     <h2 class="sec-title" data-i18n="designTitle">Choose Your Design</h2>
-    <p class="sec-sub" data-i18n="designSub">Ten looks, one celebration — tap any design to dress the whole invitation in it.</p>
+    <p class="sec-sub" data-i18n="designSub">Eleven looks, one celebration — tap any design to dress the whole invitation in it.</p>
     <div class="design-grid" id="designGrid"></div>
   </div>
 </section>
@@ -1315,7 +1521,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       scratchNote:'We cannot wait to see you there',
       scratchHint:'Rub the foil with your finger or cursor',
       designKicker:'Make It Yours', designTitle:'Choose Your Design',
-      designSub:'Ten looks, one celebration — tap any design to dress the whole invitation in it.',
+      designSub:'Eleven looks, one celebration — tap any design to dress the whole invitation in it.',
       stageKick:'A Moment to Remember', stageTitle:'The Grand Entrance',
       stageLine:'Two hearts, one journey — hand in hand, all the way to the stage.', stageReplay:'Replay'},
     ur: {open:'دعوت نامہ کھولیں', hint:'کھولنے کے لیے مہر پر دبائیں', scroll:'نیچے اسکرول کریں',
@@ -1331,7 +1537,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       scratchNote:'ہم آپ کو دیکھنے کے لیے بے تابی سے منتظر ہیں',
       scratchHint:'فوائل کو انگلی یا کرسر سے رگڑیں',
       designKicker:'اپنی پسند بنائیں', designTitle:'اپنا ڈیزائن چنیں',
-      designSub:'دس انداز، ایک جشن — کسی بھی ڈیزائن پر دبائیں، پورا دعوت نامہ اسی رنگ میں سج جائے گا۔',
+      designSub:'گیارہ انداز، ایک جشن — کسی بھی ڈیزائن پر دبائیں، پورا دعوت نامہ اسی رنگ میں سج جائے گا۔',
       stageKick:'ایک یادگار لمحہ', stageTitle:'شاندار آمد',
       stageLine:'دو دل، ایک سفر — ہاتھ میں ہاتھ، اسٹیج تک۔', stageReplay:'دوبارہ دیکھیں'}
   };
@@ -1418,7 +1624,8 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
     {id:'khwab',    name:'Khwab',    bg:'#f7f1e0', surface:'#f8f2df', gold:'#ab8a44', bright:'#71835f'},
     {id:'gulnaar',  name:'Gulnaar',  bg:'#fdf3ec', surface:'#fdecef', gold:'#c89b3c', bright:'#c2456a'},
     {id:'mukhmal',  name:'Mukhmal',  bg:'#3d0a12', surface:'#5a0e18', gold:'#c9a86a', bright:'#e8b95a'},
-    {id:'celestial',name:'Celestial',bg:'#dceef5', surface:'#ffffff', gold:'#7fb0d6', bright:'#1e3a52'}
+    {id:'celestial',name:'Celestial',bg:'#dceef5', surface:'#ffffff', gold:'#7fb0d6', bright:'#1e3a52'},
+    {id:'shahkar',  name:'Shahkar',  bg:'#160a26', surface:'#331b50', gold:'#d4af5f', bright:'#f2dda6'}
   ];
   var designGrid = document.getElementById('designGrid'), tileBtns = [];
   if(designGrid){
@@ -1681,6 +1888,54 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       playStage();
     });
   }
+
+
+  /* ---- Shahkar: guest-name personalization + cinematic film ---- */
+  (function(){
+    var greet = document.getElementById('guestGreet');
+    if(greet){
+      var hasGuest = false;
+      try{
+        var gp = new URLSearchParams(location.search).get('guest');
+        if(gp){
+          var nm = String(gp).trim().replace(/\s+/g, ' ').slice(0, 40);
+          if(nm){
+            hasGuest = true;
+            greet.innerHTML = '';
+            var b = document.createElement('b');
+            b.textContent = 'Dear ' + nm;
+            greet.appendChild(b);
+            greet.appendChild(document.createTextNode(', aap ko khaas taur par bulaya hai \u2014 Ayesha & Ahmed ki shaadi mein aap ki maujoodgi hamare liye sab se khaas hogi.'));
+          }
+        }
+      }catch(e){}
+      if(!hasGuest){
+        greet.textContent = 'Aap ko dil se dawat hai \u2014 hamari khushi mein shamil ho kar is din ko aur khaas bana dein.';
+      }
+      greet.hidden = false;
+    }
+    var film = document.getElementById('cineFilm'), cinePlayed = false;
+    function playCine(){
+      if(!film) return;
+      film.classList.remove('play'); void film.offsetWidth; film.classList.add('play');
+    }
+    if(film){
+      function maybePlayCine(){
+        if(!cinePlayed && root.getAttribute('data-theme') === 'shahkar'){
+          var r = film.getBoundingClientRect();
+          if(r.top < innerHeight && r.bottom > 0){ cinePlayed = true; playCine(); }
+        }
+      }
+      if('IntersectionObserver' in window){
+        new IntersectionObserver(function(es){ if(es[0].isIntersecting) maybePlayCine(); },
+          {threshold:.3}).observe(film);
+      }
+      addEventListener('scroll', maybePlayCine, {passive:true});
+      new MutationObserver(maybePlayCine).observe(root, {attributes:true, attributeFilter:['data-theme']});
+      var cineRb = document.getElementById('cineReplay');
+      if(cineRb) cineRb.addEventListener('click', function(){ cinePlayed = true; playCine(); });
+    }
+  })();
 
   /* ---- Reveal on scroll ---- */
   if('IntersectionObserver' in window){
