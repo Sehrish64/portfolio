@@ -1579,11 +1579,11 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
         'BEGIN:VEVENT',
         'UID:' + btn.getAttribute('data-ev') + '-ayesha-ahmed@wedding.demo',
         'DTSTAMP:' + stamp,
-        'DTSTART:' + ev.date + 'T140000Z',
-        'DTEND:' + ev.date + 'T170000Z',
-        'SUMMARY:' + ev.name + ' — Ayesha & Ahmed Wedding',
-        'LOCATION:The Crystal Marquee\\, Karachi',
-        'DESCRIPTION:' + ev.name + ' celebration of Ayesha & Ahmed, 7:00 PM to 10:00 PM (Asia/Karachi).',
+        'DTSTART:' + ev.date + (window.__wiIcsStart || 'T140000Z'),
+        'DTEND:' + ev.date + (window.__wiIcsEnd || 'T170000Z'),
+        'SUMMARY:' + ev.name + ' — ' + (window.__wiCouple || 'Ayesha & Ahmed') + ' Wedding',
+        'LOCATION:' + (window.__wiVenueIcs || 'The Crystal Marquee\\, Karachi'),
+        'DESCRIPTION:' + ev.name + ' celebration of ' + (window.__wiCouple || 'Ayesha & Ahmed') + ', ' + (window.__wiTimeRange || '7:00 PM to 10:00 PM') + ' (Asia/Karachi).',
         'END:VEVENT', 'END:VCALENDAR'].join('\r\n');
       var blob = new Blob([ics], {type: 'text/calendar'});
       var a = document.createElement('a');
@@ -1610,6 +1610,149 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
     }, {passive: true});
     updProg();
   }
+
+  /* ---- Guest view (self-serve builder params) ----
+     When the link carries couple details (g/b/date/time/venue/city/host),
+     the page opens as that couple's own card: picker hidden, demo names,
+     date, venue and countdown replaced. No params => untouched demo. */
+  try{
+    var qp = new URLSearchParams(location.search);
+    function qv(k, max){ var v = qp.get(k); v = v ? String(v).trim().replace(/\s+/g, ' ') : ''; return v.slice(0, max); }
+    var qG = qv('g', 60), qB = qv('b', 60), qVenue = qv('venue', 80), qCity = qv('city', 40), qHost = qv('host', 90),
+        qDate = qp.get('date') || '', qTime = qp.get('time') || '';
+    if(qG || qB || qVenue || qCity || qHost || /^\d{4}-\d{2}-\d{2}$/.test(qDate)){
+      var bride = qB || 'Ayesha', groom = qG || 'Ahmed', couple = bride + ' & ' + groom;
+      window.__wiCouple = couple;
+      var seal = (bride.charAt(0) || 'A') + '\u00b7' + (groom.charAt(0) || 'A');
+      window.__wiSeal = seal;
+      var MON = ['January','February','March','April','May','June','July','August','September','October','November','December'],
+          MONS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+          DAYL = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+          DAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      function fmtLong(d){ return DAYL[d.getDay()] + ' \u00b7 ' + d.getDate() + ' ' + MON[d.getMonth()] + ' ' + d.getFullYear(); }
+      function fmtWhen(d, t){ return DAYS[d.getDay()] + ' \u00b7 ' + d.getDate() + ' ' + MONS[d.getMonth()] + ' ' + d.getFullYear() + ' \u00b7 ' + t; }
+      function dstr(d){ return d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2); }
+      /* date & time (defaults mirror the demo: 20 Dec 2026, 7 PM PKT) */
+      var wd = null, hh = 19, mi = 0, md = null, wl = null;
+      if(/^\d{4}-\d{2}-\d{2}$/.test(qDate)){
+        var dp = qDate.split('-');
+        var cand = new Date(+dp[0], +dp[1] - 1, +dp[2]);
+        if(!isNaN(cand.getTime()) && cand.getFullYear() === +dp[0] && cand.getMonth() === +dp[1] - 1 && cand.getDate() === +dp[2]) wd = cand;
+      }
+      var tm = /^(\d{1,2}):(\d{2})$/.exec(qTime);
+      if(tm){ var th = +tm[1], tn = +tm[2]; if(th <= 23 && tn <= 59){ hh = th; mi = tn; } }
+      var ap = hh >= 12 ? 'PM' : 'AM', h12 = hh % 12 || 12;
+      var timeFull = h12 + ':' + ('0' + mi).slice(-2) + ' ' + ap,
+          timeShort = mi ? timeFull : (h12 + ' ' + ap);
+      var he = hh + 3; if(he >= 24) he -= 24;
+      var ape = he >= 12 ? 'PM' : 'AM';
+      window.__wiTimeRange = timeFull + ' to ' + (he % 12 || 12) + ':' + ('0' + mi).slice(-2) + ' ' + ape;
+      function icsT(h){ var u = h - 5; if(u < 0) u += 24; return 'T' + ('0' + u).slice(-2) + ('0' + mi).slice(-2) + '00Z'; }
+      window.__wiIcsStart = icsT(hh); window.__wiIcsEnd = icsT(he);
+      if(wd){
+        var iso = wd.getFullYear() + '-' + ('0' + (wd.getMonth() + 1)).slice(-2) + '-' + ('0' + wd.getDate()).slice(-2) +
+                  'T' + ('0' + hh).slice(-2) + ':' + ('0' + mi).slice(-2) + ':00+05:00';
+        window.__wiTargetMs = new Date(iso).getTime();
+        md = new Date(wd.getTime()); md.setDate(md.getDate() - 2);
+        wl = new Date(wd.getTime()); wl.setDate(wl.getDate() + 1);
+        EVENTS.mehndi.date = dstr(md); EVENTS.baraat.date = dstr(wd); EVENTS.walima.date = dstr(wl);
+      }
+      var venueLine = qVenue ? (qVenue + (qCity ? ', ' + qCity : '')) : ('The Crystal Marquee' + (qCity ? ', ' + qCity : ', Karachi'));
+      if(qVenue || qCity) window.__wiVenueIcs = venueLine.replace(/\\/g, '\\\\').replace(/,/g, '\\,').replace(/;/g, '\\;');
+      function setT(sel, txt){ var el = document.querySelector(sel); if(el) el.textContent = txt; }
+      /* names everywhere */
+      document.title = couple + ' \u2014 Wedding Invitation';
+      var metaD = document.querySelector('meta[name="description"]');
+      if(metaD) metaD.setAttribute('content', 'Wedding invitation of ' + couple + (wd ? ' \u2014 ' + wd.getDate() + ' ' + MON[wd.getMonth()] + ' ' + wd.getFullYear() : '') + (qCity ? ', ' + qCity : '') + '.');
+      var gateEl = document.getElementById('gate');
+      if(gateEl) gateEl.setAttribute('aria-label', 'Wedding invitation of ' + bride + ' and ' + groom);
+      setT('.en1', couple);
+      if(wd) setT('.en2', fmtLong(wd));
+      setT('.ca', seal);
+      setT('.env-seal span', seal);
+      setT('.seal span', seal);
+      if(wd) setT('.cd2', ('0' + wd.getDate()).slice(-2) + ' \u00b7 ' + ('0' + (wd.getMonth() + 1)).slice(-2) + ' \u00b7 ' + wd.getFullYear());
+      /* hero names: rebuild the letter spans exactly like the splitter above */
+      var nmEls = document.querySelectorAll('.names .nm');
+      [bride, groom].forEach(function(nm, ni){
+        var el = nmEls[ni]; if(!el) return;
+        if(ni === 1) el.classList.add('b');
+        el.textContent = '';
+        nm.split('').forEach(function(ch, i){
+          var s = document.createElement('span');
+          s.className = 'lt'; s.style.setProperty('--i', i); s.textContent = ch;
+          el.appendChild(s);
+        });
+      });
+      if(wd) setT('.dateline', fmtLong(wd) + (qCity ? ' \u00b7 ' + qCity : ''));
+      setT('.cn1', couple);
+      if(wd) setT('.cn2', wd.getDate() + ' ' + MON[wd.getMonth()].toUpperCase() + ' ' + wd.getFullYear() + (qCity ? ' \u00b7 ' + qCity.toUpperCase() : ''));
+      var stageN = document.querySelector('.stage-names');
+      if(stageN){
+        stageN.textContent = '';
+        stageN.appendChild(document.createTextNode(bride + ' '));
+        var amp = document.createElement('span'); amp.className = 'amp'; amp.textContent = '&';
+        stageN.appendChild(amp);
+        stageN.appendChild(document.createTextNode(' ' + groom));
+      }
+      var tag = '#' + bride.replace(/[^A-Za-z0-9]/g, '') + 'Weds' + groom.replace(/[^A-Za-z0-9]/g, '');
+      setT('.su-hash', tag);
+      setT('.hash', bride + ' weds ' + groom + ' \u2014 ' + tag);
+      setT('.sig', '\u2014 ' + couple);
+      /* blessings: host line + the two standalone serif names */
+      document.querySelectorAll('p').forEach(function(p){
+        var t = (p.textContent || '').trim();
+        if(p.style && p.style.fontSize){
+          if(t === 'Ayesha') p.textContent = bride;
+          else if(t === 'Ahmed') p.textContent = groom;
+        }
+        if(qHost){
+          for(var i = 0; i < p.childNodes.length; i++){
+            var nd = p.childNodes[i];
+            if(nd.nodeType === 3 && nd.nodeValue.indexOf('Khan') > -1){ nd.nodeValue = qHost; break; }
+          }
+        }
+      });
+      /* events: dates, venue line, map links */
+      if(wd){
+        var whens = document.querySelectorAll('.card .when'), evDates = [md, wd, wl];
+        whens.forEach(function(w, i){ if(evDates[i]) w.textContent = fmtWhen(evDates[i], timeShort); });
+      }
+      if(qVenue || qCity){
+        document.querySelectorAll('.card p').forEach(function(p){
+          for(var i = 0; i < p.childNodes.length; i++){
+            var nd = p.childNodes[i];
+            if(nd.nodeType === 3 && nd.nodeValue.indexOf('Crystal Marquee') > -1) nd.nodeValue = venueLine;
+          }
+        });
+        document.querySelectorAll('a.loc').forEach(function(a){
+          a.href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(venueLine);
+        });
+      }
+      /* scratch reveal + RSVP note (values kept across the EN/UR toggle) */
+      if(wd){
+        var dateLong = wd.getDate() + ' ' + MON[wd.getMonth()] + ' ' + wd.getFullYear();
+        setT('.su-day', DAYL[wd.getDay()]);
+        setT('.su-date', dateLong);
+        var rb = new Date(wd.getTime()); rb.setDate(rb.getDate() - 10);
+        var rbS = rb.getDate() + ' ' + MON[rb.getMonth()] + ' ' + rb.getFullYear();
+        I18N.en.scratchDay = DAYL[wd.getDay()]; I18N.ur.scratchDay = DAYL[wd.getDay()];
+        I18N.en.scratchDate = dateLong; I18N.ur.scratchDate = dateLong;
+        I18N.en.rsvpNote = 'Please respond by ' + rbS;
+        I18N.ur.rsvpNote = '\u0628\u0631\u0627\u06c1 \u06a9\u0631\u0645 ' + rbS + ' \u062a\u06a9 \u062c\u0648\u0627\u0628 \u062f\u06cc\u06ba\u06d4';
+        if((root.getAttribute('lang') || 'en') === 'en') setT('.rsvp-note', I18N.en.rsvpNote);
+      }
+      /* RSVP button: same demo number, couple's own names */
+      document.querySelectorAll('a.btn[href*="wa.me"]').forEach(function(a){
+        a.href = 'https://wa.me/923000000000?text=' + encodeURIComponent('Assalam-o-Alaikum! I would like to RSVP for the wedding of ' + couple + '.');
+      });
+      /* guest-view chrome: picker + demo tag hidden */
+      var dg = document.getElementById('designGrid');
+      if(dg){ var sec = dg.closest('section'); if(sec) sec.style.display = 'none'; }
+      var demoTag = document.querySelector('footer .demo');
+      if(demoTag) demoTag.style.display = 'none';
+    }
+  }catch(e){}
 
   /* ---- Design picker (theme switcher) ----
      Data-driven: to add a design, add ONE entry here (plus its html[data-theme] CSS vars).
@@ -1672,7 +1815,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
   }
 
   /* ---- Countdown to Baraat: Sun 20 Dec 2026, 7:00 PM PKT ---- */
-  var target = new Date('2026-12-20T19:00:00+05:00').getTime();
+  var target = window.__wiTargetMs || new Date('2026-12-20T19:00:00+05:00').getTime();
   var dEl = document.getElementById('cd-d'), hEl = document.getElementById('cd-h'),
       mEl = document.getElementById('cd-m'), sEl = document.getElementById('cd-s'),
       note = document.getElementById('count-note');
@@ -1763,7 +1906,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
       ctx.globalAlpha = .6; ctx.fillStyle = deep;
       ctx.font = '600 ' + Math.round(21 * k) + 'px Georgia, "Times New Roman", serif';
       ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('A·A', W / 2, H / 2 + 1);
+      ctx.fillText(window.__wiSeal || 'A·A', W / 2, H / 2 + 1);
       ctx.globalAlpha = 1;
     }
     function sizeCanvas(){
@@ -1905,7 +2048,7 @@ body.ur .bless-ref{letter-spacing:.3em;text-indent:.3em}
             var b = document.createElement('b');
             b.textContent = 'Dear ' + nm;
             greet.appendChild(b);
-            greet.appendChild(document.createTextNode(', aap ko khaas taur par bulaya hai \u2014 Ayesha & Ahmed ki shaadi mein aap ki maujoodgi hamare liye sab se khaas hogi.'));
+            greet.appendChild(document.createTextNode(', aap ko khaas taur par bulaya hai \u2014 ' + (window.__wiCouple || 'Ayesha & Ahmed') + ' ki shaadi mein aap ki maujoodgi hamare liye sab se khaas hogi.'));
           }
         }
       }catch(e){}

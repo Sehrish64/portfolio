@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apna Card Khud Banao — Wedding Card Builder · Sehrish Creates</title>
+<meta name="description" content="Apna wedding invitation card khud banao: design chuno, details bharo, Publish karo — apna card link aur QR code foran tayyar. Link kabhi expire nahi hota.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080604; --bg2:#0e0a06;
+  --surface:#130e07; --surface2:#171208;
+  --text:#f4ead3; --muted:#bfae8b; --faint:#8a7a58;
+  --gold:#c9a24b; --gold-bright:#eed9a0; --gold-deep:#8a6a24;
+  --line:rgba(201,162,75,.38); --line-soft:rgba(201,162,75,.18);
+  --btn-bg:linear-gradient(135deg,#dcbb62,#a87f2e); --btn-text:#221a06;
+  --serif:'Playfair Display',Georgia,'Times New Roman',serif;
+  --body:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost','Segoe UI',Arial,sans-serif;
+  --shadow:0 18px 50px rgba(0,0,0,.55);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(900px 480px at 50% -120px, rgba(201,162,75,.14), rgba(201,162,75,0) 60%),
+    linear-gradient(180deg,var(--bg2),var(--bg));
+  color:var(--text); font-family:var(--body); font-size:19px; line-height:1.55;
+  min-height:100vh;
+}
+a{color:var(--gold-bright)}
+.topbar{
+  display:flex;justify-content:space-between;align-items:center;gap:14px;
+  padding:16px 26px;border-bottom:1px solid var(--line-soft);
+  font-family:var(--sans);font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+}
+.topbar .brand{color:var(--gold-bright);font-weight:500;text-decoration:none}
+.topbar nav a{color:var(--muted);text-decoration:none;margin-left:20px}
+.topbar nav a:hover{color:var(--gold-bright)}
+.wrap{max-width:1220px;margin:0 auto;padding:34px 22px 70px}
+header.intro{text-align:center;max-width:760px;margin:6px auto 10px}
+.kicker{font-family:var(--sans);font-size:12.5px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(2rem,4.6vw,3.1rem);line-height:1.15;margin:14px 0 10px;color:var(--gold-bright)}
+h1 em{font-style:italic;color:var(--gold)}
+.intro p{color:var(--muted);font-size:1.06rem}
+.steps{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:24px auto 6px;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.steps span{border:1px solid var(--line-soft);border-radius:999px;padding:7px 14px;color:var(--muted);background:rgba(201,162,75,.05)}
+.steps b{color:var(--gold-bright);font-weight:500}
+.layout{display:grid;grid-template-columns:1fr 392px;gap:30px;align-items:start;margin-top:26px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin:8px 0 16px}
+.sec-head .no{font-family:var(--sans);font-size:12px;letter-spacing:.2em;color:var(--btn-text);background:var(--btn-bg);border-radius:999px;padding:4px 11px;font-weight:500;white-space:nowrap}
+.sec-head h2{font-family:var(--serif);font-size:1.45rem;font-weight:600;color:var(--gold-bright)}
+.sec-head small{font-family:var(--sans);color:var(--faint);font-size:12.5px;letter-spacing:.06em}
+/* design gallery */
+.design-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px}
+.design-tile{
+  appearance:none;text-align:left;cursor:pointer;color:var(--text);
+  background:linear-gradient(160deg,var(--surface2),var(--surface));
+  border:1px solid var(--line-soft);border-radius:16px;padding:10px 10px 12px;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+  font-family:var(--sans);position:relative;width:100%;
+}
+.design-tile:hover{transform:translateY(-3px);border-color:var(--line)}
+.design-tile[aria-pressed="true"]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 14px 30px rgba(0,0,0,.45)}
+.dt-preview{position:relative;display:block;height:96px;border-radius:11px;overflow:hidden;background:var(--p-bg);border:1px solid rgba(255,255,255,.07)}
+.dt-preview::before{content:"";position:absolute;inset:0;background:radial-gradient(120px 60px at 50% 0%,var(--p-glow),transparent 70%)}
+.dt-arch{position:absolute;left:50%;top:16px;transform:translateX(-50%);width:56px;height:66px;border:1.6px solid var(--p-gold);border-bottom:none;border-radius:56px 56px 0 0}
+.dt-dots{position:absolute;left:10px;top:10px;display:flex;gap:5px}
+.dt-dots i{width:9px;height:9px;border-radius:50%;border:1px solid rgba(255,255,255,.25)}
+.dt-check{position:absolute;top:8px;right:8px;width:20px;height:20px;border-radius:50%;background:var(--btn-bg);display:none;align-items:center;justify-content:center}
+.design-tile[aria-pressed="true"] .dt-check{display:flex}
+.dt-name{display:block;margin-top:10px;font-size:14.5px;letter-spacing:.05em;color:var(--text)}
+.dt-demo{display:inline-block;margin-top:3px;font-size:12px;letter-spacing:.05em;color:var(--faint);text-decoration:none;border-bottom:1px dotted var(--faint)}
+.dt-demo:hover{color:var(--gold-bright);border-color:var(--gold-bright)}
+/* form panel */
+.panel{
+  background:linear-gradient(170deg,var(--surface2),var(--surface));
+  border:1px solid var(--line-soft);border-radius:20px;padding:24px 22px 26px;
+  box-shadow:var(--shadow);position:sticky;top:22px;
+}
+.panel h2{font-family:var(--serif);font-size:1.4rem;color:var(--gold-bright);font-weight:600}
+.field{margin-top:16px}
+.field label{display:block;font-family:var(--sans);font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+.field label small{text-transform:none;letter-spacing:.02em;color:var(--faint);font-size:12px}
+.field input,.field select{
+  width:100%;background:#0b0805;border:1px solid var(--line-soft);border-radius:11px;
+  color:var(--text);font-family:var(--sans);font-size:16px;padding:12px 13px;outline:none;
+  transition:border-color .15s ease, box-shadow .15s ease;color-scheme:dark;
+}
+.field input:focus,.field select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,75,.18)}
+.field input.err{border-color:#e0654f;box-shadow:0 0 0 3px rgba(224,101,79,.2)}
+.hint{font-family:var(--sans);font-size:12.5px;color:#e08a76;min-height:18px;margin-top:10px}
+.publish-btn{
+  width:100%;margin-top:14px;border:none;cursor:pointer;border-radius:999px;
+  background:var(--btn-bg);color:var(--btn-text);
+  font-family:var(--sans);font-size:16px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  padding:16px 20px;box-shadow:0 14px 30px rgba(0,0,0,.4);transition:transform .18s ease,box-shadow .18s ease;
+}
+.publish-btn:hover{transform:translateY(-2px);box-shadow:0 18px 34px rgba(0,0,0,.5)}
+.panel .fineprint{font-family:var(--sans);font-size:12.5px;color:var(--faint);text-align:center;margin-top:12px;letter-spacing:.03em}
+/* result */
+.result{margin-top:26px;border-top:1px dashed var(--line);padding-top:22px;display:none}
+.result.show{display:block}
+.result h3{font-family:var(--serif);font-size:1.3rem;color:var(--gold-bright);font-weight:600;text-align:center}
+.result .rsub{font-family:var(--sans);font-size:13px;color:var(--muted);text-align:center;margin-top:5px;letter-spacing:.03em}
+.link-label{font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin:20px 0 7px}
+.link-row{display:flex;gap:8px}
+.link-row input{
+  flex:1;min-width:0;background:#0b0805;border:1px solid var(--line);border-radius:11px;color:var(--gold-bright);
+  font-family:var(--sans);font-size:13.5px;padding:11px 12px;outline:none;
+}
+.qr-wrap{display:flex;justify-content:center;margin:20px 0 4px}
+.qr-box{background:#fff;border-radius:16px;padding:16px;line-height:0;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.qr-box img,.qr-box canvas{width:232px;height:232px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.act{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;cursor:pointer;
+  font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.06em;
+  padding:13px 10px;border-radius:999px;border:1px solid var(--gold);color:var(--gold-bright);background:transparent;
+  transition:transform .15s ease,background .15s ease,color .15s ease;text-align:center;
+}
+.act:hover{transform:translateY(-2px)}
+.act.primary{background:var(--btn-bg);color:var(--btn-text);border-color:transparent}
+.act.wa{border-color:#3fae5a;color:#9ad9a8}
+.act.wa:hover{background:rgba(63,174,90,.12)}
+.result .note{font-family:var(--sans);font-size:12.5px;color:var(--faint);text-align:center;margin-top:16px;line-height:1.6}
+footer{border-top:1px solid var(--line-soft);padding:26px 22px 34px;text-align:center;font-family:var(--sans);font-size:13px;color:var(--faint);letter-spacing:.05em}
+footer a{color:var(--muted)}
+@media(max-width:1020px){
+  .layout{grid-template-columns:1fr}
+  .panel{position:static}
+}
+@media(max-width:420px){
+  .design-grid{grid-template-columns:repeat(auto-fill,minmax(128px,1fr))}
+  .actions{grid-template-columns:1fr}
+  .wrap{padding:26px 15px 56px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="brand" href="https://sehrish64.github.io/portfolio/">Sehrish Creates</a>
+  <nav>
+    <a href="https://sehrish64.github.io/portfolio/wedding-cards/">Sab Designs</a>
+    <a href="https://sehrish64.github.io/portfolio/wedding-invite/">Live Demo</a>
+  </nav>
+</div>
+
+<div class="wrap">
+  <header class="intro">
+    <p class="kicker">Wedding Card Builder</p>
+    <h1>Apna Card <em>Khud Banao</em></h1>
+    <p>Design chunein, details bharein aur Publish kar dein — aapka apna card link aur QR code foran tayyar. Yeh link <b style="color:var(--gold-bright)">kabhi expire nahi hota</b>.</p>
+    <div class="steps" aria-hidden="true">
+      <span><b>1</b>&nbsp; Design Chunein</span>
+      <span><b>2</b>&nbsp; Details Bharein</span>
+      <span><b>3</b>&nbsp; Publish Karein</span>
+      <span><b>4</b>&nbsp; Link Share Karein</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- STEP 1 · DESIGNS GALLERY -->
+    <section aria-label="Designs gallery">
+      <div class="sec-head"><span class="no">Step 1</span><h2>Designs</h2><small>ek template chunein — Choose a design</small></div>
+      <div class="design-grid" id="designGrid" role="group" aria-label="Choose your design"></div>
+    </section>
+
+    <!-- STEP 2 + 3 · DETAILS PANEL + PUBLISH -->
+    <aside class="panel" aria-label="Card details">
+      <div class="sec-head" style="margin-top:0"><span class="no">Step 2</span><h2>Details Bharein</h2></div>
+      <form id="builderForm" novalidate>
+        <div class="field">
+          <label for="fBride">Dulhan ka Naam <small>· Bride's name</small></label>
+          <input id="fBride" type="text" autocomplete="off" placeholder="e.g. Maryam" maxlength="60">
+        </div>
+        <div class="field">
+          <label for="fGroom">Dulha ka Naam <small>· Groom's name</small></label>
+          <input id="fGroom" type="text" autocomplete="off" placeholder="e.g. Tahir" maxlength="60">
+        </div>
+        <div class="field">
+          <label for="fDate">Shaadi ki Tareekh <small>· Wedding date (Baraat)</small></label>
+          <input id="fDate" type="date">
+        </div>
+        <div class="field">
+          <label for="fTime">Waqt <small>· Time</small></label>
+          <input id="fTime" type="time" value="19:00">
+        </div>
+        <div class="field">
+          <label for="fVenue">Venue <small>· Hall / jagah ka naam</small></label>
+          <input id="fVenue" type="text" autocomplete="off" placeholder="e.g. The Crystal Marquee" maxlength="80">
+        </div>
+        <div class="field">
+          <label for="fCity">Sheher <small>· City</small></label>
+          <input id="fCity" type="text" autocomplete="off" placeholder="e.g. Karachi" maxlength="40">
+        </div>
+        <div class="field">
+          <label for="fHost">Walidain ki Line <small>· Host line (optional)</small></label>
+          <input id="fHost" type="text" autocomplete="off" placeholder="e.g. Mr. &amp; Mrs. Khan" maxlength="90">
+        </div>
+        <div class="field">
+          <label for="fGuest">Mehman ka Naam <small>· Guest name (optional — khaas greeting ke liye)</small></label>
+          <input id="fGuest" type="text" autocomplete="off" placeholder="e.g. Ahmed Raza" maxlength="40">
+        </div>
+        <p class="hint" id="formHint" role="alert"></p>
+        <div class="sec-head" style="margin:20px 0 0"><span class="no">Step 3</span><h2>Publish</h2></div>
+        <button type="submit" class="publish-btn" id="publishBtn">Publish — Mera Card Banao</button>
+        <p class="fineprint">Link aap ke naam se banta hai — aur kabhi expire nahi hota.</p>
+      </form>
+
+      <!-- STEP 4 · RESULT -->
+      <div class="result" id="result" aria-live="polite">
+        <h3>Mubarak! Aapka Card Live Hai</h3>
+        <p class="rsub">Step 4 — link share karein ya QR print karein</p>
+        <p class="link-label">Aapka Card Link</p>
+        <div class="link-row">
+          <input id="linkOut" type="text" readonly aria-label="Aapka card link">
+        </div>
+        <div class="qr-wrap"><div class="qr-box" id="qrBox" aria-label="Card link QR code"></div></div>
+        <div class="actions">
+          <button type="button" class="act primary" id="copyBtn">Copy Link</button>
+          <a class="act wa" id="waBtn" href="#" target="_blank" rel="noopener">Send via WhatsApp</a>
+          <a class="act" id="openBtn" href="#" target="_blank" rel="noopener">Open — Card Kholo</a>
+          <button type="button" class="act" id="qrBtn">Download QR Code</button>
+        </div>
+        <p class="note">QR code download kar ke paper card par print kar dein — mehman scan kar ke seedha aap ka card khol lein ge. Details badalni hon to upar badal kar dobara Publish kar dein, link update ho jayega.</p>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<footer>
+  Wedding Card Builder · <a href="https://sehrish64.github.io/portfolio/wedding-cards/">Sehrish Creates — Wedding Invitations</a>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function(){
+  var INVITE = 'https://sehrish64.github.io/portfolio/wedding-invite/';
+  /* Same designs as the invite page's picker (id, display name, palette). */
+  var DESIGNS = [
+    {id:'midnight', name:'Midnight', bg:'#080604', surface:'#171208', gold:'#c9a24b', bright:'#eed9a0'},
+    {id:'ivory',    name:'Ivory',    bg:'#f7efdd', surface:'#fdf3df', gold:'#b07c2c', bright:'#6e1423'},
+    {id:'emerald',  name:'Emerald',  bg:'#03130c', surface:'#0a2e20', gold:'#d4af5f', bright:'#f2dda6'},
+    {id:'blush',    name:'Blush',    bg:'#fceeea', surface:'#fdeeea', gold:'#b76e79', bright:'#e3a3ad'},
+    {id:'royal',    name:'Peacock',  bg:'#032024', surface:'#0d4a4c', gold:'#d4af5f', bright:'#40beaf'},
+    {id:'rose',     name:'Rose',     bg:'#2e0714', surface:'#671431', gold:'#dfa94f', bright:'#f78fb0'},
+    {id:'khwab',    name:'Khwab',    bg:'#f7f1e0', surface:'#f8f2df', gold:'#ab8a44', bright:'#71835f'},
+    {id:'gulnaar',  name:'Gulnaar',  bg:'#fdf3ec', surface:'#fdecef', gold:'#c89b3c', bright:'#c2456a'},
+    {id:'mukhmal',  name:'Mukhmal',  bg:'#3d0a12', surface:'#5a0e18', gold:'#c9a86a', bright:'#e8b95a'},
+    {id:'celestial',name:'Celestial',bg:'#dceef5', surface:'#ffffff', gold:'#7fb0d6', bright:'#1e3a52'},
+    {id:'shahkar',  name:'Shahkar',  bg:'#160a26', surface:'#331b50', gold:'#d4af5f', bright:'#f2dda6'}
+  ];
+  var selected = 'gulnaar';
+  var grid = document.getElementById('designGrid'), tiles = [];
+  DESIGNS.forEach(function(d){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'design-tile';
+    b.setAttribute('aria-pressed', d.id === selected ? 'true' : 'false');
+    b.setAttribute('aria-label', d.name + ' design');
+    b.innerHTML =
+      '<span class="dt-preview" style="--p-bg:' + d.bg + ';--p-glow:' + d.gold + '33">' +
+        '<span class="dt-dots"><i style="background:' + d.bg + '"></i><i style="background:' + d.gold + '"></i><i style="background:' + d.bright + '"></i></span>' +
+        '<span class="dt-arch" style="border-color:' + d.gold + '"></span>' +
+        '<span class="dt-check"><svg width="11" height="11" viewBox="0 0 12 12" fill="none" stroke="#221a06" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6.5 4.8 9 10 3"/></svg></span>' +
+      '</span>' +
+      '<span class="dt-name">' + d.name + '</span>';
+    var demo = document.createElement('a');
+    demo.className = 'dt-demo';
+    demo.href = INVITE + '?design=' + d.id;
+    demo.target = '_blank'; demo.rel = 'noopener';
+    demo.textContent = 'Live Demo ↗';
+    demo.addEventListener('click', function(e){ e.stopPropagation(); });
+    b.appendChild(demo);
+    b.addEventListener('click', function(){
+      selected = d.id;
+      tiles.forEach(function(t){ t.setAttribute('aria-pressed', t === b ? 'true' : 'false'); });
+    });
+    grid.appendChild(b);
+    tiles.push(b);
+  });
+
+  var $ = function(id){ return document.getElementById(id); };
+  var currentLink = '';
+
+  function buildLink(){
+    var p = new URLSearchParams();
+    p.set('design', selected);
+    var g = $('fGroom').value.trim(), b = $('fBride').value.trim(),
+        date = $('fDate').value, time = $('fTime').value,
+        venue = $('fVenue').value.trim(), city = $('fCity').value.trim(),
+        host = $('fHost').value.trim(), guest = $('fGuest').value.trim();
+    if(b) p.set('b', b);
+    if(g) p.set('g', g);
+    if(date) p.set('date', date);
+    if(time) p.set('time', time);
+    if(venue) p.set('venue', venue);
+    if(city) p.set('city', city);
+    if(host) p.set('host', host);
+    if(guest) p.set('guest', guest);
+    return INVITE + '?' + p.toString();
+  }
+
+  function renderQR(link){
+    var box = $('qrBox');
+    box.innerHTML = '';
+    if(window.QRCode){
+      new QRCode(box, {text: link, width: 232, height: 232, colorDark: '#1a1405', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.M});
+    } else {
+      var img = document.createElement('img');
+      img.alt = 'Card link QR code';
+      img.width = 232; img.height = 232;
+      img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=232x232&margin=8&data=' + encodeURIComponent(link);
+      box.appendChild(img);
+    }
+  }
+
+  $('builderForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var bride = $('fBride'), groom = $('fGroom'), date = $('fDate'), hint = $('formHint');
+    [bride, groom, date].forEach(function(f){ f.classList.remove('err'); });
+    var missing = [];
+    if(!bride.value.trim()){ missing.push('dulhan ka naam'); bride.classList.add('err'); }
+    if(!groom.value.trim()){ missing.push('dulha ka naam'); groom.classList.add('err'); }
+    if(!date.value){ missing.push('shaadi ki tareekh'); date.classList.add('err'); }
+    if(missing.length){
+      hint.textContent = 'Pehle yeh bhar dein: ' + missing.join(', ') + '.';
+      (bride.classList.contains('err') ? bride : (groom.classList.contains('err') ? groom : date)).focus();
+      return;
+    }
+    hint.textContent = '';
+    currentLink = buildLink();
+    $('linkOut').value = currentLink;
+    $('openBtn').href = currentLink;
+    $('waBtn').href = 'https://wa.me/?text=' + encodeURIComponent('Assalam-o-Alaikum! Hamari shaadi ka card dekhein — ' + currentLink);
+    renderQR(currentLink);
+    var res = $('result');
+    res.classList.add('show');
+    res.scrollIntoView({behavior:'smooth', block:'nearest'});
+  });
+
+  $('copyBtn').addEventListener('click', function(){
+    var btn = this, out = $('linkOut');
+    function done(){ btn.textContent = 'Copy Ho Gaya ✓'; setTimeout(function(){ btn.textContent = 'Copy Link'; }, 2200); }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(out.value).then(done, function(){ out.select(); document.execCommand('copy'); done(); });
+    } else { out.select(); document.execCommand('copy'); done(); }
+  });
+
+  $('qrBtn').addEventListener('click', function(){
+    var box = $('qrBox'), cv = box.querySelector('canvas');
+    var a = document.createElement('a');
+    a.download = 'wedding-card-qr.png';
+    if(cv && cv.toDataURL){
+      a.href = cv.toDataURL('image/png');
+    } else {
+      a.href = 'https://api.qrserver.com/v1/create-qr-code/?size=800x800&margin=16&data=' + encodeURIComponent(currentLink);
+      a.target = '_blank'; a.rel = 'noopener';
+    }
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
+  $('linkOut').addEventListener('focus', function(){ this.select(); });
+})();
+</script>
+</body>
+</html>
