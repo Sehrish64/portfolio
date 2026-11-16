@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apni Website Banwayein — Book a Free Intro Call | Sehrish Web Design</title>
+<style>
+  :root{
+    --bg:#0a0a14; --bg2:#10101f; --card:#14142a; --line:#26264a;
+    --pink:#ff2d95; --cyan:#00e5ff; --txt:#f2f2fa; --dim:#a7a7c4;
+    --ok:#2ee6a8; --err:#ff5d7a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--txt);
+    font-family:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 18px}
+  section{padding:56px 0}
+  h1,h2{line-height:1.15;letter-spacing:-.5px}
+  h2{font-size:clamp(24px,4.5vw,34px);margin-bottom:8px}
+  .sub{color:var(--dim);margin-bottom:28px}
+  .grad{background:linear-gradient(90deg,var(--pink),var(--cyan));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* Hero */
+  .hero{padding:72px 0 60px;text-align:center;
+    background:radial-gradient(700px 340px at 50% -60px,rgba(255,45,149,.18),transparent 65%),
+               radial-gradient(600px 300px at 85% 10px,rgba(0,229,255,.12),transparent 65%)}
+  .hero h1{font-size:clamp(32px,7vw,54px);margin-bottom:14px}
+  .hero p{color:var(--dim);max-width:560px;margin:0 auto 26px;font-size:clamp(15px,2.6vw,18px)}
+  .btn{display:inline-block;border:none;cursor:pointer;text-decoration:none;
+    background:linear-gradient(90deg,var(--pink),#b14bff);color:#fff;font-weight:700;
+    padding:15px 34px;border-radius:999px;font-size:16px;
+    box-shadow:0 0 24px rgba(255,45,149,.45);transition:transform .15s ease,box-shadow .15s ease}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 0 34px rgba(255,45,149,.65)}
+  .btn.cyan{background:linear-gradient(90deg,#00b8d9,var(--cyan));color:#04121a;
+    box-shadow:0 0 24px rgba(0,229,255,.4)}
+  .hero .mini{margin-top:16px;font-size:13.5px;color:var(--dim)}
+  .hero .mini b{color:var(--ok)}
+
+  /* Steps */
+  .steps{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+  .step .n{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-weight:800;font-size:18px;color:#fff;margin-bottom:14px;
+    background:linear-gradient(135deg,var(--pink),var(--cyan))}
+  .step h3{margin-bottom:6px;font-size:18px}
+  .step p{color:var(--dim);font-size:14.5px}
+
+  /* Packages */
+  .pkgs{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:760px){.pkgs{grid-template-columns:repeat(3,1fr)}}
+  .pkg{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;position:relative}
+  .pkg.hot{border-color:var(--pink);box-shadow:0 0 26px rgba(255,45,149,.25)}
+  .pkg .tag{position:absolute;top:-13px;right:18px;background:var(--pink);color:#fff;
+    font-size:12px;font-weight:700;padding:4px 12px;border-radius:999px}
+  .pkg h3{font-size:19px;margin-bottom:4px}
+  .pkg .price{font-size:clamp(20px,3.4vw,25px);font-weight:800;color:var(--cyan);margin-bottom:14px}
+  .pkg ul{list-style:none;color:var(--dim);font-size:14.5px}
+  .pkg li{padding:5px 0 5px 22px;position:relative}
+  .pkg li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:800}
+  .deal{margin-top:22px;text-align:center;background:linear-gradient(90deg,rgba(255,45,149,.14),rgba(0,229,255,.14));
+    border:1px dashed var(--pink);border-radius:14px;padding:16px 18px;font-size:15.5px}
+  .deal b{color:var(--pink)}
+
+  /* Booking form */
+  .form{background:var(--bg2);border:1px solid var(--line);border-radius:20px;padding:26px}
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:640px){.grid{grid-template-columns:1fr 1fr}}
+  label{display:block;font-size:13.5px;font-weight:600;margin-bottom:7px;color:var(--txt)}
+  label span{color:var(--pink)}
+  input,select,textarea{width:100%;background:#0d0d1d;border:1px solid var(--line);color:var(--txt);
+    border-radius:11px;padding:12px 14px;font-size:15.5px;font-family:inherit;outline:none}
+  input:focus,select:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,229,255,.15)}
+  textarea{resize:vertical;min-height:84px}
+  .full{grid-column:1/-1}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{border:1px solid var(--line);background:#0d0d1d;color:var(--txt);border-radius:999px;
+    padding:9px 15px;font-size:14px;cursor:pointer;font-family:inherit;transition:all .12s ease;line-height:1.3}
+  .chip small{display:block;font-size:11px;color:var(--dim)}
+  .chip:hover{border-color:var(--cyan)}
+  .chip.sel{background:linear-gradient(90deg,var(--pink),#b14bff);border-color:transparent;color:#fff;font-weight:700;
+    box-shadow:0 0 14px rgba(255,45,149,.45)}
+  .chip.sel small{color:#ffe3f1}
+  .chip.tsel{background:linear-gradient(90deg,#00b8d9,var(--cyan));border-color:transparent;color:#04121a;font-weight:700;
+    box-shadow:0 0 14px rgba(0,229,255,.4)}
+  .err{display:none;background:rgba(255,93,122,.12);border:1px solid var(--err);color:#ffb3c0;
+    border-radius:11px;padding:12px 15px;font-size:14.5px;margin-bottom:16px}
+  .done{display:none;background:rgba(46,230,168,.1);border:1px solid var(--ok);color:#bdf5e2;
+    border-radius:11px;padding:14px 16px;font-size:15px;margin-top:18px}
+  .submit{width:100%;margin-top:20px;font-size:17px}
+  .note{margin-top:14px;text-align:center;color:var(--dim);font-size:13.5px}
+
+  footer{padding:34px 0 44px;text-align:center;color:var(--dim);font-size:13.5px;border-top:1px solid var(--line)}
+  footer b{color:var(--txt)}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <h1>Apni <span class="grad">Website</span> Banwayein</h1>
+    <p>Book a <b style="color:#fff">FREE intro call</b> with <b style="color:#fff">Sehrish</b> — Web Designer.
+    Salon, shop, restaurant ya school — aap ke business ke liye professional website, bina kisi jhanjhat ke.</p>
+    <a class="btn" href="#book">Free Call Book Karo →</a>
+    <div class="mini">Koi payment abhi nahi — pehle <b>free call</b>, pasand aaye to aage badhenge.</div>
+  </div>
+</header>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="wrap">
+    <h2>Kaise <span class="grad">Kaam Karega?</span></h2>
+    <p class="sub">Sirf 3 asaan steps — aur aap ki website live!</p>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <h3>Slot Book Karo</h3>
+        <p>Neeche form mein apna naam, WhatsApp number aur pasandeeda date/time choose karo.</p>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <h3>Free Intro Call</h3>
+        <p>Selected time par WhatsApp call hogi — aap apni requirements batayein, main poora plan samjhaungi.</p>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <h3>Website Live!</h3>
+        <p>50% advance (Easypaisa / JazzCash) ke baad kaam shuru — demo dekh kar approve karo, phir website live!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section style="padding-top:8px">
+  <div class="wrap">
+    <h2>Packages <span class="grad">&amp; Prices</span></h2>
+    <p class="sub">Har package mein mobile-friendly design + WhatsApp order button shamil hai.</p>
+    <div class="pkgs">
+      <div class="pkg">
+        <h3>Basic</h3>
+        <div class="price">Rs 15,000 – 20,000</div>
+        <ul>
+          <li>1-page professional website</li>
+          <li>Business info, photos, services</li>
+          <li>WhatsApp contact button</li>
+          <li>Google Maps location</li>
+        </ul>
+      </div>
+      <div class="pkg hot">
+        <div class="tag">POPULAR</div>
+        <h3>Standard</h3>
+        <div class="price">Rs 25,000 – 35,000</div>
+        <ul>
+          <li>Multi-page website (Home, Services, Gallery, Contact)</li>
+          <li>Booking / order form → WhatsApp</li>
+          <li>Photo gallery &amp; price list</li>
+          <li>Social media links</li>
+        </ul>
+      </div>
+      <div class="pkg">
+        <h3>Premium</h3>
+        <div class="price">Rs 40,000 – 60,000</div>
+        <ul>
+          <li>Sab kuch Standard mein + extras</li>
+          <li>Online booking calendar</li>
+          <li>Animations &amp; premium design</li>
+          <li>Priority support</li>
+        </ul>
+      </div>
+    </div>
+    <div class="deal">🎉 <b>Special Offer:</b> Pehle 2–3 clients ke liye website sirf <b>Rs 12,000</b> mein!
+    Har package par sirf <b>50% advance</b> (Easypaisa / JazzCash) — baqi kaam complete hone par.</div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section id="book" style="padding-top:8px">
+  <div class="wrap">
+    <h2>Free Intro Call <span class="grad">Book Karo</span></h2>
+    <p class="sub">Date aur time choose karo — booking direct mere WhatsApp par aa jayegi.</p>
+
+    <form class="form" id="bookForm" novalidate>
+      <div class="err" id="errBox"></div>
+      <div class="grid">
+        <div>
+          <label for="cname">Aap ka Naam <span>*</span></label>
+          <input id="cname" type="text" placeholder="e.g. Fatima Khan" autocomplete="name">
+        </div>
+        <div>
+          <label for="cphone">Aap ka WhatsApp Number <span>*</span></label>
+          <input id="cphone" type="tel" placeholder="03XX-XXXXXXX" autocomplete="tel">
+        </div>
+        <div>
+          <label for="cbiz">Business Type <span>*</span></label>
+          <select id="cbiz">
+            <option value="">— Select karo —</option>
+            <option>Salon</option>
+            <option>Shop</option>
+            <option>Restaurant</option>
+            <option>School</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div>
+          <label for="cpkg">Package Interest <span>*</span></label>
+          <select id="cpkg">
+            <option value="">— Select karo —</option>
+            <option>Basic — Rs 15,000–20,000</option>
+            <option>Standard — Rs 25,000–35,000</option>
+            <option>Premium — Rs 40,000–60,000</option>
+            <option>Special Offer — Rs 12,000 (pehle 2–3 clients)</option>
+            <option>Abhi sure nahi — pehle baat karni hai</option>
+          </select>
+        </div>
+        <div class="full">
+          <label>Date Select Karo <span>*</span></label>
+          <div class="chips" id="dateChips"></div>
+        </div>
+        <div class="full">
+          <label>Time Select Karo (PKT) <span>*</span></label>
+          <div class="chips" id="timeChips"></div>
+        </div>
+        <div class="full">
+          <label for="cnotes">Notes (optional)</label>
+          <textarea id="cnotes" placeholder="Apne business ke baare mein kuch batana chahen to yahan likhein..."></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn cyan submit">WhatsApp par Booking Confirm Karo ✓</button>
+      <div class="note">Submit karne par WhatsApp khulega — wahan bas <b>Send</b> dabana hai, booking ho jayegi!</div>
+      <div class="done" id="doneBox"></div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>Sehrish — Web Designer</b> · Karachi, Pakistan<br>
+    Websites jo customers laayein — salon, shop, restaurant aur school ke liye.
+  </div>
+</footer>
+
+<script>
+  /* ============================================================
+     CONFIG — Sehrish: yahan apna BUSINESS WhatsApp number likho!
+     Format: country code ke saath, bina + aur bina spaces ke.
+     Example: "923001234567"
+     ============================================================ */
+  const BUSINESS_WHATSAPP = "92XXXXXXXXXX";
+
+  const WEEKDAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+  const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  let selDate = "", selDateLabel = "", selTime = "";
+
+  // ---- Date chips: next 14 days ----
+  const dateChips = document.getElementById("dateChips");
+  const today = new Date();
+  for (let i = 0; i < 14; i++) {
+    const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() + i);
+    const wd = WEEKDAYS[d.getDay()];
+    const label = wd + ", " + d.getDate() + " " + MONTHS[d.getMonth()];
+    const val = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip";
+    b.innerHTML = (i === 0 ? "Aaj" : wd) + "<small>" + d.getDate() + " " + MONTHS[d.getMonth()] + "</small>";
+    b.addEventListener("click", () => {
+      dateChips.querySelectorAll(".chip").forEach(c => c.classList.remove("sel"));
+      b.classList.add("sel"); selDate = val; selDateLabel = label;
+    });
+    dateChips.appendChild(b);
+  }
+
+  // ---- Time chips: 11:00 AM – 8:00 PM hourly ----
+  const timeChips = document.getElementById("timeChips");
+  for (let h = 11; h <= 20; h++) {
+    const hr12 = ((h + 11) % 12) + 1;
+    const label = hr12 + ":00 " + (h < 12 ? "AM" : "PM");
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "chip"; b.textContent = label;
+    b.addEventListener("click", () => {
+      timeChips.querySelectorAll(".chip").forEach(c => c.classList.remove("tsel"));
+      b.classList.add("tsel"); selTime = label;
+    });
+    timeChips.appendChild(b);
+  }
+
+  // ---- Submit ----
+  const form = document.getElementById("bookForm");
+  const errBox = document.getElementById("errBox");
+  const doneBox = document.getElementById("doneBox");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    errBox.style.display = "none"; doneBox.style.display = "none";
+
+    const name  = document.getElementById("cname").value.trim();
+    const phone = document.getElementById("cphone").value.trim();
+    const biz   = document.getElementById("cbiz").value;
+    const pkg   = document.getElementById("cpkg").value;
+    const notes = document.getElementById("cnotes").value.trim();
+
+    const missing = [];
+    if (!name) missing.push("Naam");
+    if (!phone) missing.push("WhatsApp number");
+    if (!biz) missing.push("Business type");
+    if (!pkg) missing.push("Package");
+    if (!selDate) missing.push("Date");
+    if (!selTime) missing.push("Time");
+
+    if (missing.length) {
+      errBox.textContent = "⚠️ Ye fields reh gaye hain: " + missing.join(", ") + " — please pehle ye fill karo.";
+      errBox.style.display = "block";
+      errBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      return;
+    }
+    if (!/^\+?[0-9\s-]{10,16}$/.test(phone)) {
+      errBox.textContent = "⚠️ WhatsApp number sahi nahi lag raha — please dobara check karo (e.g. 03XX-XXXXXXX).";
+      errBox.style.display = "block";
+      return;
+    }
+
+    const ref = "BK-" + Math.random().toString(36).slice(2, 6).toUpperCase();
+
+    const lines = [
+      "Assalam-o-Alaikum! Main ne website ke liye FREE intro call book ki hai.",
+      "",
+      "Booking Ref: " + ref,
+      "Naam: " + name,
+      "Mera WhatsApp: " + phone,
+      "Business: " + biz,
+      "Package: " + pkg,
+      "Date: " + selDateLabel,
+      "Time: " + selTime + " (PKT)"
+    ];
+    if (notes) lines.push("Notes: " + notes);
+    lines.push("", "Please is time par call confirm kar dein. Shukriya!");
+
+    const url = "https://wa.me/" + BUSINESS_WHATSAPP + "?text=" + encodeURIComponent(lines.join("\n"));
+
+    doneBox.innerHTML = "✅ <b>Booking tayyar hai!</b> Aap ka ref: <b>" + ref + "</b> — " +
+      selDateLabel + ", " + selTime + ".<br>WhatsApp khul raha hai, wahan <b>Send</b> dabate hi booking confirm ho jayegi.";
+    doneBox.style.display = "block";
+    window.open(url, "_blank");
+  });
+</script>
+</body>
+</html>
