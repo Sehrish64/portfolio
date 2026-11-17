@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zahra's Salon And Studio — Baat Karo | AI Receptionist Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0b0d; --panel:#141416; --panel2:#1b1b1f;
+    --gold:#c9a24b; --gold2:#e8c97a; --cream:#f3ead3; --muted:#9a958a;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--cream);font-family:'Jost',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:20px 14px 30px}
+  header{text-align:center;margin:10px 0 4px}
+  header .kicker{letter-spacing:.35em;font-size:.68rem;color:var(--gold);text-transform:uppercase}
+  header h1{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--cream);margin-top:6px}
+  header h1 span{color:var(--gold2)}
+  header p{color:var(--muted);font-size:.9rem;margin-top:4px}
+  .rule{width:64px;height:2px;background:var(--gold);margin:14px auto;border-radius:2px}
+  #chat{width:100%;max-width:520px;background:var(--panel);border:1px solid #26262b;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:260px;max-height:46vh;overflow-y:auto}
+  .msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:.98rem;line-height:1.45;white-space:pre-wrap;word-wrap:break-word}
+  .msg.agent{background:var(--panel2);border:1px solid #2e2a1e;border-bottom-left-radius:4px;color:var(--cream)}
+  .msg.agent b{color:var(--gold2);font-weight:500}
+  .msg.user{background:#26221a;border:1px solid var(--gold);border-bottom-right-radius:4px;align-self:flex-end;color:#fff}
+  .msg.sys{background:transparent;border:1px dashed #3a3a40;color:var(--muted);align-self:center;text-align:center;font-size:.85rem}
+  #status{text-align:center;color:var(--gold2);font-size:.9rem;min-height:1.4em;margin-top:12px;letter-spacing:.03em}
+  #micBtn{margin-top:10px;width:110px;height:110px;border-radius:50%;border:2px solid var(--gold);background:radial-gradient(circle at 35% 30%, #2a2517, #141310 70%);color:var(--gold2);font-size:2.4rem;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:transform .15s, box-shadow .15s}
+  #micBtn small{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-family:'Jost',sans-serif}
+  #micBtn:hover{transform:scale(1.04);box-shadow:0 0 24px rgba(201,162,75,.35)}
+  #micBtn.listening{animation:pulse 1.2s infinite;border-color:#e2574c;color:#ff8a7a}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(226,87,76,.45)}70%{box-shadow:0 0 0 20px rgba(226,87,76,0)}100%{box-shadow:0 0 0 0 rgba(226,87,76,0)}}
+  #typeRow{width:100%;max-width:520px;display:flex;gap:8px;margin-top:14px}
+  #typeInput{flex:1;background:var(--panel);border:1px solid #2c2c31;border-radius:10px;color:var(--cream);padding:11px 13px;font-family:'Jost',sans-serif;font-size:.95rem}
+  #typeInput:focus{outline:none;border-color:var(--gold)}
+  #sendBtn{background:var(--gold);color:#141310;border:none;border-radius:10px;padding:0 18px;font-family:'Jost',sans-serif;font-weight:500;cursor:pointer}
+  #chips{width:100%;max-width:520px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
+  .chip{border:1px solid #3a3423;background:var(--panel);color:var(--gold2);border-radius:999px;padding:7px 14px;font-size:.85rem;cursor:pointer;font-family:'Jost',sans-serif}
+  .chip:hover{border-color:var(--gold)}
+  #summary{display:none;width:100%;max-width:520px;margin-top:16px;background:linear-gradient(160deg,#1d1a10,#12110c);border:1px solid var(--gold);border-radius:14px;padding:16px 18px}
+  #summary h3{font-family:'Playfair Display',serif;color:var(--gold2);font-size:1.1rem;margin-bottom:8px}
+  #summary p{font-size:.95rem;line-height:1.55}
+  footer{margin-top:22px;color:var(--muted);font-size:.78rem;text-align:center}
+  footer b{color:var(--gold);font-weight:500}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">Ladies Only · Gulshan-e-Iqbal, Karachi</div>
+  <h1>Zahra's <span>Salon</span> And Studio</h1>
+  <p>Neeche button dabayein aur bol kar baat karein — rates, timing, appointment, sab kuch.</p>
+  <div class="rule"></div>
+</header>
+
+<div id="chat" aria-live="polite"></div>
+<div id="status">…</div>
+
+<button id="micBtn" aria-label="Baat Karo">🎤<small>Baat Karo</small></button>
+
+<div id="typeRow">
+  <input id="typeInput" type="text" placeholder="Ya yahan likh kar poochein… (e.g. bridal ka rate?)">
+  <button id="sendBtn">Bhejein</button>
+</div>
+
+<div id="chips">
+  <button class="chip" data-q="Bridal makeup ka rate kya hai?">Bridal rate?</button>
+  <button class="chip" data-q="Salon ki timing kya hai?">Timing?</button>
+  <button class="chip" data-q="Facial ke rates bata dein">Facial rates?</button>
+  <button class="chip" data-q="Salon kahan hai?">Location?</button>
+  <button class="chip" data-q="Mujhe appointment book karni hai">Appointment</button>
+</div>
+
+<div id="summary"><h3>📋 Appointment Note</h3><p id="summaryText"></p></div>
+
+<footer>Demo — AI receptionist by <b>Sehrish Creates</b> · Ye demo hai, appointment asal mein salon se confirm hoti hai (WhatsApp 0336-2504823)</footer>
+
+<script>
+"use strict";
+/* ============================================================
+   ZAHRA'S SALON — AI RECEPTIONIST (V1, fully client-side)
+   Sunna  = Web Speech API (SpeechRecognition, ur-PK)
+   Sochna = keyword / intent matching on salon facts (below)
+   Bolna  = speechSynthesis (best available ur/hi female voice)
+   Facts: sehrish64.github.io/zahras-salon (live site, Nov 2026)
+   ============================================================ */
+
+/* ---------- SALON FACTS (from the live Zahra's Salon site) ---------- */
+var FACTS = {
+  name: "Zahra's Salon And Studio",
+  phone: "0336-2504823",
+  address: "Shop L-19, Opposite Bagh-e-Rizwan Apartments, Gulshan-e-Iqbal Block 16, Karachi",
+  hoursText: "Tuesday se Saturday subah 11 bajay se raat 9 bajay tak, Sunday dopahar 2 bajay se raat 9 bajay tak. Monday ko salon band hota hai.",
+  services: [
+    { key:"bridal", label:"Signature Bridal Makeup", price:"Rs 25,000 se shuru",
+      kw:["bridal","dulhan","barat","shaadi","شادی","دلہن"],
+      say:"Signature Bridal Makeup Rs 25,000 se shuru hai — lashes aur hairstyling shamil hain. Bridal trial Rs 3,000 ka hai, aur agar 7 din ke andar package book karein to trial ki raqam adjust ho jati hai. Hamare packages: Bridal Royal Rs 32,000 aur Walima Signature Rs 45,000." },
+    { key:"party makeup", label:"Party Makeup", price:"Rs 5,000",
+      kw:["party makeup","party","پارٹی"],
+      say:"Party Makeup Rs 5,000 ka hai. Mehndi Makeup Rs 8,000 aur Engagement / Nikkah Makeup Rs 10,000 ka hai." },
+    { key:"mehndi makeup", label:"Mehndi Makeup", price:"Rs 8,000",
+      kw:["mehndi makeup","mehndi","مہندی"],
+      say:"Mehndi Makeup Rs 8,000 ka hai. Mehndi ke liye hamara Zahra Signature package Rs 18,000 ka bohat pasandeeda hai — makeup, hairstyling, facial, mani-pedi sab shamil." },
+    { key:"facial", label:"Facials", price:"Rs 1,500 se Rs 6,000",
+      kw:["facial","facials","فیشل","glow"],
+      say:"Facials ke rates ye hain: Clean-up Rs 1,500, Signature Glow Facial Rs 2,500, Whitening Facial Rs 3,500, Gold Facial Rs 4,500, aur Hydra Glow Treatment Rs 6,000. Har facial ke saath skin analysis bilkul free hai." },
+    { key:"clean-up", label:"Clean-up", price:"Rs 1,500",
+      kw:["clean-up","cleanup","clean up"],
+      say:"Clean-up Rs 1,500 ka hai. Walk-in bhi chalega, lekin appointment se wait nahi karna parta." },
+    { key:"haircut", label:"Haircut + Blow Dry", price:"Rs 1,200",
+      kw:["haircut","hair cut","cutting","بال کاٹ","کٹنگ"],
+      say:"Haircut + Blow Dry Rs 1,200 ka hai, aur free hair consultation bhi shamil hai. Sirf Blowout & Styling Rs 1,000 ki hai." },
+    { key:"hair color", label:"Hair Color", price:"Rs 4,500 se shuru",
+      kw:["color","colour","dye","balayage","highlight","بالوں کا رنگ","کلر"],
+      say:"Hair Color / Dye Rs 4,500 se shuru hai. Highlights / Balayage Rs 8,000 se, Root Touch-up Rs 2,800, aur Fashion Shades Rs 12,000 se. Shade selection bilkul free hai." },
+    { key:"keratin", label:"Keratin / Protein", price:"Rs 10,000 se shuru",
+      kw:["keratin","protein","rebonding","کیریٹن"],
+      say:"Keratin / Protein treatment Rs 10,000 se shuru hai — final rate baalon ki lambai dekh kar confirm hota hai. Hair Spa + Massage Rs 2,500 ka hai." },
+    { key:"nails", label:"Nails", price:"Rs 1,200 se shuru",
+      kw:["nail","manicure","pedicure","mani","pedi","ناخن"],
+      say:"Nails ke rates: Manicure Rs 1,200, Pedicure Rs 1,500, Mani-Pedi Combo Rs 2,400, Gel / Acrylic Nails Rs 3,000 se, aur Nail Art Rs 800 se per set. Pedicure ke saath massage shamil hai." },
+    { key:"waxing", label:"Waxing & Threading", price:"Rs 300 se shuru",
+      kw:["wax","threading","eyebrow","بھویں","ویکس"],
+      say:"Eyebrow Threading sirf Rs 300, Full Face Threading Rs 800, Full Arms + Legs Wax Rs 2,800, aur Full Body Rica Wax Rs 5,500 ka hai. Hum gentle Rica wax use karte hain." },
+    { key:"package", label:"Packages", price:"Rs 6,500 se shuru",
+      kw:["package","packages","deal","deals","پیکج"],
+      say:"Hamare packages: Glow Basic Rs 6,500 (facial, mani-pedi, haircut, threading, head massage), Zahra Signature Rs 18,000 mehndi ke liye, Bridal Royal Rs 32,000, aur Walima Signature Rs 45,000." }
+  ],
+  servicesOverview: "Hamare yahan Hair Studio, Hair Color, Skin & Facials, Nails, Makeup (party se bridal tak) aur Waxing & Threading — sab services hain. Rates Rs 300 se Rs 45,000 tak hain. Kis service ka rate bataun?"
+};
+
+/* ---------- ELEMENTS ---------- */
+var chatEl = document.getElementById("chat");
+var statusEl = document.getElementById("status");
+var micBtn = document.getElementById("micBtn");
+var typeInput = document.getElementById("typeInput");
+var sendBtn = document.getElementById("sendBtn");
+var summaryEl = document.getElementById("summary");
+var summaryText = document.getElementById("summaryText");
+
+/* ---------- STATE ---------- */
+var greeted = false;
+var recog = null;
+var recogLang = "ur-PK";
+var listening = false;
+var lastIntent = null;
+var appt = null; /* {step:'name'|'service'|'when', name, service, when} */
+
+/* ---------- CHAT UI ---------- */
+function addMsg(text, who){
+  var d = document.createElement("div");
+  d.className = "msg " + who;
+  d.textContent = text;
+  chatEl.appendChild(d);
+  chatEl.scrollTop = chatEl.scrollHeight;
+  return d;
+}
+function setStatus(t){ statusEl.textContent = t; }
+
+/* ---------- BOLNA (speechSynthesis) ---------- */
+function pickVoice(){
+  var voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  if(!voices.length) return null;
+  function find(pred){ for(var i=0;i<voices.length;i++){ if(pred(voices[i])) return voices[i]; } return null; }
+  var fem = function(v){ return /female|woman|zira|google.*(urdu|hindi)|heera|swara|kalpana/i.test(v.name); };
+  return find(function(v){ return /^ur/i.test(v.lang) && fem(v); })
+      || find(function(v){ return /^ur/i.test(v.lang); })
+      || find(function(v){ return /^hi/i.test(v.lang) && fem(v); })
+      || find(function(v){ return /^hi/i.test(v.lang); })
+      || find(fem)
+      || voices[0];
+}
+if("speechSynthesis" in window){ speechSynthesis.onvoiceschanged = function(){}; }
+
+function speak(text){
+  addMsg(text, "agent");
+  if(!("speechSynthesis" in window)) return;
+  try{
+    speechSynthesis.cancel();
+    var u = new SpeechSynthesisUtterance(text);
+    var v = pickVoice();
+    if(v){ u.voice = v; u.lang = v.lang; } else { u.lang = "ur-PK"; }
+    u.rate = 1.0; u.pitch = 1.05;
+    speechSynthesis.speak(u);
+  }catch(e){ /* voice unavailable — text already on screen */ }
+}
+
+/* ---------- SUNNA (SpeechRecognition) ---------- */
+var SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
+
+function startListening(){
+  if(!SR){
+    setStatus("Is browser mein voice sunna supported nahi — neeche likh kar baat karein.");
+    typeInput.focus();
+    return;
+  }
+  if(listening) { try{ recog.stop(); }catch(e){} return; }
+  recog = new SR();
+  recog.lang = recogLang;
+  recog.interimResults = true;
+  recog.maxAlternatives = 1;
+
+  recog.onstart = function(){
+    listening = true;
+    micBtn.classList.add("listening");
+    setStatus("🎙 Sun rahi hun… boliye");
+  };
+  recog.onresult = function(ev){
+    var interim = "", finalText = "";
+    for(var i=ev.resultIndex;i<ev.results.length;i++){
+      if(ev.results[i].isFinal) finalText += ev.results[i][0].transcript;
+      else interim += ev.results[i][0].transcript;
+    }
+    if(interim) setStatus("🎙 " + interim);
+    if(finalText.trim()){ handleUserText(finalText.trim()); }
+  };
+  recog.onerror = function(ev){
+    listening = false;
+    micBtn.classList.remove("listening");
+    if(ev.error === "language-not-supported" && recogLang === "ur-PK"){
+      recogLang = "en-US";
+      setStatus("Urdu voice is device par nahi mili — English mode mein dobara try karein, button dabayein.");
+    } else if(ev.error === "not-allowed" || ev.error === "service-not-allowed"){
+      setStatus("Mic ki ijazat nahi mili. Browser mein mic allow karein, ya neeche likh kar baat karein.");
+    } else if(ev.error === "no-speech"){
+      setStatus("Awaz samajh nahi aayi — dobara button daba kar boliye, ya likh dein.");
+    } else {
+      setStatus("Voice mein masla aaya (" + ev.error + ") — likh kar bhi baat ho sakti hai.");
+    }
+  };
+  recog.onend = function(){
+    listening = false;
+    micBtn.classList.remove("listening");
+    if(statusEl.textContent.indexOf("Sun rahi") === 0) setStatus("Button dabayein aur boliye — ya likh kar poochein.");
+  };
+  try{ recog.start(); }catch(e){ setStatus("Mic shuru nahi ho saka — likh kar baat karein."); }
+}
+
+/* ---------- SOCHNA (intent matching) ---------- */
+function norm(s){
+  return (s || "").toLowerCase().replace(/[؟،۔]/g," ").replace(/\s+/g," ").trim();
+}
+function has(text, list){
+  for(var i=0;i<list.length;i++){ if(text.indexOf(list[i]) !== -1) return true; }
+  return false;
+}
+
+var KW = {
+  timing:   ["timing","time","timings","waqt","khul","band","kab tak","open","close","hours","وقت","کھل","بند","monday","sunday"],
+  location: ["kahan","location","address","pata","area","gulshan","کہاں","پتہ","ایڈریس"],
+  phone:    ["number","phone","whatsapp","contact","rabta","نمبر","فون","رابطہ"],
+  payment:  ["payment","easypaisa","jazzcash","cash","advance","ادائیگی","پیسے"],
+  ladies:   ["ladies","ladies only","aurat","aurton","gents","mard","خواتین","لیڈیز"],
+  services: ["services","service","kya kya","kia kia","menu","کیا کیا","سروس"],
+  rate:     ["rate","rates","price","prices","qeemat","kitne","kitna","charges","cost","قیمت","کتنے"],
+  appoint:  ["appointment","book","booking","reserve","اپائنٹمنٹ","بکنگ"]
+};
+
+function think(raw){
+  var t = norm(raw);
+
+  /* appointment flow in progress — collect answers one by one */
+  if(appt){
+    if(has(t, ["cancel","rehne do","rehne dein","nahi chahiye","ruk jao","کینسل"])){
+      appt = null;
+      return "Koi baat nahi, appointment cancel kar di. Kuch aur bataun — rates ya timing?";
+    }
+    if(appt.step === "name"){
+      appt.name = raw.trim();
+      appt.step = "service";
+      return "Shukriya " + appt.name + "! Kaunsi service ke liye appointment chahiye — misal facial, haircut, ya bridal makeup?";
+    }
+    if(appt.step === "service"){
+      appt.service = raw.trim();
+      appt.step = "when";
+      return "Bohat khoob. Kis din aur kis time par aana chahengi? (Yaad rahe, Monday ko salon band hota hai.)";
+    }
+    if(appt.step === "when"){
+      appt.when = raw.trim();
+      var done = appt; appt = null;
+      showSummary(done);
+      return "Ho gaya! Aap ki appointment ki details note kar li hain: " + done.name + ", " + done.service + ", " + done.when + ". Ye demo hai — asal confirmation ke liye salon WhatsApp " + FACTS.phone + " par ek message kar dein, aap ki seat pakki ho jayegi. Kuch aur madad karun?";
+    }
+  }
+
+  /* greeting — only when the message starts with a greeting word
+     (substring match would misfire on Roman Urdu words like "chahiye"/"bhi") */
+  var greetings = ["salam","assalam","hello","hi","aoa","السلام","ہیلو"];
+  var isGreet = t.length < 40 && greetings.some(function(g){
+    return t === g || t.indexOf(g + " ") === 0 || t.indexOf(g + ",") === 0;
+  });
+  if(isGreet){
+    lastIntent = "greet";
+    return "Wa alaikum assalam! Zahra's Salon mein khush aamadid. Rates, timing, location — ya appointment, kis mein madad karun?";
+  }
+
+  /* start appointment */
+  if(has(t, KW.appoint)){
+    appt = { step:"name", name:"", service:"", when:"" };
+    lastIntent = "appoint";
+    return "Zaroor! Appointment note kar leti hun. Sab se pehle — aap ka naam kya hai?";
+  }
+
+  /* timings — also catches follow-ups like "aur timing?" */
+  if(has(t, KW.timing)){
+    lastIntent = "timing";
+    return "Hamari timings ye hain: " + FACTS.hoursText + " Walk-ins welcome hain, lekin appointment walo ko wait nahi karna parta.";
+  }
+
+  /* location */
+  if(has(t, KW.location)){
+    lastIntent = "location";
+    return "Salon ka address: " + FACTS.address + ". Gulshan-e-Iqbal Block 16 mein hai — Bagh-e-Rizwan Apartments ke bilkul saamne.";
+  }
+
+  /* phone / contact */
+  if(has(t, KW.phone)){
+    lastIntent = "phone";
+    return "Salon ka number aur WhatsApp: " + FACTS.phone + ". Isi par call ya message karke booking confirm ho jati hai.";
+  }
+
+  /* payment */
+  if(has(t, KW.payment)){
+    lastIntent = "payment";
+    return "Payment Cash, Easypaisa aur JazzCash — teeno se ho jati hai. Bridal packages 30% advance se book ho jate hain.";
+  }
+
+  /* ladies only */
+  if(has(t, KW.ladies)){
+    lastIntent = "ladies";
+    return "Ji, Zahra's Salon mukammal ladies-only studio hai. Facial aur bridal ke liye private rooms bhi available hain — bilkul sukoon se.";
+  }
+
+  /* specific service rates (check before generic services list) */
+  for(var i=0;i<FACTS.services.length;i++){
+    var s = FACTS.services[i];
+    if(has(t, s.kw)){
+      lastIntent = s.key;
+      return s.say;
+    }
+  }
+
+  /* generic rates / services */
+  if(has(t, KW.services) || has(t, KW.rate)){
+    lastIntent = "services";
+    return FACTS.servicesOverview;
+  }
+
+  /* short follow-ups using memory */
+  if(lastIntent && has(t, ["aur","or","batao","bata dein","detail"])){
+    return "Is ke ilawa: " + FACTS.servicesOverview;
+  }
+
+  /* fallback */
+  lastIntent = "fallback";
+  return "Ye detail main ne note kar li hai — salon se confirm karke aap ko bata diya jayega. Filhal main rates, timings, location, services aur appointment mein foran madad kar sakti hun. Kya poochna chahengi?";
+}
+
+function showSummary(a){
+  summaryText.textContent = "Naam: " + a.name + "  ·  Service: " + a.service + "  ·  Din / Time: " + a.when + "  ·  Salon: " + FACTS.name + " (" + FACTS.phone + ")";
+  summaryEl.style.display = "block";
+}
+
+/* ---------- USER INPUT ---------- */
+function handleUserText(text){
+  addMsg(text, "user");
+  setStatus("");
+  var reply = think(text);
+  setTimeout(function(){ speak(reply); }, 250);
+}
+
+micBtn.addEventListener("click", function(){
+  if(!greeted){ greet(); }
+  startListening();
+});
+sendBtn.addEventListener("click", function(){
+  var v = typeInput.value.trim();
+  if(!v) return;
+  typeInput.value = "";
+  if(!greeted) greeted = true;
+  handleUserText(v);
+});
+typeInput.addEventListener("keydown", function(e){ if(e.key === "Enter") sendBtn.click(); });
+var chips = document.querySelectorAll(".chip");
+for(var c=0;c<chips.length;c++){
+  chips[c].addEventListener("click", function(){
+    if(!greeted) greeted = true;
+    handleUserText(this.getAttribute("data-q"));
+  });
+}
+
+/* ---------- GREETING (text on load; voice on first tap — browsers block autoplay audio) ---------- */
+var GREETING = "Assalam o alaikum! Zahra's Salon And Studio mein khush aamadid. Main aap ki AI receptionist hun. Main aap ki kya madad kar sakti hun — rates, timing, ya appointment?";
+function greet(){
+  if(greeted) return;
+  greeted = true;
+  speak(GREETING);
+}
+addMsg(GREETING, "agent");
+if(!SR){
+  addMsg("Note: Is browser mein voice sunna (Speech Recognition) supported nahi hai — aap neeche likh kar baat kar sakti hain, jawab awaz aur text dono mein milega.", "sys");
+  setStatus("Likh kar baat karein — voice is browser mein available nahi.");
+} else {
+  setStatus("🎤 'Baat Karo' button dabayein aur boliye.");
+}
+</script>
+</body>
+</html>
