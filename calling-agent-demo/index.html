@@ -19,6 +19,9 @@
   header h1 span{color:var(--gold2)}
   header p{color:var(--muted);font-size:.9rem;margin-top:4px}
   .rule{width:64px;height:2px;background:var(--gold);margin:14px auto;border-radius:2px}
+  #topbar{width:100%;max-width:520px;display:flex;justify-content:flex-end;margin-bottom:8px}
+  #kbToggle{background:transparent;border:1px solid #3a3423;color:var(--gold2);border-radius:999px;padding:6px 14px;font-size:.8rem;cursor:pointer;font-family:'Jost',sans-serif;letter-spacing:.04em}
+  #kbToggle:hover{border-color:var(--gold)}
   #chat{width:100%;max-width:520px;background:var(--panel);border:1px solid #26262b;border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;min-height:260px;max-height:46vh;overflow-y:auto}
   .msg{max-width:88%;padding:10px 14px;border-radius:14px;font-size:.98rem;line-height:1.45;white-space:pre-wrap;word-wrap:break-word}
   .msg.agent{background:var(--panel2);border:1px solid #2e2a1e;border-bottom-left-radius:4px;color:var(--cream)}
@@ -38,21 +41,52 @@
   #chips{width:100%;max-width:520px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:14px}
   .chip{border:1px solid #3a3423;background:var(--panel);color:var(--gold2);border-radius:999px;padding:7px 14px;font-size:.85rem;cursor:pointer;font-family:'Jost',sans-serif}
   .chip:hover{border-color:var(--gold)}
+  #actions{width:100%;max-width:520px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:12px}
+  .act-btn{border:1px solid #3a3423;background:var(--panel2);color:var(--cream);border-radius:10px;padding:9px 14px;font-size:.85rem;cursor:pointer;font-family:'Jost',sans-serif;text-decoration:none;display:inline-block}
+  .act-btn:hover{border-color:var(--gold);color:var(--gold2)}
+  .act-btn.wa{border-color:#2e5d43;color:#bfe8cf}
+  .act-btn.wa:hover{border-color:#25d366;color:#eafff2}
   #summary{display:none;width:100%;max-width:520px;margin-top:16px;background:linear-gradient(160deg,#1d1a10,#12110c);border:1px solid var(--gold);border-radius:14px;padding:16px 18px}
   #summary h3{font-family:'Playfair Display',serif;color:var(--gold2);font-size:1.1rem;margin-bottom:8px}
   #summary p{font-size:.95rem;line-height:1.55}
+  #summaryTicks{list-style:none;margin:0 0 10px;padding:0;font-size:.92rem;line-height:1.6}
+  #summaryTicks .ok{color:var(--cream)}
+  #summaryTicks .ok .mark{color:var(--gold2);font-weight:600}
+  #summaryTicks .miss{color:var(--muted)}
+  #waSend{display:none;margin-top:12px;background:#25d366;color:#0c2416;border:none;border-radius:10px;padding:10px 16px;font-family:'Jost',sans-serif;font-weight:600;font-size:.9rem;cursor:pointer;text-decoration:none}
+  #waSend:hover{background:#2fe673}
   footer{margin-top:22px;color:var(--muted);font-size:.78rem;text-align:center}
   footer b{color:var(--gold);font-weight:500}
+  /* ---------- Knowledge-base drawer ---------- */
+  #kbDrawer{position:fixed;top:0;right:0;height:100%;width:min(430px,96vw);background:var(--panel);border-left:1px solid var(--gold);z-index:50;transform:translateX(105%);transition:transform .25s ease;overflow-y:auto;padding:18px 18px 30px;box-shadow:-12px 0 32px rgba(0,0,0,.5)}
+  #kbDrawer.open{transform:translateX(0)}
+  #kbDrawer h3{font-family:'Playfair Display',serif;color:var(--gold2);font-size:1.25rem}
+  #kbDrawer .kb-sub{color:var(--muted);font-size:.82rem;line-height:1.5;margin:8px 0 14px}
+  #kbDrawer label{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin:14px 0 5px}
+  #kbDrawer input[type="text"],#kbDrawer textarea{width:100%;background:var(--panel2);border:1px solid #2c2c31;border-radius:8px;color:var(--cream);padding:9px 11px;font-family:'Jost',sans-serif;font-size:.92rem}
+  #kbDrawer input[type="text"]:focus,#kbDrawer textarea:focus{outline:none;border-color:var(--gold)}
+  #kbDrawer textarea{resize:vertical;min-height:52px}
+  #kbDrawer .svc{border:1px solid #2e2a1e;border-radius:10px;padding:4px 12px 12px;margin-top:12px;background:#101013}
+  #kbDrawer .svc h4{font-family:'Playfair Display',serif;color:var(--cream);font-size:.98rem;margin-top:10px}
+  .kb-head{display:flex;justify-content:space-between;align-items:center}
+  #kbClose{background:transparent;border:1px solid #3a3423;color:var(--gold2);border-radius:50%;width:32px;height:32px;font-size:1rem;cursor:pointer;line-height:1}
+  #kbClose:hover{border-color:var(--gold)}
+  .kb-btns{display:flex;gap:8px;margin-top:20px}
+  #kbSave{flex:1;background:var(--gold);color:#141310;border:none;border-radius:10px;padding:11px;font-family:'Jost',sans-serif;font-weight:600;cursor:pointer}
+  #kbReset{background:transparent;color:var(--muted);border:1px solid #3a3a40;border-radius:10px;padding:11px 14px;font-family:'Jost',sans-serif;cursor:pointer}
+  #kbSaved{color:var(--gold2);font-size:.85rem;min-height:1.3em;margin-top:10px;text-align:center}
 </style>
 </head>
 <body>
 
 <header>
   <div class="kicker">Ladies Only · Gulshan-e-Iqbal, Karachi</div>
-  <h1>Zahra's <span>Salon</span> And Studio</h1>
+  <h1 id="bizName">Zahra's <span>Salon</span> And Studio</h1>
   <p>Neeche button dabayein aur bol kar baat karein — rates, timing, appointment, sab kuch.</p>
   <div class="rule"></div>
 </header>
+
+<div id="topbar"><button id="kbToggle" type="button">⚙ Salon ki maloomat</button></div>
 
 <div id="chat" aria-live="polite"></div>
 <div id="status">…</div>
@@ -72,23 +106,85 @@
   <button class="chip" data-q="Mujhe appointment book karni hai">Appointment</button>
 </div>
 
-<div id="summary"><h3>📋 Appointment Note</h3><p id="summaryText"></p></div>
+<div id="actions">
+  <a class="act-btn wa" id="waHuman" href="#" target="_blank" rel="noopener">💬 WhatsApp par baat karein</a>
+  <button class="act-btn" id="dlTranscript" type="button">⬇ Guftagu download karein</button>
+  <button class="act-btn" id="endBtn" type="button">📋 Summary / Khatam</button>
+</div>
 
-<footer>Demo — AI receptionist by <b>Sehrish Creates</b> · Ye demo hai, appointment asal mein salon se confirm hoti hai (WhatsApp 0336-2504823)</footer>
+<div id="summary">
+  <h3>📋 Appointment Note</h3>
+  <ul id="summaryTicks">
+    <li id="tickName"></li>
+    <li id="tickService"></li>
+    <li id="tickWhen"></li>
+  </ul>
+  <p id="summaryText"></p>
+  <a id="waSend" href="#" target="_blank" rel="noopener">WhatsApp par bhejo</a>
+</div>
+
+<footer>Demo — AI receptionist by <b>Sehrish Creates</b> · Ye demo hai, appointment asal mein salon se confirm hoti hai (WhatsApp <span id="footPhone">0336-2504823</span>)</footer>
+
+<!-- ---------- KNOWLEDGE BASE DRAWER ---------- -->
+<aside id="kbDrawer" aria-label="Salon ki maloomat">
+  <div class="kb-head">
+    <h3>Salon ki maloomat</h3>
+    <button id="kbClose" type="button" aria-label="Band karein">✕</button>
+  </div>
+  <p class="kb-sub">Yahan se salon ki maloomat badlein — agent ke jawab foran inhi nayi maloomat se banein ge, aur maloomat is browser mein mehfooz (save) ho jati hai.<br><br>
+  <b style="color:var(--gold2)">Awaz wali note:</b> agent ki awaz asal (default) rates par record ki gayi hai. Agar aap koi rate ya maloomat badlein gi, to us jawab ki awaz nahi chalegi — jawab sirf text mein aayega, taake purani qeemat kabhi awaz mein na boli jaye. Nayi greeting bhi agli dafa page khulne par nazar aayegi.</p>
+
+  <label for="kbAgentName">Agent ka naam</label>
+  <input type="text" id="kbAgentName">
+  <label for="kbBizName">Business ka naam</label>
+  <input type="text" id="kbBizName">
+  <label for="kbGreeting">Greeting (khush-aamadid wali line)</label>
+  <textarea id="kbGreeting"></textarea>
+  <label for="kbPhone">Phone / WhatsApp number</label>
+  <input type="text" id="kbPhone">
+  <label for="kbAddress">Address</label>
+  <textarea id="kbAddress"></textarea>
+  <label for="kbHours">Timings</label>
+  <textarea id="kbHours"></textarea>
+  <label for="kbOverview">Services ka khulasa (overview)</label>
+  <textarea id="kbOverview"></textarea>
+
+  <h3 style="margin-top:22px;font-size:1.05rem">Price list — har service</h3>
+  <div id="kbServices"></div>
+
+  <div class="kb-btns">
+    <button id="kbSave" type="button">Mehfooz karein</button>
+    <button id="kbReset" type="button">Asal maloomat wapas</button>
+  </div>
+  <p id="kbSaved"></p>
+</aside>
 
 <script>
 "use strict";
 /* ============================================================
-   ZAHRA'S SALON — AI RECEPTIONIST (V1, fully client-side)
+   ZAHRA'S SALON — AI RECEPTIONIST (V2, fully client-side)
    Sunna  = Web Speech API (SpeechRecognition, ur-PK)
-   Sochna = keyword / intent matching on salon facts (below)
-   Bolna  = speechSynthesis (best available ur/hi female voice)
+   Sochna = keyword / intent matching on the Knowledge Base (below)
+   Bolna  = pre-recorded Gemini TTS audio files (audio/*.mp3, voice: Sulafat)
    Facts: sehrish64.github.io/zahras-salon (live site, Nov 2026)
+
+   V2 additions (Dograh-inspired, still zero backend / zero keys):
+   - Knowledge Base drawer: facts editable, saved to localStorage,
+     answers generated from the KB values.
+   - Agent Builder lite: agent name + greeting editable.
+   - Call summary card with QA ticks + "WhatsApp par bhejo" (wa.me).
+   - Human fallback button (WhatsApp), transcript download.
+   - Voice safety: recorded audio only ever matches the DEFAULT facts.
+     If a reply is built from an edited KB value, it is shown as text
+     only — the voice never speaks a stale price.
    ============================================================ */
 
-/* ---------- SALON FACTS (from the live Zahra's Salon site) ---------- */
-var FACTS = {
+/*LOGIC-START*/
+/* ---------- DEFAULT FACTS (from the live Zahra's Salon site) ---------- */
+var DEFAULT_FACTS = {
   name: "Zahra's Salon And Studio",
+  agentName: "AI Receptionist",
+  greeting: "Assalam o alaikum! Zahra's Salon And Studio mein khush aamadid. Main aap ki AI receptionist hun. Main aap ki kya madad kar sakti hun — rates, timing, ya appointment?",
   phone: "0336-2504823",
   address: "Shop L-19, Opposite Bagh-e-Rizwan Apartments, Gulshan-e-Iqbal Block 16, Karachi",
   hoursText: "Tuesday se Saturday subah 11 bajay se raat 9 bajay tak, Sunday dopahar 2 bajay se raat 9 bajay tak. Monday ko salon band hota hai.",
@@ -130,6 +226,246 @@ var FACTS = {
   servicesOverview: "Hamare yahan Hair Studio, Hair Color, Skin & Facials, Nails, Makeup (party se bridal tak) aur Waxing & Threading — sab services hain. Rates Rs 300 se Rs 45,000 tak hain. Kis service ka rate bataun?"
 };
 
+/* ---------- KNOWLEDGE BASE (defaults + localStorage edits) ---------- */
+var KB_KEY = "zahraSalonKB.v1";
+function deepCopy(o){ return JSON.parse(JSON.stringify(o)); }
+function kbStore(){
+  try{ return (typeof localStorage !== "undefined") ? localStorage : null; }catch(e){ return null; }
+}
+function loadKB(){
+  var kb = deepCopy(DEFAULT_FACTS);
+  var store = kbStore();
+  if(!store) return kb;
+  var raw = null;
+  try{ raw = store.getItem(KB_KEY); }catch(e){}
+  if(!raw) return kb;
+  try{
+    var s = JSON.parse(raw);
+    var fields = ["name","agentName","greeting","phone","address","hoursText","servicesOverview"];
+    for(var f=0;f<fields.length;f++){
+      var k = fields[f];
+      if(typeof s[k] === "string" && s[k].trim()) kb[k] = s[k];
+    }
+    if(s.services && s.services.length){
+      for(var i=0;i<s.services.length;i++){
+        var ss = s.services[i];
+        for(var j=0;j<kb.services.length;j++){
+          if(kb.services[j].key === ss.key){
+            if(typeof ss.label === "string" && ss.label.trim()) kb.services[j].label = ss.label;
+            if(typeof ss.price === "string" && ss.price.trim()) kb.services[j].price = ss.price;
+            if(typeof ss.say === "string" && ss.say.trim()) kb.services[j].say = ss.say;
+          }
+        }
+      }
+    }
+  }catch(e){ /* saved KB unreadable — defaults stay */ }
+  return kb;
+}
+function saveKB(){
+  var store = kbStore();
+  if(!store) return false;
+  try{ store.setItem(KB_KEY, JSON.stringify(FACTS)); return true; }catch(e){ return false; }
+}
+function resetKBStore(){
+  var store = kbStore();
+  if(store){ try{ store.removeItem(KB_KEY); }catch(e){} }
+}
+
+/* FACTS is the live Knowledge Base the agent answers from. */
+var FACTS = loadKB();
+
+/* ---------- KB / AUDIO SAFETY ----------
+   Recorded MP3 lines match the DEFAULT facts word-for-word.
+   gateAudio() returns the audio name only when the reply's facts are
+   still the recorded ones; otherwise null (text-only reply). */
+function findService(list, key){
+  for(var i=0;i<list.length;i++){ if(list[i].key === key) return list[i]; }
+  return null;
+}
+function serviceIsDefault(key){
+  var d = findService(DEFAULT_FACTS.services, key);
+  var c = findService(FACTS.services, key);
+  return !!(d && c && d.say === c.say && d.label === c.label && d.price === c.price);
+}
+function allServicesDefault(){
+  for(var i=0;i<DEFAULT_FACTS.services.length;i++){
+    if(!serviceIsDefault(DEFAULT_FACTS.services[i].key)) return false;
+  }
+  return true;
+}
+function kbIsDefault(){
+  var fields = ["name","agentName","greeting","phone","address","hoursText","servicesOverview"];
+  for(var i=0;i<fields.length;i++){ if(FACTS[fields[i]] !== DEFAULT_FACTS[fields[i]]) return false; }
+  return allServicesDefault();
+}
+function gateAudio(audioName){
+  if(!audioName) return null;
+  /* fact-free recorded lines — safe with any KB */
+  if(audioName === "fallback" || audioName === "appt-cancel" ||
+     audioName === "appt-ask-name" || audioName === "appt-ask-service" ||
+     audioName === "appt-ask-when"){
+    return audioName;
+  }
+  if(audioName === "greeting"){
+    return (FACTS.greeting === DEFAULT_FACTS.greeting && FACTS.name === DEFAULT_FACTS.name) ? "greeting" : null;
+  }
+  if(audioName === "greet-reply" || audioName === "ladies"){
+    /* both lines speak the salon's name */
+    return FACTS.name === DEFAULT_FACTS.name ? audioName : null;
+  }
+  if(audioName.indexOf("rates-") === 0){
+    var key = audioName.slice(6).replace(/-/g, " ");
+    return serviceIsDefault(key) ? audioName : null;
+  }
+  if(audioName === "timing")   return FACTS.hoursText === DEFAULT_FACTS.hoursText ? audioName : null;
+  if(audioName === "location") return FACTS.address === DEFAULT_FACTS.address ? audioName : null;
+  if(audioName === "phone")    return FACTS.phone === DEFAULT_FACTS.phone ? audioName : null;
+  if(audioName === "payment")  return audioName; /* line carries no KB-editable facts */
+  if(audioName === "services" || audioName === "followup"){
+    return (FACTS.servicesOverview === DEFAULT_FACTS.servicesOverview && allServicesDefault()) ? audioName : null;
+  }
+  if(audioName === "appt-done"){
+    /* the spoken line recaps the booking + salon phone */
+    return FACTS.phone === DEFAULT_FACTS.phone ? audioName : null;
+  }
+  return audioName;
+}
+
+/* wa.me needs the international format: 0336-2504823 -> 923362504823 */
+function waNumber(phone){
+  var d = (phone || "").replace(/\D/g, "");
+  if(d.indexOf("92") === 0) return d;
+  if(d.indexOf("0") === 0) return "92" + d.slice(1);
+  return d;
+}
+
+/* ---------- STATE ---------- */
+var lastIntent = null;
+var appt = null;     /* in-progress: {step:'name'|'service'|'when', name, service, when} */
+var lastAppt = null; /* last completed appointment, for the summary card */
+
+/* ---------- SOCHNA (intent matching) ---------- */
+function norm(s){
+  return (s || "").toLowerCase().replace(/[؟،۔]/g," ").replace(/\s+/g," ").trim();
+}
+function has(text, list){
+  for(var i=0;i<list.length;i++){ if(text.indexOf(list[i]) !== -1) return true; }
+  return false;
+}
+
+var KW = {
+  timing:   ["timing","time","timings","waqt","khul","band","kab tak","open","close","hours","وقت","کھل","بند","monday","sunday"],
+  location: ["kahan","location","address","pata","area","gulshan","کہاں","پتہ","ایڈریس"],
+  phone:    ["number","phone","whatsapp","contact","rabta","نمبر","فون","رابطہ"],
+  payment:  ["payment","easypaisa","jazzcash","cash","advance","ادائیگی","پیسے"],
+  ladies:   ["ladies","ladies only","aurat","aurton","gents","mard","خواتین","لیڈیز"],
+  services: ["services","service","kya kya","kia kia","menu","کیا کیا","سروس"],
+  rate:     ["rate","rates","price","prices","qeemat","kitne","kitna","charges","cost","قیمت","کتنے"],
+  appoint:  ["appointment","book","booking","reserve","اپائنٹمنٹ","بکنگ"]
+};
+
+function think(raw){
+  var t = norm(raw);
+
+  /* appointment flow in progress — collect answers one by one */
+  if(appt){
+    if(has(t, ["cancel","rehne do","rehne dein","nahi chahiye","ruk jao","کینسل"])){
+      appt = null;
+      return ["Koi baat nahi, appointment cancel kar di. Kuch aur bataun — rates ya timing?", "appt-cancel"];
+    }
+    if(appt.step === "name"){
+      appt.name = raw.trim();
+      appt.step = "service";
+      return ["Shukriya " + appt.name + "! Kaunsi service ke liye appointment chahiye — misal facial, haircut, ya bridal makeup?", "appt-ask-service"];
+    }
+    if(appt.step === "service"){
+      appt.service = raw.trim();
+      appt.step = "when";
+      return ["Bohat khoob. Kis din aur kis time par aana chahengi? (Yaad rahe, Monday ko salon band hota hai.)", "appt-ask-when"];
+    }
+    if(appt.step === "when"){
+      appt.when = raw.trim();
+      var done = appt; appt = null;
+      lastAppt = done;
+      showSummary(done);
+      return ["Ho gaya! Aap ki appointment ki details note kar li hain: " + done.name + ", " + done.service + ", " + done.when + ". Ye demo hai — asal confirmation ke liye salon WhatsApp " + FACTS.phone + " par ek message kar dein, aap ki seat pakki ho jayegi. Kuch aur madad karun?", "appt-done"];
+    }
+  }
+
+  /* greeting — only when the message starts with a greeting word
+     (substring match would misfire on Roman Urdu words like "chahiye"/"bhi") */
+  var greetings = ["salam","assalam","hello","hi","aoa","السلام","ہیلو"];
+  var isGreet = t.length < 40 && greetings.some(function(g){
+    return t === g || t.indexOf(g + " ") === 0 || t.indexOf(g + ",") === 0;
+  });
+  if(isGreet){
+    lastIntent = "greet";
+    return ["Wa alaikum assalam! " + FACTS.name + " mein khush aamadid. Rates, timing, location — ya appointment, kis mein madad karun?", "greet-reply"];
+  }
+
+  /* start appointment */
+  if(has(t, KW.appoint)){
+    appt = { step:"name", name:"", service:"", when:"" };
+    lastIntent = "appoint";
+    return ["Zaroor! Appointment note kar leti hun. Sab se pehle — aap ka naam kya hai?", "appt-ask-name"];
+  }
+
+  /* timings — also catches follow-ups like "aur timing?" */
+  if(has(t, KW.timing)){
+    lastIntent = "timing";
+    return ["Hamari timings ye hain: " + FACTS.hoursText + " Walk-ins welcome hain, lekin appointment walo ko wait nahi karna parta.", "timing"];
+  }
+
+  /* location */
+  if(has(t, KW.location)){
+    lastIntent = "location";
+    return ["Salon ka address: " + FACTS.address + ". Gulshan-e-Iqbal Block 16 mein hai — Bagh-e-Rizwan Apartments ke bilkul saamne.", "location"];
+  }
+
+  /* phone / contact */
+  if(has(t, KW.phone)){
+    lastIntent = "phone";
+    return ["Salon ka number aur WhatsApp: " + FACTS.phone + ". Isi par call ya message karke booking confirm ho jati hai.", "phone"];
+  }
+
+  /* payment */
+  if(has(t, KW.payment)){
+    lastIntent = "payment";
+    return ["Payment Cash, Easypaisa aur JazzCash — teeno se ho jati hai. Bridal packages 30% advance se book ho jate hain.", "payment"];
+  }
+
+  /* ladies only */
+  if(has(t, KW.ladies)){
+    lastIntent = "ladies";
+    return ["Ji, " + FACTS.name + " mukammal ladies-only studio hai. Facial aur bridal ke liye private rooms bhi available hain — bilkul sukoon se.", "ladies"];
+  }
+
+  /* specific service rates (check before generic services list) */
+  for(var i=0;i<FACTS.services.length;i++){
+    var s = FACTS.services[i];
+    if(has(t, s.kw)){
+      lastIntent = s.key;
+      return [s.say, "rates-" + s.key.replace(/\s+/g, "-")];
+    }
+  }
+
+  /* generic rates / services */
+  if(has(t, KW.services) || has(t, KW.rate)){
+    lastIntent = "services";
+    return [FACTS.servicesOverview, "services"];
+  }
+
+  /* short follow-ups using memory */
+  if(lastIntent && has(t, ["aur","or","batao","bata dein","detail"])){
+    return ["Is ke ilawa: " + FACTS.servicesOverview, "followup"];
+  }
+
+  /* fallback */
+  lastIntent = "fallback";
+  return ["Ye detail main ne note kar li hai — salon se confirm karke aap ko bata diya jayega. Filhal main rates, timings, location, services aur appointment mein foran madad kar sakti hun. Kya poochna chahengi?", "fallback"];
+}
+/*LOGIC-END*/
+
 /* ---------- ELEMENTS ---------- */
 var chatEl = document.getElementById("chat");
 var statusEl = document.getElementById("status");
@@ -138,58 +474,56 @@ var typeInput = document.getElementById("typeInput");
 var sendBtn = document.getElementById("sendBtn");
 var summaryEl = document.getElementById("summary");
 var summaryText = document.getElementById("summaryText");
+var waSendEl = document.getElementById("waSend");
+var waHumanEl = document.getElementById("waHuman");
+var bizNameEl = document.getElementById("bizName");
+var footPhoneEl = document.getElementById("footPhone");
 
-/* ---------- STATE ---------- */
+/* ---------- STATE (UI) ---------- */
 var greeted = false;
 var recog = null;
 var recogLang = "ur-PK";
 var listening = false;
-var lastIntent = null;
-var appt = null; /* {step:'name'|'service'|'when', name, service, when} */
+var replySeq = 0; /* interruption token — only the newest reply may speak */
 
-/* ---------- CHAT UI ---------- */
+/* ---------- CHAT UI + TRANSCRIPT LOG ---------- */
+var transcriptLog = [];
 function addMsg(text, who){
   var d = document.createElement("div");
   d.className = "msg " + who;
   d.textContent = text;
   chatEl.appendChild(d);
   chatEl.scrollTop = chatEl.scrollHeight;
+  transcriptLog.push({ who: who, text: text });
   return d;
 }
 function setStatus(t){ statusEl.textContent = t; }
 
-/* ---------- BOLNA (speechSynthesis) ---------- */
-function pickVoice(){
-  var voices = window.speechSynthesis ? speechSynthesis.getVoices() : [];
-  if(!voices.length) return null;
-  function find(pred){ for(var i=0;i<voices.length;i++){ if(pred(voices[i])) return voices[i]; } return null; }
-  var fem = function(v){ return /female|woman|zira|google.*(urdu|hindi)|heera|swara|kalpana/i.test(v.name); };
-  return find(function(v){ return /^ur/i.test(v.lang) && fem(v); })
-      || find(function(v){ return /^ur/i.test(v.lang); })
-      || find(function(v){ return /^hi/i.test(v.lang) && fem(v); })
-      || find(function(v){ return /^hi/i.test(v.lang); })
-      || find(fem)
-      || voices[0];
+/* ---------- BOLNA (pre-recorded Gemini TTS audio) ---------- */
+var currentAudio = null;
+function stopAudio(){
+  if(currentAudio){
+    try{ currentAudio.pause(); currentAudio.currentTime = 0; }catch(e){}
+    currentAudio = null;
+  }
 }
-if("speechSynthesis" in window){ speechSynthesis.onvoiceschanged = function(){}; }
-
-function speak(text){
+function speak(text, audioName){
+  stopAudio(); /* a new reply always interrupts the previous line */
   addMsg(text, "agent");
-  if(!("speechSynthesis" in window)) return;
+  if(!audioName) return;
   try{
-    speechSynthesis.cancel();
-    var u = new SpeechSynthesisUtterance(text);
-    var v = pickVoice();
-    if(v){ u.voice = v; u.lang = v.lang; } else { u.lang = "ur-PK"; }
-    u.rate = 1.0; u.pitch = 1.05;
-    speechSynthesis.speak(u);
-  }catch(e){ /* voice unavailable — text already on screen */ }
+    currentAudio = new Audio("audio/" + audioName + ".mp3");
+    var p = currentAudio.play();
+    if(p && p.catch) p.catch(function(){ /* playback blocked — text already on screen */ });
+  }catch(e){ /* audio unavailable — text already on screen */ }
 }
 
 /* ---------- SUNNA (SpeechRecognition) ---------- */
 var SR = window.SpeechRecognition || window.webkitSpeechRecognition || null;
 
 function startListening(){
+  stopAudio(); /* tapping the mic interrupts whatever is playing */
+  replySeq++;
   if(!SR){
     setStatus("Is browser mein voice sunna supported nahi — neeche likh kar baat karein.");
     typeInput.focus();
@@ -237,137 +571,44 @@ function startListening(){
   try{ recog.start(); }catch(e){ setStatus("Mic shuru nahi ho saka — likh kar baat karein."); }
 }
 
-/* ---------- SOCHNA (intent matching) ---------- */
-function norm(s){
-  return (s || "").toLowerCase().replace(/[؟،۔]/g," ").replace(/\s+/g," ").trim();
+/* ---------- CALL SUMMARY (QA ticks + WhatsApp send) ---------- */
+function setTick(id, label, val){
+  var li = document.getElementById(id);
+  li.className = val ? "ok" : "miss";
+  li.textContent = "";
+  var mark = document.createElement("span");
+  mark.className = "mark";
+  mark.textContent = val ? "✓ " : "○ ";
+  li.appendChild(mark);
+  li.appendChild(document.createTextNode(label + ": " + (val ? val : "abhi nahi mila")));
 }
-function has(text, list){
-  for(var i=0;i<list.length;i++){ if(text.indexOf(list[i]) !== -1) return true; }
-  return false;
-}
-
-var KW = {
-  timing:   ["timing","time","timings","waqt","khul","band","kab tak","open","close","hours","وقت","کھل","بند","monday","sunday"],
-  location: ["kahan","location","address","pata","area","gulshan","کہاں","پتہ","ایڈریس"],
-  phone:    ["number","phone","whatsapp","contact","rabta","نمبر","فون","رابطہ"],
-  payment:  ["payment","easypaisa","jazzcash","cash","advance","ادائیگی","پیسے"],
-  ladies:   ["ladies","ladies only","aurat","aurton","gents","mard","خواتین","لیڈیز"],
-  services: ["services","service","kya kya","kia kia","menu","کیا کیا","سروس"],
-  rate:     ["rate","rates","price","prices","qeemat","kitne","kitna","charges","cost","قیمت","کتنے"],
-  appoint:  ["appointment","book","booking","reserve","اپائنٹمنٹ","بکنگ"]
-};
-
-function think(raw){
-  var t = norm(raw);
-
-  /* appointment flow in progress — collect answers one by one */
-  if(appt){
-    if(has(t, ["cancel","rehne do","rehne dein","nahi chahiye","ruk jao","کینسل"])){
-      appt = null;
-      return "Koi baat nahi, appointment cancel kar di. Kuch aur bataun — rates ya timing?";
-    }
-    if(appt.step === "name"){
-      appt.name = raw.trim();
-      appt.step = "service";
-      return "Shukriya " + appt.name + "! Kaunsi service ke liye appointment chahiye — misal facial, haircut, ya bridal makeup?";
-    }
-    if(appt.step === "service"){
-      appt.service = raw.trim();
-      appt.step = "when";
-      return "Bohat khoob. Kis din aur kis time par aana chahengi? (Yaad rahe, Monday ko salon band hota hai.)";
-    }
-    if(appt.step === "when"){
-      appt.when = raw.trim();
-      var done = appt; appt = null;
-      showSummary(done);
-      return "Ho gaya! Aap ki appointment ki details note kar li hain: " + done.name + ", " + done.service + ", " + done.when + ". Ye demo hai — asal confirmation ke liye salon WhatsApp " + FACTS.phone + " par ek message kar dein, aap ki seat pakki ho jayegi. Kuch aur madad karun?";
-    }
-  }
-
-  /* greeting — only when the message starts with a greeting word
-     (substring match would misfire on Roman Urdu words like "chahiye"/"bhi") */
-  var greetings = ["salam","assalam","hello","hi","aoa","السلام","ہیلو"];
-  var isGreet = t.length < 40 && greetings.some(function(g){
-    return t === g || t.indexOf(g + " ") === 0 || t.indexOf(g + ",") === 0;
-  });
-  if(isGreet){
-    lastIntent = "greet";
-    return "Wa alaikum assalam! Zahra's Salon mein khush aamadid. Rates, timing, location — ya appointment, kis mein madad karun?";
-  }
-
-  /* start appointment */
-  if(has(t, KW.appoint)){
-    appt = { step:"name", name:"", service:"", when:"" };
-    lastIntent = "appoint";
-    return "Zaroor! Appointment note kar leti hun. Sab se pehle — aap ka naam kya hai?";
-  }
-
-  /* timings — also catches follow-ups like "aur timing?" */
-  if(has(t, KW.timing)){
-    lastIntent = "timing";
-    return "Hamari timings ye hain: " + FACTS.hoursText + " Walk-ins welcome hain, lekin appointment walo ko wait nahi karna parta.";
-  }
-
-  /* location */
-  if(has(t, KW.location)){
-    lastIntent = "location";
-    return "Salon ka address: " + FACTS.address + ". Gulshan-e-Iqbal Block 16 mein hai — Bagh-e-Rizwan Apartments ke bilkul saamne.";
-  }
-
-  /* phone / contact */
-  if(has(t, KW.phone)){
-    lastIntent = "phone";
-    return "Salon ka number aur WhatsApp: " + FACTS.phone + ". Isi par call ya message karke booking confirm ho jati hai.";
-  }
-
-  /* payment */
-  if(has(t, KW.payment)){
-    lastIntent = "payment";
-    return "Payment Cash, Easypaisa aur JazzCash — teeno se ho jati hai. Bridal packages 30% advance se book ho jate hain.";
-  }
-
-  /* ladies only */
-  if(has(t, KW.ladies)){
-    lastIntent = "ladies";
-    return "Ji, Zahra's Salon mukammal ladies-only studio hai. Facial aur bridal ke liye private rooms bhi available hain — bilkul sukoon se.";
-  }
-
-  /* specific service rates (check before generic services list) */
-  for(var i=0;i<FACTS.services.length;i++){
-    var s = FACTS.services[i];
-    if(has(t, s.kw)){
-      lastIntent = s.key;
-      return s.say;
-    }
-  }
-
-  /* generic rates / services */
-  if(has(t, KW.services) || has(t, KW.rate)){
-    lastIntent = "services";
-    return FACTS.servicesOverview;
-  }
-
-  /* short follow-ups using memory */
-  if(lastIntent && has(t, ["aur","or","batao","bata dein","detail"])){
-    return "Is ke ilawa: " + FACTS.servicesOverview;
-  }
-
-  /* fallback */
-  lastIntent = "fallback";
-  return "Ye detail main ne note kar li hai — salon se confirm karke aap ko bata diya jayega. Filhal main rates, timings, location, services aur appointment mein foran madad kar sakti hun. Kya poochna chahengi?";
-}
-
 function showSummary(a){
-  summaryText.textContent = "Naam: " + a.name + "  ·  Service: " + a.service + "  ·  Din / Time: " + a.when + "  ·  Salon: " + FACTS.name + " (" + FACTS.phone + ")";
+  setTick("tickName", "Naam", a.name);
+  setTick("tickService", "Service", a.service);
+  setTick("tickWhen", "Din / Time", a.when);
+  summaryText.textContent = "Naam: " + (a.name || "—") + "  ·  Service: " + (a.service || "—") + "  ·  Din / Time: " + (a.when || "—") + "  ·  Salon: " + FACTS.name + " (" + FACTS.phone + ")";
+  if(a.name && a.service && a.when){
+    var msg = "Assalam o alaikum! Main " + a.name + ". Mujhe " + a.service + " ki appointment chahiye — " + a.when + ". (AI receptionist demo se bheja gaya note)";
+    waSendEl.href = "https://wa.me/" + waNumber(FACTS.phone) + "?text=" + encodeURIComponent(msg);
+    waSendEl.style.display = "inline-block";
+  } else {
+    waSendEl.style.display = "none";
+  }
   summaryEl.style.display = "block";
 }
 
 /* ---------- USER INPUT ---------- */
 function handleUserText(text){
+  stopAudio(); /* a new question interrupts the current line at once */
+  var mySeq = ++replySeq;
   addMsg(text, "user");
   setStatus("");
   var reply = think(text);
-  setTimeout(function(){ speak(reply); }, 250);
+  var audioName = gateAudio(reply[1]); /* never voice stale KB facts */
+  setTimeout(function(){
+    if(mySeq !== replySeq) return; /* a newer question already took over */
+    speak(reply[0], audioName);
+  }, 250);
 }
 
 micBtn.addEventListener("click", function(){
@@ -390,14 +631,136 @@ for(var c=0;c<chips.length;c++){
   });
 }
 
+/* ---------- ACTION BUTTONS ---------- */
+/* Human fallback — Dograh's "call transfer", our style: straight to WhatsApp */
+function refreshWaLinks(){
+  waHumanEl.href = "https://wa.me/" + waNumber(FACTS.phone) + "?text=" +
+    encodeURIComponent("Assalam o alaikum! Mujhe salon se baat karni hai.");
+  footPhoneEl.textContent = FACTS.phone;
+}
+document.getElementById("dlTranscript").addEventListener("click", function(){
+  var lines = [];
+  lines.push(FACTS.name + " — AI Receptionist Demo");
+  lines.push("Agent: " + FACTS.agentName + "  ·  Business: " + FACTS.name);
+  lines.push("Tareekh: " + new Date().toLocaleString());
+  lines.push("----------------------------------------");
+  for(var i=0;i<transcriptLog.length;i++){
+    var m = transcriptLog[i];
+    var who = m.who === "user" ? "Caller" : (m.who === "sys" ? "Note" : "Agent");
+    lines.push(who + ": " + m.text);
+  }
+  var blob = new Blob([lines.join("\n")], { type:"text/plain;charset=utf-8" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = "salon-call-transcript.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 500);
+});
+document.getElementById("endBtn").addEventListener("click", function(){
+  var a = lastAppt || appt;
+  if(a){ showSummary(a); summaryEl.scrollIntoView({ behavior:"smooth", block:"nearest" }); }
+  else addMsg("Abhi koi appointment note nahi bana — pehle 'Appointment' wala button daba kar booking shuru karein.", "sys");
+});
+
+/* ---------- KNOWLEDGE BASE DRAWER ---------- */
+var kbDrawer = document.getElementById("kbDrawer");
+var kbServicesEl = document.getElementById("kbServices");
+var kbSavedEl = document.getElementById("kbSaved");
+var kbFields = {
+  agentName: document.getElementById("kbAgentName"),
+  name:      document.getElementById("kbBizName"),
+  greeting:  document.getElementById("kbGreeting"),
+  phone:     document.getElementById("kbPhone"),
+  address:   document.getElementById("kbAddress"),
+  hoursText: document.getElementById("kbHours"),
+  servicesOverview: document.getElementById("kbOverview")
+};
+var kbSvcInputs = {}; /* key -> {label, price, say} */
+
+function fillDrawer(){
+  var keys = Object.keys(kbFields);
+  for(var i=0;i<keys.length;i++) kbFields[keys[i]].value = FACTS[keys[i]];
+  kbServicesEl.innerHTML = "";
+  kbSvcInputs = {};
+  for(var j=0;j<FACTS.services.length;j++){
+    (function(s){
+      var box = document.createElement("div");
+      box.className = "svc";
+      var h = document.createElement("h4");
+      h.textContent = s.label;
+      box.appendChild(h);
+      var mk = function(labelText, val, rows){
+        var lab = document.createElement("label");
+        lab.textContent = labelText;
+        var inp = document.createElement(rows ? "textarea" : "input");
+        if(!rows) inp.type = "text";
+        inp.value = val;
+        box.appendChild(lab);
+        box.appendChild(inp);
+        return inp;
+      };
+      kbSvcInputs[s.key] = {
+        label: mk("Service ka naam", s.label, 0),
+        price: mk("Price", s.price, 0),
+        say:   mk("Agent ka jawab (rate wali line)", s.say, 3)
+      };
+      kbServicesEl.appendChild(box);
+    })(FACTS.services[j]);
+  }
+}
+function refreshDynamic(){
+  if(FACTS.name !== DEFAULT_FACTS.name) bizNameEl.textContent = FACTS.name;
+  document.title = FACTS.name + " — Baat Karo | AI Receptionist Demo";
+  refreshWaLinks();
+  if(lastAppt || appt) showSummary(lastAppt || appt);
+}
+document.getElementById("kbToggle").addEventListener("click", function(){
+  fillDrawer();
+  kbSavedEl.textContent = "";
+  kbDrawer.classList.add("open");
+});
+document.getElementById("kbClose").addEventListener("click", function(){
+  kbDrawer.classList.remove("open");
+});
+document.getElementById("kbSave").addEventListener("click", function(){
+  var keys = Object.keys(kbFields);
+  for(var i=0;i<keys.length;i++){
+    var v = kbFields[keys[i]].value.trim();
+    if(v) FACTS[keys[i]] = v;
+  }
+  for(var j=0;j<FACTS.services.length;j++){
+    var s = FACTS.services[j], inp = kbSvcInputs[s.key];
+    if(!inp) continue;
+    if(inp.label.value.trim()) s.label = inp.label.value.trim();
+    if(inp.price.value.trim()) s.price = inp.price.value.trim();
+    if(inp.say.value.trim())   s.say   = inp.say.value.trim();
+  }
+  var ok = saveKB();
+  refreshDynamic();
+  kbSavedEl.textContent = ok
+    ? "✓ Mehfooz ho gaya — agent ab inhi maloomat se jawab dega."
+    : "Is browser mein save nahi ho saka — jawab is session ke liye badal gaye hain.";
+});
+document.getElementById("kbReset").addEventListener("click", function(){
+  resetKBStore();
+  FACTS = deepCopy(DEFAULT_FACTS);
+  bizNameEl.innerHTML = "Zahra's <span>Salon</span> And Studio";
+  refreshDynamic();
+  fillDrawer();
+  kbSavedEl.textContent = "✓ Asal (default) maloomat wapas aa gayi.";
+});
+
 /* ---------- GREETING (text on load; voice on first tap — browsers block autoplay audio) ---------- */
-var GREETING = "Assalam o alaikum! Zahra's Salon And Studio mein khush aamadid. Main aap ki AI receptionist hun. Main aap ki kya madad kar sakti hun — rates, timing, ya appointment?";
 function greet(){
   if(greeted) return;
   greeted = true;
-  speak(GREETING);
+  speak(FACTS.greeting, gateAudio("greeting"));
 }
-addMsg(GREETING, "agent");
+refreshWaLinks();
+addMsg(FACTS.greeting, "agent");
 if(!SR){
   addMsg("Note: Is browser mein voice sunna (Speech Recognition) supported nahi hai — aap neeche likh kar baat kar sakti hain, jawab awaz aur text dono mein milega.", "sys");
   setStatus("Likh kar baat karein — voice is browser mein available nahi.");
