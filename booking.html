@@ -182,7 +182,7 @@
 <section id="book" style="padding-top:8px">
   <div class="wrap">
     <h2>Free Intro Call <span class="grad">Book Karo</span></h2>
-    <p class="sub">Date aur time choose karo — booking direct mere WhatsApp par aa jayegi.</p>
+    <p class="sub">Date aur time choose karo — booking direct mere email par aa jayegi.</p>
 
     <form class="form" id="bookForm" novalidate>
       <div class="err" id="errBox"></div>
@@ -230,8 +230,8 @@
           <textarea id="cnotes" placeholder="Apne business ke baare mein kuch batana chahen to yahan likhein..."></textarea>
         </div>
       </div>
-      <button type="submit" class="btn cyan submit">WhatsApp par Booking Confirm Karo ✓</button>
-      <div class="note">Submit karne par WhatsApp khulega — wahan bas <b>Send</b> dabana hai, booking ho jayegi!</div>
+      <button type="submit" class="btn cyan submit">Email Se Booking Confirm Karo ✓</button>
+      <div class="note">Submit karne par tumhari email app khule gi — wahan bas <b>Send</b> dabana hai, booking ho jayegi!</div>
       <div class="done" id="doneBox"></div>
     </form>
   </div>
@@ -246,11 +246,9 @@
 
 <script>
   /* ============================================================
-     CONFIG — Sehrish: yahan apna BUSINESS WhatsApp number likho!
-     Format: country code ke saath, bina + aur bina spaces ke.
-     Example: "923001234567"
+     CONFIG — Booking is email par aati hai.
      ============================================================ */
-  const BUSINESS_WHATSAPP = "923170122418";
+  const BUSINESS_EMAIL = "contact@sehrishcreatespk.com";
 
   const WEEKDAYS = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
   const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -340,10 +338,10 @@
     if (notes) lines.push("Notes: " + notes);
     lines.push("", "Please is time par call confirm kar dein. Shukriya!");
 
-    const url = "https://wa.me/" + BUSINESS_WHATSAPP + "?text=" + encodeURIComponent(lines.join("\n"));
+    const url = "mailto:" + BUSINESS_EMAIL + "?subject=" + encodeURIComponent("Website Booking " + ref + " — " + name) + "&body=" + encodeURIComponent(lines.join("\n"));
 
     doneBox.innerHTML = "✅ <b>Booking tayyar hai!</b> Aap ka ref: <b>" + ref + "</b> — " +
-      selDateLabel + ", " + selTime + ".<br>WhatsApp khul raha hai, wahan <b>Send</b> dabate hi booking confirm ho jayegi.";
+      selDateLabel + ", " + selTime + ".<br>Email app khul rahi hai, wahan <b>Send</b> dabate hi booking confirm ho jayegi.";
     doneBox.style.display = "block";
     window.open(url, "_blank");
   });
